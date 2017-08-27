@@ -1,0 +1,1 @@
+<script src="{!! asset(config('app.themes').'/js/frontend.js') !!}" type="text/javascript"></script>
