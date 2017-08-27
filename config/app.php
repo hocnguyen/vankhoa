@@ -95,6 +95,8 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+    'themes' => 'resources/assets',
+
     /*
     |--------------------------------------------------------------------------
     | Logging Configuration

@@ -10,7 +10,5 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
+/*Route::get('/', array('as'=> 'index','uses' => 'IndexController@index'));*/
+Route::get('/', array('as'=> 'login','uses' => 'SiteController@login'));
