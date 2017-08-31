@@ -11,4 +11,7 @@
 |
 */
 /*Route::get('/', array('as'=> 'index','uses' => 'IndexController@index'));*/
-Route::get('/', array('as'=> 'login','uses' => 'SiteController@login'));
+Route::get('/','IndexController@index');
+Route::get('logout', 'IndexController@logout');
+Route::get('login', ['as' => 'getLogin', 'uses' => 'SiteController@getLogin']);
+Route::post('login', ['as' => 'postLogin', 'uses' => 'SiteController@postLogin']);
