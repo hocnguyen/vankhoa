@@ -52,7 +52,8 @@ class AuthController extends Controller
             'username' => 'required|max:255|unique:users',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
-            'passwordpharse' => 'required|min:6',
+            'passwordpharse' => 'required|min:8',
+            'g-recaptcha-response' => 'required|captcha'
         ]);
     }
 
@@ -68,7 +69,7 @@ class AuthController extends Controller
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'passwordpharse' => bcrypt($data['passwordpharse']),
+            'passwordpharse' => $data['passwordpharse'],
         ]);
     }
 }
