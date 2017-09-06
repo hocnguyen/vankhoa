@@ -54,6 +54,12 @@ class SiteController extends Controller
                             ['is_active', '=', User::STATUS_ACTIVE],
                         ])->get();
                         if(count($user) > 0) {
+                            DB::table('histories_login')->insert(
+                                array(
+                                    'user_id' => Auth::user()->id,
+                                    'time_login' => date('Y-m-d H:m:s')
+                                )
+                            );
                             return redirect()->intended('/');
                         }else{
                             $errors = new MessageBag(['errorlogin' => 'This user is inactive.']);

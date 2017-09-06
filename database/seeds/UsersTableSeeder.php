@@ -11,13 +11,18 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->truncate();
         App\User::create([
             'username' => 'admin123',
             'email' =>'badman@gmail.com',
             'password' => bcrypt('12345678'),
             'passwordpharse' => '12345678',
-            'is_active' => 1
+            'firstname' => 'Tom',
+            'lastname' => 'Jery',
+            'phone' =>  '+8422222222',
+            'branch' => 'CN1',
+            'is_admin' => 1,
+            'is_active' => 1,
+            'remember_token' => rand(1000000, 100000000000)
         ]);
     }
 }
