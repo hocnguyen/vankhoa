@@ -1,6 +1,7 @@
 @extends('layouts.main-login')
 @section('title','Login Page')
 @section('content')
+<link href="{{ captcha_layout_stylesheet_url() }}" type="text/css" rel="stylesheet">
 <div class="container">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
@@ -35,6 +36,10 @@
                                 @if($errors->has('passwordpharse'))
                                     <p style="color:red">{{$errors->first('passwordpharse')}}</p>
                                 @endif
+                            </div>
+                            <div class="form-group">
+                            {!! captcha_image_html('ExampleCaptcha') !!}
+                            <input class="form-control"  type="text" id="CaptchaCode" name="CaptchaCode">
                             </div>
                             {{ csrf_field() }}
                             <!-- Change this to a button or input when using this as a form -->
