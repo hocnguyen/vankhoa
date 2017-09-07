@@ -6,12 +6,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="http://demo.startlaravel.com/sb-admin-laravel">SB Admin v2.0 | Laravel 5</a>
+        <a class="navbar-brand" href="{{ url('/') }}">Van Khoa School</a>
     </div>
     <!-- /.navbar-header -->
 
     <ul class="nav navbar-top-links navbar-right">
-        <li class="dropdown">
+        {{--<li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
             </a>
@@ -60,9 +60,9 @@
                 </li>
             </ul>
             <!-- /.dropdown-messages -->
-        </li>
+        </li>--}}
         <!-- /.dropdown -->
-        <li class="dropdown">
+        {{--<li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
             </a>
@@ -155,9 +155,9 @@
                 </li>
             </ul>
             <!-- /.dropdown-tasks -->
-        </li>
+        </li>--}}
         <!-- /.dropdown -->
-        <li class="dropdown">
+        {{--<li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
             </a>
@@ -215,19 +215,19 @@
                 </li>
             </ul>
             <!-- /.dropdown-alerts -->
-        </li>
+        </li>--}}
         <!-- /.dropdown -->
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-user">
-                <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                <li><a href="{{ url('/profile') }}"><i class="fa fa-user fa-fw"></i> User Profile</a>
                 </li>
-                <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                <li><a href="{{ url('/settings') }}"><i class="fa fa-gear fa-fw"></i> Settings</a>
                 </li>
                 <li class="divider"></li>
-                <li><a href="http://demo.startlaravel.com/sb-admin-laravel/login"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                 </li>
             </ul>
             <!-- /.dropdown-user -->
@@ -264,25 +264,10 @@
                     <a href="http://demo.startlaravel.com/sb-admin-laravel/forms"><i class="fa fa-edit fa-fw"></i> Forms</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-wrench fa-fw"></i> Manage<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                        <li>
-                            <a href="http://demo.startlaravel.com/sb-admin-laravel/panels">Panels and Collapsibles</a>
-                        </li>
-                        <li>
-                            <a href="http://demo.startlaravel.com/sb-admin-laravel/buttons">Buttons</a>
-                        </li>
-                        <li>
-                            <a href="http://demo.startlaravel.com/sb-admin-laravel/notifications">Alerts</a>
-                        </li>
-                        <li>
-                            <a href="http://demo.startlaravel.com/sb-admin-laravel/typography">Typography</a>
-                        </li>
-                        <li>
-                            <a href="http://demo.startlaravel.com/sb-admin-laravel/icons"> Icons</a>
-                        </li>
-                        <li>
-                            <a href="http://demo.startlaravel.com/sb-admin-laravel/grid">Grid</a>
+                        <li class="{{ (Route::currentRouteName() == 'histories')?"active":"" }}">
+                            <a href="{{ url('/histories') }}">Histories Login</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->

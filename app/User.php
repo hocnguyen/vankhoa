@@ -25,4 +25,8 @@ class User extends Authenticatable
     ];
 
     const STATUS_ACTIVE = 1;
+
+    public function his(){
+        return $this->hasMany('App/HistoriesLogin','user_id');
+    }
 }
