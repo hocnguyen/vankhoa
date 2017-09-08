@@ -24,7 +24,24 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public $rules = [
+        'username' => 'required|min:6|max:255|unique:users',
+        'email' => 'required|email|min:6|max:255|unique:users',
+        'password' => 'required|min:6|max:255',
+        'passwordpharse' => 'required|min:6|max:255',
+        'firstname' => 'required|min:3|max:255',
+        'lastname' => 'required|min:3|max:255',
+        'phone' => 'required|min:8|max:255',
+        'branch' => 'required|max:255',
+        'is_admin' => 'required',
+        'is_active' => 'required',
+    ];
+
     const STATUS_ACTIVE = 1;
+    const STATUS_INACTIVE = 2;
+    const ROLE_ADMIN = 0;
+    const ROLE_USER = 1;
+    const ROLE_NORMAL = 2;
 
     public function his(){
         return $this->hasMany('App/HistoriesLogin','user_id');

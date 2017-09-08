@@ -49,10 +49,10 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'username' => 'required|max:255|unique:users',
+            'username' => 'required|min:6|max:255|unique:users',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
-            'passwordpharse' => 'required|min:8',
+            'password' => 'required|min:6|max:255|confirmed',
+            'passwordpharse' => 'required|min:6|max:255',
             'g-recaptcha-response' => 'required|captcha'
         ]);
     }

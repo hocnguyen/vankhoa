@@ -19,15 +19,15 @@ class SiteController extends Controller
 
     public function postLogin(Request $request) {
         $rules = [
-            'username' =>'required|min:6',
-            'password' => 'required|min:8',
-            'passwordpharse' => 'required|min:6',
+            'username' =>'required|min:6|max:255',
+            'password' => 'required|min:6|max:255',
+            'passwordpharse' => 'required|min:6|max:255',
         ];
         $messages = [
             'username.required' => 'Username is required!',
             'username.min' => 'Username must be at least 6 characters!',
             'password.required' => 'Password is required!',
-            'password.min' => 'Password must be at least 8 characters!',
+            'password.min' => 'Password must be at least 6 characters!',
             'passwordpharse.required' => 'Password pharse is required!',
             'passwordpharse.min' => 'Password pharse must be at least 6 characters!',
         ];

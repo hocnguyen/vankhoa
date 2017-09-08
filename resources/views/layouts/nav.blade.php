@@ -269,6 +269,9 @@
                         <li class="{{ (Route::currentRouteName() == 'histories')?"active":"" }}">
                             <a href="{{ url('/histories') }}">Histories Login</a>
                         </li>
+                        <li class="{{ (Route::currentRouteName() == 'users')?"active":"" }}">
+                            <a href="{{ url('/users') }}">Users</a>
+                        </li>
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>

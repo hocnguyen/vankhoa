@@ -15,8 +15,19 @@ Route::get('/','IndexController@index');
 Route::get('logout', 'IndexController@logout');
 Route::get('login', ['as' => 'getLogin', 'uses' => 'SiteController@getLogin']);
 Route::post('login', ['as' => 'postLogin', 'uses' => 'SiteController@postLogin']);
+
 Route::get('profile', ['as' => 'getProfile', 'uses' => 'UserController@getProfile']);
 Route::post('profile', ['as' => 'postProfile', 'uses' => 'UserController@postProfile']);
+
 Route::get('settings', ['as' => 'getSettings', 'uses' => 'UserController@getSettings']);
 Route::post('settings', ['as' => 'postSettings', 'uses' => 'UserController@postSettings']);
+
 Route::get('histories', ['as' => 'histories', 'uses' => 'HistoriesLoginController@index']);
+
+Route::get('/user/create', ['as' => 'usercreate', 'uses' => 'UserController@getCreate']);
+Route::post('/user/create', ['as' => 'usercreate', 'uses' => 'UserController@postCreate']);
+
+Route::get('/user/update/{id}', ['as' => 'userupdate', 'uses' => 'UserController@getUpdate']);
+Route::post('/user/update/{id}', ['as' => 'userupdate', 'uses' => 'UserController@postUpdate']);
+
+Route::get('/users', ['as' => 'userlist', 'uses' => 'UserController@index']);
