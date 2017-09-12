@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('lastname');
             $table->string('phone');
             $table->string('branch');
-            $table->string('is_admin');
+            $table->integer('role');
             $table->integer('is_active');
             $table->rememberToken();
             $table->timestamps();

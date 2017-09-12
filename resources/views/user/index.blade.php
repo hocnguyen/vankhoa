@@ -1,3 +1,6 @@
+<?php
+use App\User;
+?>
 @extends('layouts.main')
 @section('title','List User Page')
 @section('content')
@@ -36,7 +39,10 @@
                                             <a href="{{ url('/user/view/' . $value->id) }}"><i class="fa fa-eye"></i></a>
                                             <a href="{{ url('/user/delete/' . $value->id) }}"><i class="fa fa-trash-o"></i></a>
                                             <a href="{{ url('/user/update/' . $value->id) }}"><i class="fa fa-pencil-square-o"></i></a>
-                                            <a href="{{ url('/user/changepasss/' . $value->id) }}"><i class="fa fa-lock"></i></a>
+                                            <a href="{{ url('/user/changepass/' . $value->id) }}"><i class="fa fa-lock"></i></a>
+                                            @if(Auth::User()->role == User::ROLE_ADMIN)
+                                            <a href="{{ url('/user/changepasspharse/' . $value->id) }}"><i class="fa fa-lock"></i></a>
+                                            @endif
                                         </th>
                                     </tr>
                                     <?php } ?>

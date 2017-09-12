@@ -31,3 +31,10 @@ Route::get('/user/update/{id}', ['as' => 'userupdate', 'uses' => 'UserController
 Route::post('/user/update/{id}', ['as' => 'userupdate', 'uses' => 'UserController@postUpdate']);
 
 Route::get('/users', ['as' => 'userlist', 'uses' => 'UserController@index']);
+Route::get('/user/view/{id}', ['as' => 'userview', 'uses' => 'UserController@view']);
+
+Route::get('/user/changepass/{id}', ['as' => 'userchangepass', 'uses' => 'UserController@getChangePass']);
+Route::post('/user/changepass/{id}', ['as' => 'userchangepass', 'uses' => 'UserController@postChangePass']);
+
+Route::get('/user/changepasspharse/{id}', ['as' => 'userchangepasspharse', 'uses' => 'UserController@getChangePassPharse']);
+Route::post('/user/changepasspharse/{id}', ['as' => 'userchangepasspharse', 'uses' => 'UserController@postChangePassPharse']);

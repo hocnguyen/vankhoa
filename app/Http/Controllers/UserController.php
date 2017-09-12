@@ -6,6 +6,9 @@ use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\MessageBag;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -45,7 +48,7 @@ class UserController extends Controller
         $model->lastname = $request->lastname;
         $model->phone = $request->phone;
         $model->branch = $request->branch;
-        $model->is_admin = $request->is_admin;
+        $model->role = $request->role;
         $model->is_active = $request->is_active;
         $model->remember_token = rand(1000000, 100000000000);
         if ($model->save()) {
@@ -73,11 +76,66 @@ class UserController extends Controller
         $model->lastname = $request->lastname;
         $model->phone = $request->phone;
         $model->branch = $request->branch;
-        $model->is_admin = $request->is_admin;
+        $model->role = $request->role;
         $model->is_active = $request->is_active;
         $model->remember_token = rand(1000000, 100000000000);
         if ($model->update()) {
             return redirect("/users");
+        }
+    }
+
+    public function getChangePass($id){
+        $model = User::find($id);
+        return view('user.changepass', ['model' => $model]);
+    }
+
+    public function postChangePass(Request $request, $id){
+        $model = User::find($id);
+        $rules = [
+            'current_password' => 'required',
+            'password' => 'required|min:6|max:255|same:password',
+            'password_confirmation' => 'required|min:6|max:255|same:password',
+        ];
+        $hashedPassword = $model->password;
+        if (Hash::check($request->current_password, $hashedPassword)) {
+            $this->validate($request, $rules);
+            $model->password =  bcrypt($request->password);
+            if ($model->update()) {
+                return redirect("/users");
+            }
+        }else{
+            $errors = new MessageBag(['errorchangepass' => "Old password doesn't mactch!"]);
+            return redirect()->back()->withInput()->withErrors($errors);
+        }
+    }
+
+    public function View($id){
+        $model = User::find($id);
+        return view('user.view', ['model' => $model]);
+    }
+
+    public function getChangePassPharse($id){
+        $model = User::find($id);
+        return view('user.changepasspharse', ['model' => $model]);
+    }
+
+    public function postChangePassPharse(Request $request, $id){
+        $model = User::find($id);
+        $rules = [
+            'current_passwordpharse' => 'required',
+            'passwordpharse' => 'required|min:6|max:255|same:passwordpharse',
+            'passwordpharse_confirmation' => 'required|min:6|max:255|same:passwordpharse',
+        ];
+        $hashedPassword = $model->passwordpharse;
+        if ($request->current_passwordpharse == $hashedPassword) {
+            $this->validate($request, $rules);
+            $model->passwordpharse =  $request->passwordpharse;
+            if ($model->update()) {
+                return redirect("/users");
+            }
+        }else{
+            $errors = new MessageBag(['errorchangepass' => "Old password pharse doesn't mactch!"]);
+            return redirect()->back()->withInput()->withErrors($errors);
         }
     }
 }
