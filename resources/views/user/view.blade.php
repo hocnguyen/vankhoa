@@ -8,17 +8,13 @@ use App\User;
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    View User #{{ $model->id }}
+                    Detail user {{ $model->firstname }} {{ $model->lastname }}
                 </h1>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-6 col-lg-offset-3">
                 <table class="table table-bordered">
-                    <tr>
-                        <td><label>#ID</label></td>
-                        <td>{{ $model->id }}</td>
-                    </tr>
                     <tr>
                         <td><label>User Name</label></td>
                         <td>{{ $model->username }}</td>
@@ -44,8 +40,18 @@ use App\User;
                         <td>{{ $model->branch }}</td>
                     </tr>
                     <tr>
-                        <td><label>Create At</label></td>
-                        <td>{{ $model->created_at }}</td>
+                        <td><label>Branch</label></td>
+                        <td>{{ $model->branch }}</td>
+                    </tr>
+                    <tr>
+                        <td><label>Is Active</label></td>
+                        <td>
+                            <?php if ($model->is_active == User::STATUS_ACTIVE) {
+                                echo "Active";
+                            } else {
+                                echo "Inactive";
+                            } ?>
+                        </td>
                     </tr>
                 </table>
             </div>

@@ -8,7 +8,7 @@ use App\User;
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    Change Password Pharse User #{{ $model->id }}
+                    Change pass pharse user {{ $model->firstname }} {{ $model->lastname }}
                 </h1>
             </div>
         </div>

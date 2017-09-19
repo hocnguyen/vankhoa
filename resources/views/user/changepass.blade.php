@@ -8,7 +8,7 @@ use App\User;
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    Change Password User #{{ $model->id }}
+                    Change password user {{ $model->firstname }} {{ $model->lastname }}
                 </h1>
             </div>
         </div>

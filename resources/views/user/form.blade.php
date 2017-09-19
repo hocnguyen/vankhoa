@@ -9,9 +9,9 @@ use App\User;
             <div class="col-lg-12">
                 <h1 class="page-header">
                     @if($model->exists)
-                        Update User #{{ $model->id }}
+                        Update user {{ $model->firstname }} {{ $model->lastname }}
                     @else
-                        Create User
+                        Create user
                     @endif
                 </h1>
             </div>

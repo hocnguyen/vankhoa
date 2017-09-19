@@ -55,6 +55,8 @@
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>
+                <?php
+                if (Auth::User()->role == \App\User::ROLE_ADMIN) { ?>
                 <li>
                     <a href="#"><i class="fa fa-wrench fa-fw"></i> Manage<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
@@ -67,7 +69,7 @@
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>
-
+                <?php } ?>
             </ul>
         </div>
         <!-- /.sidebar-collapse -->
