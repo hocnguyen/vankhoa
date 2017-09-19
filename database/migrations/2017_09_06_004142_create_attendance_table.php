@@ -18,6 +18,7 @@ class CreateAttendanceTable extends Migration
             $table->integer('is_present');
             $table->integer('student_id')->unsigned();;
             $table->dateTime('time')->nullable();
+            $table->timestamps();
             $table->foreign('grade_id')->references('id')->on('grades');
             $table->foreign('student_id')->references('id')->on('students');
         });

@@ -1,0 +1,6 @@
+table tr.having td{
+    color: #5cb85c;
+}
+table tr.no-having td{
+    color: #d9534f;
+}
