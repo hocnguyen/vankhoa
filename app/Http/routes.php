@@ -41,3 +41,13 @@ Route::post('/user/changepasspharse/{id}', ['as' => 'userchangepasspharse', 'use
 
 Route::get('/attendances/{grade}', ['as' => 'attendances', 'uses' => 'StudentController@attendances']);
 Route::post('/attendance/{time}', ['as' => 'attendance', 'uses' => 'AttendanceController@attendance']);
+
+Route::get('grades', ['as' => 'grades', 'uses' => 'GradeController@index']);
+Route::get('/grade/view/{id}', ['as' => 'gradeview', 'uses' => 'GradeController@view']);
+Route::get('/grade/delete/{id}', ['as' => 'gradedelete', 'uses' => 'GradeController@delete']);
+
+Route::get('/grade/create', ['as' => 'gradecreate', 'uses' => 'GradeController@getCreate']);
+Route::post('/grade/create', ['as' => 'gradecreate', 'uses' => 'GradeController@postCreate']);
+
+Route::get('/grade/update/{id}', ['as' => 'gradeupdate', 'uses' => 'GradeController@getUpdate']);
+Route::post('/grade/update/{id}', ['as' => 'gradeupdate', 'uses' => 'GradeController@postUpdate']);
