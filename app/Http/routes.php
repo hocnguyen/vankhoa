@@ -38,3 +38,8 @@ Route::post('/user/changepass/{id}', ['as' => 'userchangepass', 'uses' => 'UserC
 
 Route::get('/user/changepasspharse/{id}', ['as' => 'userchangepasspharse', 'uses' => 'UserController@getChangePassPharse'])->middleware('admin');
 Route::post('/user/changepasspharse/{id}', ['as' => 'userchangepasspharse', 'uses' => 'UserController@postChangePassPharse'])->middleware('admin');
+
+Route::get('/attendances/{grade}', ['as' => 'attendances', 'uses' => 'StudentController@attendances']);
+Route::post('/attendance/{time}', ['as' => 'attendance', 'uses' => 'AttendanceController@attendance']);
+
+Route::get('/student/create', [ 'uses' => 'StudentController@create']);
