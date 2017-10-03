@@ -55,6 +55,8 @@
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>
+                <?php
+                if (Auth::User()->role == \App\User::ROLE_ADMIN) { ?>
                 <li>
                     <a href="#"><i class="fa fa-wrench fa-fw"></i> Manage<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
@@ -64,10 +66,16 @@
                         <li class="{{ (Route::currentRouteName() == 'users')?"active":"" }}">
                             <a href="{{ url('/users') }}">Users</a>
                         </li>
+                        <li class="{{ (Route::currentRouteName() == 'attendances')?"active":"" }}">
+                            <a href="{{ url('/attendances') }}">Attendances</a>
+                        </li>
+                        <li class="{{ (Route::currentRouteName() == 'grades')?"active":"" }}">
+                            <a href="{{ url('/grades') }}">Grades</a>
+                        </li>
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>
-
+                <?php } ?>
             </ul>
         </div>
         <!-- /.sidebar-collapse -->

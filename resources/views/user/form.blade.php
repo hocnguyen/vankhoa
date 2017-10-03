@@ -9,9 +9,9 @@ use App\User;
             <div class="col-lg-12">
                 <h1 class="page-header">
                     @if($model->exists)
-                        Update User #{{ $model->id }}
+                        Update user {{ $model->firstname }} {{ $model->lastname }}
                     @else
-                        Create User
+                        Create user
                     @endif
                 </h1>
             </div>
@@ -77,8 +77,8 @@ use App\User;
                     </div>
 
                     <div class="form-group">
-                        <?php echo Form::label('is_admin', 'Is Admin'); ?>
-                        <?php echo Form::select('is_admin', [ User::ROLE_ADMIN => 'Is Admin', User::ROLE_NORMAL => 'Normal'], $model->is_admin, ['class' => 'form-control', 'placeholder' => 'Please select one']); ?>
+                        <?php echo Form::label('role', 'Role'); ?>
+                        <?php echo Form::select('role', [ User::ROLE_ADMIN => 'Admin', User::ROLE_NORMAL => 'Normal'], $model->role, ['class' => 'form-control', 'placeholder' => 'Please select one']); ?>
                     </div>
 
                     <div class="form-group">

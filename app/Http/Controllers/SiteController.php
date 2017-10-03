@@ -60,6 +60,7 @@ class SiteController extends Controller
                                     'time_login' => date('Y-m-d H:m:s')
                                 )
                             );
+                            //session()->put('role', $user[0]->role);
                             return redirect()->intended('/');
                         }else{
                             $errors = new MessageBag(['errorlogin' => 'This user is inactive.']);

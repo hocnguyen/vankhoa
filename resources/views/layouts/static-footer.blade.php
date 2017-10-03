@@ -1,1 +1,1 @@
-<script src="{!! asset(config('app.themes').'/js/frontend.js') !!}" type="text/javascript"></script>
+<script src="{!! asset(config('app.themes').'/js/alertify.js') !!}" type="text/javascript"></script>

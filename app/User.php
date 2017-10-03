@@ -33,7 +33,7 @@ class User extends Authenticatable
         'lastname' => 'required|min:3|max:255',
         'phone' => 'required|min:8|max:255',
         'branch' => 'required|max:255',
-        'is_admin' => 'required',
+        'role' => 'required',
         'is_active' => 'required',
     ];
 

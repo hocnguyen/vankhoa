@@ -1,0 +1,28 @@
+table tr.having td{
+    color: #5cb85c;
+}
+table tr.no-having td{
+    color: #d9534f;
+}
+.fix-space-lbl {
+    margin-right: 30px!important;
+}
+.center-text {
+    text-align: center;
+}
+.title-style {
+    color: #2ca02c;
+}
+.title-sub {
+    margin: 10px 15px 20px 15px;
+    font-size: 20px;
+    font-weight: bold;
+    border-bottom: 1px solid;
+    padding-bottom: 5px;
+}
+.fix-col-lg-6 {
+    width:50%;
+}
+.error_msg {
+    color: #a94442;
+}
