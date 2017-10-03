@@ -20,3 +20,9 @@ table tr.no-having td{
     border-bottom: 1px solid;
     padding-bottom: 5px;
 }
+.fix-col-lg-6 {
+    width:50%;
+}
+.error_msg {
+    color: #a94442;
+}

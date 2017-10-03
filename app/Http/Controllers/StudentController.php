@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Grades;
 use App\Students;
+use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
@@ -13,8 +15,20 @@ class StudentController extends Controller
         return view('student.attendances', ['students' => $students, 'grade' => $grade]);
     }
 
-    public function create(){
+    public function enrolment(){
+        $current_year = date("Y");
         $model = new Students();
-        return view('student.form', ['model' => $model]);
+        $grade = Grades::whereRaw('school_year = '.$current_year." and status = 1")->get();
+        return view('student.form', ['model' => $model,'grade'=>$grade]);
+    }
+
+    public function add(Request $request){
+        $model = new Students();
+        print_r($request->last_name); exit;
+        $this->validate($request, $model->rules);
+
+        /*if (Students::create($request->all())) {
+            return redirect("/students");
+        }*/
     }
 }

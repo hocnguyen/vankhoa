@@ -10,6 +10,10 @@ class Attendances extends Model
         return $this->belongsTo('App\Students', 'student_id');
     }
 
+    public function grade(){
+        return $this->belongsTo('App\Attendances', 'grade_id');
+    }
+
     const STATUS_EMPTY = 1;
     const STATUS_HAVING = 2;
     const STATUS_NO_HAVING = 3;

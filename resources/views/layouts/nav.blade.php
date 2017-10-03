@@ -69,6 +69,9 @@
                         <li class="{{ (Route::currentRouteName() == 'attendances')?"active":"" }}">
                             <a href="{{ url('/attendances') }}">Attendances</a>
                         </li>
+                        <li class="{{ (Route::currentRouteName() == 'grades')?"active":"" }}">
+                            <a href="{{ url('/grades') }}">Grades</a>
+                        </li>
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>
