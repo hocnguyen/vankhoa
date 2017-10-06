@@ -46,4 +46,7 @@ class User extends Authenticatable
     public function his(){
         return $this->hasMany('App/HistoriesLogin','user_id');
     }
+    public function grades(){
+        return $this->hasMany('App/Grades','user_id');
+    }
 }

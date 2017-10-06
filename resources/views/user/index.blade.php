@@ -2,12 +2,12 @@
 use App\User;
 ?>
 @extends('layouts.main')
-@section('title','List User Page')
+@section('title','Danh sách người dùng - List User Page')
 @section('content')
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">List Users</h1>
+                <h1 class="page-header">Danh sách người dùng - List Users</h1>
             </div>
         </div>
         <div class="row">
@@ -20,10 +20,10 @@ use App\User;
                                     <thead>
                                     <tr>
                                         <th>Email</th>
-                                        <th>User Name</th>
-                                        <th>Full Name</th>
-                                        <th>Phone</th>
-                                        <th>Branch</th>
+                                        <th>Tên người dùng</th>
+                                        <th>Tên đầy đủ </th>
+                                        <th>Số địện thoại</th>
+                                        <th>Chi nhánh</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
