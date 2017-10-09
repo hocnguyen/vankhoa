@@ -2,12 +2,12 @@
 use App\Grades;
 ?>
 @extends('layouts.main')
-@section('title','List Grade Page')
+@section('title','Danh sách lớp - List Grade Page')
 @section('content')
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">List Grades</h1>
+                <h1 class="page-header">Danh sách lớp - List Grades</h1>
             </div>
         </div>
         <div class="row">
@@ -20,11 +20,11 @@ use App\Grades;
                                     <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Shool Year</th>
-                                        <th>Number Student</th>
-                                        <th>Branch</th>
-                                        <th>Status</th>
+                                        <th>Tên lớp</th>
+                                        <th>Năm học</th>
+                                        <th>Số lượng học sinh</th>
+                                        <th>Chi nhánh</th>
+                                        <th>Trạng thái</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -38,11 +38,11 @@ use App\Grades;
                                         <td>{{ $value->branch }}</td>
                                         <td>
                                             @if($value->status == Grades::STATUS_ACTIVE)
-                                                Active
+                                                Hoạt động
                                             @elseif($value->status == Grades::STATUS_INACTIVE)
-                                                In Active
+                                                Không hoạt động
                                             @else
-                                                Deleted
+                                                Đã xoá
                                             @endif
                                         </td>
                                         <th>

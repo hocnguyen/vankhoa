@@ -2,45 +2,46 @@
 use App\User;
 ?>
 @extends('layouts.main')
-@section('title','Change Password User')
+@section('title','Đổi mật khẩu - Change Password User')
 @section('content')
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    Change password user {{ $model->firstname }} {{ $model->lastname }}
+                    Đổi mật khẩu - Change password
                 </h1>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12">
-                @foreach($errors->all() as $error)
-                    <div class="alert alert-danger" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        {{ $error }}
-                    </div>
-                @endforeach
-            </div>
             {{ Form::open(array('url' => '/user/changepass/' .$model->id , 'method' => 'post')) }}
             {{ csrf_field() }}
             <div class="col-lg-6 col-lg-offset-3">
                 <div class="form-group">
-                    <?php echo Form::label('current_password', 'Old Password'); ?>
-                    <?php echo Form::password('current_password', ['class' => 'form-control', 'placeholder' => 'Old Password']); ?>
+                    <?php echo Form::label('current_password', 'Mật khẩu cũ (Old Password)'); ?>
+                    <?php echo Form::password('current_password', ['class' => 'form-control', 'placeholder' => 'Mật khẩu cũ']); ?>
+                    @if ($errors->has('current_password'))
+                        <div class="invalid error_msg">{{ $errors->first('current_password') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
-                    <?php echo Form::label('password', 'New Password'); ?>
-                    <?php echo Form::password('password', ['class' => 'form-control', 'placeholder' => 'New Password']); ?>
+                    <?php echo Form::label('password', 'Mật khẩu mới (New Password)'); ?>
+                    <?php echo Form::password('password', ['class' => 'form-control', 'placeholder' => 'Mật khẩu mới']); ?>
+                    @if ($errors->has('password'))
+                        <div class="invalid error_msg">{{ $errors->first('password') }}</div>
+                    @endif
                 </div>
 
                 <div class="form-group">
-                    <?php echo Form::label('password_confirmation', 'Confirm Password'); ?>
-                    <?php echo Form::password('password_confirmation', ['class' => 'form-control', 'placeholder' => 'Confirm Password']); ?>
+                    <?php echo Form::label('password_confirmation', 'Xác nhận mật khẩu (Confirm Password)'); ?>
+                    <?php echo Form::password('password_confirmation', ['class' => 'form-control', 'placeholder' => 'Xác nhận mật khẩu']); ?>
+                    @if ($errors->has('password_confirmation'))
+                        <div class="invalid error_msg">{{ $errors->first('password_confirmation') }}</div>
+                    @endif
                 </div>
 
                 <div style="text-align: center">
-                    <?php echo Form::button('Change Password', ['type' => 'submit', 'class' => 'btn btn-success']); ?>
+                    <?php echo Form::button('Đổi mật khẩu', ['type' => 'submit', 'class' => 'btn btn-success']); ?>
                 </div>
             </div>
             {!! Form::close() !!}

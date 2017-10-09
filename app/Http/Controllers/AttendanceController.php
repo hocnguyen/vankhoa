@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class AttendanceController extends Controller
 {
-    public function attendance(Request $request, $time){
+    public function postAttendance(Request $request, $time){
         if ($request->isMethod('post')) {
             $is_present = $request->request->get('is_present');
             $student_id = $request->request->get('student_id');
@@ -18,7 +18,7 @@ class AttendanceController extends Controller
             $check = Attendances::where('grade_id', $grade_id)->where('student_id', $student_id)->where('time', $time)->first();
             if($check) {
                 Attendances::where('id', $check->id)->update(['is_present' => $is_present]);
-                return json_encode(array('success' => 1, 'message' => 'Attendances successfully!'));
+                return json_encode(array('success' => 1, 'message' => 'Điểm danh thành công!'));
             }else{
                 $model = new Attendances();
                 $model->grade_id = $grade_id;
@@ -26,14 +26,14 @@ class AttendanceController extends Controller
                 $model->is_present = $is_present;
                 $model->time = $time;
                 if ($model->save()) {
-                    return json_encode(array('success' => 1, 'message' => 'Attendances successfully!'));
+                    return json_encode(array('success' => 1, 'message' => 'Điểm danh thành công!'));
                 } else {
-                    return json_encode(array('success' => 0, 'message' => 'Attendances not successfully!'));
+                    return json_encode(array('success' => 0, 'message' => 'Điểm danh thành công!'));
                 }
             }
 
         }else{
-            return json_encode(array('success' => 0, 'message' => 'Check Again!'));
+            return json_encode(array('success' => 0, 'message' => 'Xảy ra lỗi. Kiểm tra lại!'));
         }
     }
 }

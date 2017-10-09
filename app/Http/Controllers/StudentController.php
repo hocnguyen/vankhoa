@@ -7,12 +7,24 @@ use App\Students;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
-    public function attendances($grade){
-        $students = Students::with('grade')->where('grade_id', $grade)->orderBy('id', 'DESC')->paginate(10);
-        return view('student.attendances', ['students' => $students, 'grade' => $grade]);
+    public function attendances(){
+        $grades = Grades::where('user_id', Auth::User()->id)->get();
+        return view('student.attendances',['grades' => $grades]);
+    }
+
+    public function getAttendance(){
+        if(isset($_GET['grade']) && trim($_GET['grade']) != '' && isset($_GET['time']) && trim($_GET['time']) != '') {
+            $grade = trim($_GET['grade']);
+            $time = trim($_GET['time']);
+            $students = Students::with('grade')->where('grade_id', $grade)->orderBy('id', 'DESC')->paginate(10);
+            return view('student.attendance', ['students' => $students, 'grade' => $grade, 'time' => $time]);
+        }else{
+            return redirect("/error");
+        }
     }
 
     public function enrolment(){

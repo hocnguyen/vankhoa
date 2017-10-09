@@ -8,7 +8,7 @@ use App\Grades;
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    View Grade #{{ $model->id }}
+                    Chi tiết lớp - View Grade #{{ $model->id }}
                 </h1>
             </div>
         </div>
@@ -20,30 +20,30 @@ use App\Grades;
                         <td>{{ $model->id }}</td>
                     </tr>
                     <tr>
-                        <td><label>Name</label></td>
+                        <td><label>Tên lớp (Name)</label></td>
                         <td>{{ $model->name }}</td>
                     </tr>
                     <tr>
-                        <td><label>School Year</label></td>
+                        <td><label>Năm học (School Year)</label></td>
                         <td>{{ $model->school_year }}</td>
                     </tr>
                     <tr>
-                        <td><label>Number Student</label></td>
+                        <td><label>Số lượng học sinh (Number Student)</label></td>
                         <td>{{ $model->number_student }}</td>
                     </tr>
                     <tr>
-                        <td><label>Branch</label></td>
+                        <td><label>Chi nhánh (Branch)</label></td>
                         <td>{{ $model->branch }}</td>
                     </tr>
                     <tr>
-                        <td><label>Branch</label></td>
+                        <td><label>Trạn thái</label></td>
                         <td>
                             @if($model->status == Grades::STATUS_ACTIVE)
-                                Active
+                                Hoạt động
                             @elseif($model->status == Grades::STATUS_INACTIVE)
-                                In Active
+                                Không hoạt động
                             @else
-                                Deleted
+                                Đã xoá
                             @endif
                         </td>
                     </tr>

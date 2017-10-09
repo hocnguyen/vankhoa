@@ -39,8 +39,9 @@ Route::post('/user/changepass/{id}', ['as' => 'userchangepass', 'uses' => 'UserC
 Route::get('/user/changepasspharse/{id}', ['as' => 'userchangepasspharse', 'uses' => 'UserController@getChangePassPharse'])->middleware('admin');
 Route::post('/user/changepasspharse/{id}', ['as' => 'userchangepasspharse', 'uses' => 'UserController@postChangePassPharse'])->middleware('admin');
 
-Route::get('/attendances/{grade}', ['as' => 'attendances', 'uses' => 'StudentController@attendances']);
-Route::post('/attendance/{time}', ['as' => 'attendance', 'uses' => 'AttendanceController@attendance']);
+Route::get('/attendance', ['as' => 'attendances', 'uses' => 'StudentController@getAttendance']);
+Route::post('/attendance/{time}', ['as' => 'attendances', 'uses' => 'AttendanceController@postAttendance']);
+Route::get('/attendances', ['as' => 'attendances', 'uses' => 'StudentController@attendances']);
 
 Route::get('grades', ['as' => 'grades', 'uses' => 'GradeController@index']);
 Route::get('/grade/view/{id}', ['as' => 'gradeview', 'uses' => 'GradeController@view']);

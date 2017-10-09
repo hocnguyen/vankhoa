@@ -2,13 +2,13 @@
 use App\User;
 ?>
 @extends('layouts.main')
-@section('title','View User')
+@section('title','Chi tiết người dùng (View User)')
 @section('content')
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    Detail user {{ $model->firstname }} {{ $model->lastname }}
+                    Chi tiết người dùng - Detail user
                 </h1>
             </div>
         </div>
@@ -16,7 +16,7 @@ use App\User;
             <div class="col-lg-6 col-lg-offset-3">
                 <table class="table table-bordered">
                     <tr>
-                        <td><label>User Name</label></td>
+                        <td><label>Tên người dùng (User Name)</label></td>
                         <td>{{ $model->username }}</td>
                     </tr>
                     <tr>
@@ -24,27 +24,23 @@ use App\User;
                         <td>{{ $model->email }}</td>
                     </tr>
                     <tr>
-                        <td><label>Firstname</label></td>
+                        <td><label>Họ (Firstname)</label></td>
                         <td>{{ $model->firstname }}</td>
                     </tr>
                     <tr>
-                        <td><label>Lastname</label></td>
+                        <td><label>Tên (Lastname)</label></td>
                         <td>{{ $model->lastname }}</td>
                     </tr>
                     <tr>
-                        <td><label>Phone</label></td>
+                        <td><label>Điện thoại (Phone)</label></td>
                         <td>{{ $model->phone }}</td>
                     </tr>
                     <tr>
-                        <td><label>Lastname</label></td>
+                        <td><label>Chi nhánh (Branch)</label></td>
                         <td>{{ $model->branch }}</td>
                     </tr>
                     <tr>
-                        <td><label>Branch</label></td>
-                        <td>{{ $model->branch }}</td>
-                    </tr>
-                    <tr>
-                        <td><label>Is Active</label></td>
+                        <td><label>Trạng thái (Is Active)</label></td>
                         <td>
                             <?php if ($model->is_active == User::STATUS_ACTIVE) {
                                 echo "Active";
