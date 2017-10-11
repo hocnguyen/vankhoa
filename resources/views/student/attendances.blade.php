@@ -37,7 +37,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#time').datetimepicker({
-                format: 'DD.MM.YYYY',
+                format: 'YYYY-MM-DD',
                 ignoreReadonly: true
             });
         })
