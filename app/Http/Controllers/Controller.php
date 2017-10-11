@@ -11,4 +11,12 @@ use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 class Controller extends BaseController
 {
     use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;
+    
+    public static function generalID($id){
+        $countNum = strlen($id);
+        for ($i = $countNum; $i < 5; $i++){
+            $id = "0".$id;
+        }
+        return $id;
+    }
 }

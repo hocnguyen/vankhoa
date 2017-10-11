@@ -53,6 +53,7 @@ Route::post('/grade/create', ['as' => 'gradecreate', 'uses' => 'GradeController@
 Route::get('/grade/update/{id}', ['as' => 'gradeupdate', 'uses' => 'GradeController@getUpdate']);
 Route::post('/grade/update/{id}', ['as' => 'gradeupdate', 'uses' => 'GradeController@postUpdate']);
 
+Route::get('/students', [ 'uses' => 'StudentController@index']);
 Route::get('/student/enrolment', [ 'uses' => 'StudentController@enrolment']);
 Route::post('/student/enrolment', [ 'uses' => 'StudentController@add']);
 
