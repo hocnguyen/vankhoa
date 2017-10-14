@@ -1,5 +1,10 @@
+<?php
+use App\Students;
+use App\Grades;
+use App\User;
+?>
 @extends('layouts.main')
-@section('title','Home Page')
+@section('title','Trang chủ')
 @section('content')
     <div id="page-wrapper" style="min-height: 346px;">
         <div class="row">
@@ -21,7 +26,12 @@
                                         <i class="fa fa-comments fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">26</div>
+                                        <div class="huge">
+                                            {{
+                                            count(Students::with(['grade' => function ($query) {
+                                                $query->where('school_year', date('Y'));
+                                            }])->get()) }}
+                                        </div>
                                         <div>Students</div>
                                     </div>
                                 </div>
@@ -43,7 +53,7 @@
                                         <i class="fa fa-tasks fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">12</div>
+                                        <div class="huge">{{ count(User::where('role', User::ROLE_USER)->get()) }}</div>
                                         <div>Teachers</div>
                                     </div>
                                 </div>
@@ -65,7 +75,7 @@
                                         <i class="fa fa-shopping-cart fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">124</div>
+                                        <div class="huge">{{ count(Grades::where('school_year' , date('Y'))->get()) }}</div>
                                         <div>Grades</div>
                                     </div>
                                 </div>

@@ -15,6 +15,9 @@ use App\Grades;
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="panel panel-default">
+                            <div class="panel-heading text-right">
+                                <a href="{{ url('/grade/create') }}" class="btn btn-primary"> Thêm Mới Lớp</a>
+                            </div>
                             <div class="panel-body">
                                 <table class="table ">
                                     <thead>
@@ -31,6 +34,7 @@ use App\Grades;
                                     <tbody>
                                     <?php foreach ($grades as $value){ ?>
                                     <tr>
+                                        <td>{{ \App\Http\Controllers\GradeController::generalID($value->id) }}</td>
                                         <td>{{ $value->id }}</td>
                                         <td>{{ $value->name }}</td>
                                         <td>{{ $value->school_year }}</td>
