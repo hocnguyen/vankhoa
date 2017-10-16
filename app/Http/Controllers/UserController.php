@@ -50,7 +50,7 @@ class UserController extends Controller
         $model->branch = $request->branch;
         $model->role = $request->role;
         $model->is_active = $request->is_active;
-        $model->remember_token = rand(1000000, 100000000000);
+        $model->remember_token = rand(1000000, 10000000);
         if ($model->save()) {
             return redirect("/users");
         }

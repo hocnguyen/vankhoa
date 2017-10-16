@@ -15,6 +15,9 @@ use App\User;
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="panel panel-default">
+                            <div class="panel-heading text-right">
+                                <a href="{{ url('/user/create') }}" class="btn btn-primary"> Thêm Mới Người Dùng</a>
+                            </div>
                             <div class="panel-body">
                                 <table class="table ">
                                     <thead>

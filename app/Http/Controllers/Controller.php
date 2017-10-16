@@ -37,7 +37,6 @@ class Controller extends BaseController
             return "2017";
         }
             return $year;
-
     }
 
 }
