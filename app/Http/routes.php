@@ -13,7 +13,7 @@
 /*Route::get('/', array('as'=> 'index','uses' => 'IndexController@index'));*/
 Route::get('/','IndexController@index');
 Route::get('logout', 'IndexController@logout');
-Route::get('login', ['as' => 'getLogin', 'uses' => 'SiteController@getLogin']);
+Route::get('login', ['as' => 'getLogin', 'uses' => 'SiteController@getLogin'])->middleware('login');
 Route::post('login', ['as' => 'postLogin', 'uses' => 'SiteController@postLogin']);
 
 Route::get('profile', ['as' => 'getProfile', 'uses' => 'UserController@getProfile']);
@@ -56,5 +56,11 @@ Route::post('/grade/update/{id}', ['as' => 'gradeupdate', 'uses' => 'GradeContro
 Route::get('/students', [ 'uses' => 'StudentController@index']);
 Route::get('/student/enrolment', [ 'uses' => 'StudentController@enrolment']);
 Route::post('/student/enrolment', [ 'uses' => 'StudentController@add']);
+
+Route::get('/student/update/{id}', ['as' => 'studentupdate', 'uses' => 'StudentController@getUpdate']);
+Route::post('/student/update/{id}', ['as' => 'studentupdate', 'uses' => 'StudentController@postUpdate']);
+
+Route::get('/student/view/{id}', ['as' => 'userview', 'uses' => 'StudentController@view']);
+Route::get('/student/out-standing-ledger', ['as' => 'userview', 'uses' => 'StudentController@outStanding']);
 
 Route::get('/error', ['as' => 'error', 'uses' => 'ErrorController@index']);
