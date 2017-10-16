@@ -47,7 +47,7 @@ use App\Attendances;
                                     }
                                     ?>
                                     <tr class="student-{{ $student->id }} {{ $class }}" data-id="{{ $student->id }}">
-                                        <td>{{ $student->id }}</td>
+                                        <td>{{ \App\Http\Controllers\StudentController::generalID($value->id) }}</td>
                                         <td>{{ $student->first_name }}</td>
                                         <td>{{ $student->last_name }}</td>
                                         <td>{{ $student->middle_name }}</td>
