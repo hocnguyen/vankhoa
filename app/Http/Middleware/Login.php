@@ -3,9 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use \App\User;
+use \Auth;
 
-class Admin
+class Login
 {
     /**
      * Handle an incoming request.
@@ -17,12 +17,8 @@ class Admin
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (session()->get('role') != User::ROLE_ADMIN) {
-            if ($request->ajax() || $request->wantsJson()) {
-                return response('Unauthorized.', 401);
-            } else {
-                return redirect()->intended('/');
-            }
+        if (Auth::check()) {
+            return redirect()->intended('/');
         }
 
         return $next($request);

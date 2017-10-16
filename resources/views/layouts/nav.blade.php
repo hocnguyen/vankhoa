@@ -6,7 +6,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="{{ url('/') }}">Van Khoa School <?php echo date("Y"); ?></a>
+        <a class="navbar-brand" href="{{ url('/') }}">Van Khoa School <?php echo \App\Http\Controllers\StudentController::getYear() ; ?></a>
     </div>
     <!-- /.navbar-header -->
 
@@ -47,7 +47,7 @@
                     <a href="#"><i class="fa fa-users fa-fw"></i> Students<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li class="{{ (Route::currentRouteName() == 'students')?"active":"" }}">
-                            <a href="{{ url('/histories') }}">Students List</a>
+                            <a href="{{ url('/students') }}">Students List</a>
                         </li>
                         <li class="{{ (Route::currentRouteName() == 'attendance')?"active":"" }}">
                             <a href="{{ url('/histories') }}">Make Attendance</a>

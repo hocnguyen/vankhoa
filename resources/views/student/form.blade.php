@@ -11,12 +11,21 @@
         <div class="row">
             <div class="col-lg-12">
                 <h3 class="page-header center-text title-style">
-                    VĂN KHOA VIETNAMESE LANGUAGE SCHOOL 2017 Student Enrolment
+
+                    VĂN KHOA VIETNAMESE LANGUAGE SCHOOL
+                    <?php echo \App\Http\Controllers\StudentController::getYear() ;
+                    if ($model->exists) {
+                        echo " STUDENT UPDATE";
+                    } else {
+                        echo " STUDENT ENROLMENT";
+                    }
+                    ?>
+
                 </h3>
             </div>
         </div>
         <div class="row">
-            {{ Form::open(array('url' => ($model->exists?'/student/update/' .$model->id:'/student/enrolment') , 'method' => 'post')) }}
+            {{ Form::open(array('url' => ($model->exists?'/student/update/' .$model->id:'/student/enrolment') , 'method' => 'post', 'onsubmit' => 'return confirm("Bạn có chắc chắn thực hiện hành động này ?")')) }}
             {{ csrf_field() }}
                 <div class="title-sub">Lý Lịch Học Sinh ‐ Student Details</div>
                 <div class="col-lg-12">
@@ -146,42 +155,64 @@
                         @endif
                     </div>
                 </div>
+                <?php
+                if ($model->exists) {
+                $key = 0;
+                    foreach ($sibling as $item) {
+                $key++;
+                ?>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <?php if ($key == 1 ) { echo "<label >Họ tên anh chị em (siblings’ names) </label>" ; } ?>
+                                <?php echo Form::text('full_name'.$key, $item->full_name, ['class' => 'form-control']); ?>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <?php if ($key == 1 ) { echo " <label >Lớp (Grade) </label>" ; } ?>
+                                <?php echo Form::text('grade_year'.$key, $item->grade_year, ['class' => 'form-control']); ?>
+                            </div>
+                        </div>
+                <?php   }
+                    } else {
+                ?>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label >Họ tên anh chị em (siblings’ names) </label>
+                            <?php echo Form::text('full_name1', $sibling->full_name1, ['class' => 'form-control']); ?>
+                        </div>
+                    </div>
 
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label >Họ tên anh chị em (siblings’ names) </label>
-                        <?php echo Form::text('full_name1', $sibling->full_name1, ['class' => 'form-control']); ?>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label >Lớp (Grade) </label>
+                            <?php echo Form::text('grade_year1', $sibling->grade_year1, ['class' => 'form-control']); ?>
+                        </div>
                     </div>
-                </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <?php echo Form::text('full_name2', $sibling->full_name2, ['class' => 'form-control']); ?>
+                        </div>
+                    </div>
 
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label >Lớp (Grade) </label>
-                        <?php echo Form::text('grade_year1', $sibling->grade_year1, ['class' => 'form-control']); ?>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <?php echo Form::text('grade_year2', $sibling->grade_year2, ['class' => 'form-control']); ?>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <?php echo Form::text('full_name2', $sibling->full_name2, ['class' => 'form-control']); ?>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <?php echo Form::text('full_name3', $sibling->full_name3, ['class' => 'form-control']); ?>
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <?php echo Form::text('grade_year2', $sibling->grade_year2, ['class' => 'form-control']); ?>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <?php echo Form::text('grade_year3', $sibling->grade_year3, ['class' => 'form-control']); ?>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <?php echo Form::text('full_name3', $sibling->full_name3, ['class' => 'form-control']); ?>
-                    </div>
-                </div>
 
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <?php echo Form::text('grade_year3', $sibling->grade_year3, ['class' => 'form-control']); ?>
-                    </div>
-                </div>
+                <?php } ?>
 
                 <div class="col-lg-12">
                     <div class="form-group">
@@ -267,9 +298,9 @@
                 <div class="col-lg-12">
                     <label class="fix-space-lbl" style="margin-right: 63px!important;">Học sinh có tạm trú Visa ngắn hạn? (Does the student hold a temporary visa?)</label>
                     <label for="yes_visa">Yes</label>
-                    <?php echo Form::radio('is_temporary_visa', 1, ($model->is_ovis_temporary_visaer_seas_student == 1) ? true : "", ['class' => 'fix-space-lbl', 'id' => 'yes_visa']); ?>
+                    <?php echo Form::radio('is_temporary_visa', 1, ($model->is_temporary_visa == 1) ? true : "", ['class' => 'fix-space-lbl', 'id' => 'yes_visa']); ?>
                     <label for="no_visa">No</label>
-                    <?php echo Form::radio('is_temporary_visa', 2, ($model->is_ovis_temporary_visaer_seas_student == 2) ? true : "", ['class' => 'fix-space-lbl', 'id' => 'no_visa']); ?>
+                    <?php echo Form::radio('is_temporary_visa', 2, ($model->is_temporary_visa == 2) ? true : "", ['class' => 'fix-space-lbl', 'id' => 'no_visa']); ?>
                     @if ($errors->has('is_temporary_visa'))
                         <div class="invalid error_msg">{{ $errors->first('is_temporary_visa') }}</div>
                     @endif

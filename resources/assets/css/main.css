@@ -26,3 +26,8 @@ table tr.no-having td{
 .error_msg {
     color: #a94442;
 }
+.view-std label.form-control, .view-std textarea.form-control{
+    font-weight: normal;
+    background-color: rgba(128, 128, 128, 0.23);
+    color: blue;
+}
