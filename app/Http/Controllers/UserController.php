@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     public function getProfile(){
-        return view('user.profile');
+        $model = User::find(Auth::id());
+        return view('user.profile', ['model' => $model]);
     }
     public function postProfile(Request $request) {
 

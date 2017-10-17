@@ -17,7 +17,7 @@ use App\Grades;
             </div>
         </div>
         <div class="row">
-            {{ Form::open(array('url' => ($model->exists?'/grade/update/' .$model->id:'/grade/create') , 'method' => 'post')) }}
+            {{ Form::open(array('url' => ($model->exists?'/grade/update/' .$model->id:'/grade/create') , 'method' => 'post', 'onsubmit' => 'return confirm("Bạn có chắc chắn thực hiện hành động này ?")')) }}
             {{ csrf_field() }}
             <div class="col-lg-6 col-lg-offset-3">
                 <div class="form-group">
@@ -47,7 +47,7 @@ use App\Grades;
 
                 <div class="form-group">
                     <?php echo Form::label('branch', 'Chi nhánh (Branch)'); ?>
-                    <?php echo Form::text('branch', $model->branch, ['class' => 'form-control', 'placeholder' => 'Chi nhánh']); ?>
+                    <?php echo Form::select('branch',['St. Albans' => 'St. Albans', 'South Yarra' => 'South Yarra'], $model->branch, ['class' => 'form-control']); ?>
                     @if ($errors->has('branch'))
                         <div class="invalid error_msg">{{ $errors->first('branch') }}</div>
                     @endif

@@ -40,7 +40,7 @@ use App\User;
                                         <td>{{ $value->branch }}</td>
                                         <th>
                                             <a title="Detail" href="{{ url('/user/view/' . $value->id) }}"><i class="fa fa-eye"></i></a>
-                                            <a title="Delete User"href="{{ url('/user/delete/' . $value->id) }}"><i class="fa fa-trash-o"></i></a>
+                                            <a class="action-delete" title="Delete User"href="{{ url('/user/delete/' . $value->id) }}"><i class="fa fa-trash-o"></i></a>
                                             <a title="Update user" href="{{ url('/user/update/' . $value->id) }}"><i class="fa fa-pencil-square-o"></i></a>
                                             <a title="Change Password" href="{{ url('/user/changepass/' . $value->id) }}"><i class="fa fa-lock"></i></a>
                                             @if(Auth::User()->role == User::ROLE_ADMIN)
@@ -59,4 +59,14 @@ use App\User;
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(document).on('click', '.action-delete', function () {
+                if(confirm("Bạn có chắc chắn thực hiện hành động này ?")){
+                    windown.href($(this).attr('href'));
+                }
+                return false;
+            })
+        })
+    </script>
 @endsection
