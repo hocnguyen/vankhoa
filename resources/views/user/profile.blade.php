@@ -1,3 +1,6 @@
+<?php
+use App\User;
+?>
 @extends('layouts.main')
 @section('title','Profile Page')
 @section('content')
@@ -5,16 +8,21 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    @if($model->exists)
-                        Chỉnh sửa thông tin người dùng - Update user
-                    @else
-                        Tạo mới người dùng - Create user
-                    @endif
+                    Profile - Update user
                 </h1>
             </div>
         </div>
         <div class="row">
-            {{ Form::open(array('url' => ($model->exists?'/user/update/' .$model->id:'/user/create') , 'method' => 'post', 'onsubmit' => 'return confirm("Bạn có chắc chắn thực hiện hành động này ?")')) }}
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-right">
+                        <a href="{{ url('/changemypassword') }}" class="btn btn-primary"> Đổi mật khẩu</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {{ Form::open(array('url' => ('/profile') , 'method' => 'post', 'onsubmit' => 'return confirm("Bạn có chắc chắn thực hiện hành động này ?")')) }}
             {{ csrf_field() }}
             <div class="col-lg-6">
                 <div class="form-group">

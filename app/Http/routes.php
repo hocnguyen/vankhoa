@@ -19,6 +19,9 @@ Route::post('login', ['as' => 'postLogin', 'uses' => 'SiteController@postLogin']
 Route::get('profile', ['as' => 'getProfile', 'uses' => 'UserController@getProfile']);
 Route::post('profile', ['as' => 'postProfile', 'uses' => 'UserController@postProfile']);
 
+Route::get('changemypassword', ['as' => 'getMyChangePassword', 'uses' => 'UserController@getMyChangePassword']);
+Route::post('changemypassword', ['as' => 'postMyChangePassword', 'uses' => 'UserController@postMyChangePassword']);
+
 Route::get('settings', ['as' => 'getSettings', 'uses' => 'UserController@getSettings']);
 Route::post('settings', ['as' => 'postSettings', 'uses' => 'UserController@postSettings']);
 

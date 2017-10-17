@@ -13,11 +13,32 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     public function getProfile(){
-        $model = User::find(Auth::id());
+        $id = Auth::id();
+        $model = User::find($id);
         return view('user.profile', ['model' => $model]);
     }
     public function postProfile(Request $request) {
+        $id = Auth::id();
+        $model = User::find($id);
+        $rule = $model->rules;
+        unset($rule['password']);
+        unset($rule['passwordpharse']);
+        $rule['username'] = $rule['username'] . ',id,' . $id;
+        $rule['email'] = $rule['email'] . ',id,' . $id;
+        $this->validate($request, $rule);
 
+        $model->username = $request->username;
+        $model->email = $request->email;
+        $model->firstname = $request->firstname;
+        $model->lastname = $request->lastname;
+        $model->phone = $request->phone;
+        $model->branch = $request->branch;
+        $model->role = $request->role;
+        $model->is_active = $request->is_active;
+        $model->remember_token = rand(1000000, 100000000000);
+        if ($model->update()) {
+            return redirect("/profile");
+        }
     }
 
     public function getSettings(){
@@ -100,12 +121,39 @@ class UserController extends Controller
         $hashedPassword = $model->password;
         if (Hash::check($request->current_password, $hashedPassword)) {
             $this->validate($request, $rules);
-            $model->password =  bcrypt($request->password);
+            $model->password =  Hash::make($request->password);
             if ($model->update()) {
                 return redirect("/users");
             }
         }else{
-            $errors = new MessageBag(['errorchangepass' => "Old password doesn't mactch!"]);
+            $errors = new MessageBag(['errorchangepass' => "Mật khẩu cũ không đúng!"]);
+            return redirect()->back()->withInput()->withErrors($errors);
+        }
+    }
+
+    public function getMyChangePassword(){
+        $id = Auth::id();
+        $model = User::find($id);
+        return view('user.profile_changepass', ['model' => $model]);
+    }
+
+    public function postMyChangePassword(Request $request){
+        $id = Auth::id();
+        $model = User::find($id);
+        $rules = [
+            'current_password' => 'required',
+            'password' => 'required|min:6|max:255|same:password',
+            'password_confirmation' => 'required|min:6|max:255|same:password',
+        ];
+        $hashedPassword = $model->password;
+        if (Hash::check($request->current_password, $hashedPassword)) {
+            $this->validate($request, $rules);
+            $model->password =  Hash::make($request->password);
+            if ($model->update()) {
+                return redirect("/profile");
+            }
+        }else{
+            $errors = new MessageBag(['errorchangepass' => "Mật khẩu cũ không đúng!"]);
             return redirect()->back()->withInput()->withErrors($errors);
         }
     }
@@ -135,7 +183,7 @@ class UserController extends Controller
                 return redirect("/users");
             }
         }else{
-            $errors = new MessageBag(['errorchangepass' => "Old password pharse doesn't mactch!"]);
+            $errors = new MessageBag(['errorchangepass' => "Mật khẩu pharse cũ không đúng!"]);
             return redirect()->back()->withInput()->withErrors($errors);
         }
     }

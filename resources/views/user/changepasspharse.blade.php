@@ -17,6 +17,11 @@ use App\User;
             {{ csrf_field() }}
             <div class="col-lg-6 col-lg-offset-3">
                 <div class="form-group">
+                    @if ($errors->has('errorchangepass'))
+                        <div class="invalid error_msg">{{ $errors->first('errorchangepass') }}</div>
+                    @endif
+                </div>
+                <div class="form-group">
                     <?php echo Form::label('current_passwordpharse', 'Mật khẩu pharse cũ (Old Password Pharse)'); ?>
                     <?php echo Form::password('current_passwordpharse', ['class' => 'form-control', 'placeholder' => 'Mật khẩu pharse cũ']); ?>
                     @if ($errors->has('current_passwordpharse'))
