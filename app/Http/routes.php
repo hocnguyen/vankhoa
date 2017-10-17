@@ -61,6 +61,7 @@ Route::get('/student/update/{id}', ['as' => 'studentupdate', 'uses' => 'StudentC
 Route::post('/student/update/{id}', ['as' => 'studentupdate', 'uses' => 'StudentController@postUpdate']);
 
 Route::get('/student/view/{id}', ['as' => 'userview', 'uses' => 'StudentController@view']);
+Route::get('/student/delete/{id}', ['as' => 'userview', 'uses' => 'StudentController@delete']);
 Route::get('/student/out-standing-ledger', ['as' => 'userview', 'uses' => 'StudentController@outStanding']);
 
 Route::get('/error', ['as' => 'error', 'uses' => 'ErrorController@index']);
