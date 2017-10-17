@@ -42,7 +42,7 @@ use App\Grades;
                                         <td>{{ $value->phone }}</td>
                                         <th>
                                             <a href="{{ url('/student/view/' . $value->id) }}"><i class="fa fa-eye"></i></a>
-                                            <a href="{{ url('/student/delete/' . $value->id) }}"><i class="fa fa-trash-o"></i></a>
+                                            <a class="action-delete" href="{{ url('/student/delete/' . $value->id) }}"><i class="fa fa-trash-o"></i></a>
                                             <a href="{{ url('/student/update/' . $value->id) }}"><i class="fa fa-pencil-square-o"></i></a>
                                         </th>
                                     </tr>
@@ -57,4 +57,14 @@ use App\Grades;
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(document).on('click', '.action-delete', function () {
+                if(confirm("Bạn có chắc chắn thực hiện hành động này ?")){
+                    windown.href($(this).attr('href'));
+                }
+                return false;
+            })
+        })
+    </script>
 @endsection
