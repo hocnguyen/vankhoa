@@ -13,7 +13,7 @@ use App\User;
             </div>
         </div>
         <div class="row">
-            {{ Form::open(array('url' => '/user/changepass/' .$model->id , 'method' => 'post')) }}
+            {{ Form::open(array('url' => '/user/changepass/' .$model->id , 'method' => 'post', 'onsubmit' => 'return confirm("Bạn có chắc chắn thực hiện hành động này ?")')) }}
             {{ csrf_field() }}
             <div class="col-lg-6 col-lg-offset-3">
                 <div class="form-group">
