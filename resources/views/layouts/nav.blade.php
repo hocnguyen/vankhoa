@@ -34,45 +34,25 @@
                 <li class="&quot;active&quot;">
                     <a href="/" class="active"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                 </li>
-                <li>
-                    <a href=""><i class="fa fa-user-times fa-fw"></i> Teachers</a>
-                    <!-- /.nav-second-level -->
+                @if(Auth::User()->role == \App\User::ROLE_ADMIN)
+                <li class="{{ (Route::currentRouteName() == 'users')?"active":"" }}">
+                    <a href="{{ url('/users') }}"><i class="fa fa-user-times fa-fw"></i> Teachers</a>
                 </li>
-                <li>
-                    <a href=""><i class="fa fa-table fa-fw"></i> Grades</a>
+                <li class="{{ (Route::currentRouteName() == 'grades')?"active":"" }}">
+                    <a href="{{ url('/grades') }}"><i class="fa fa-table fa-fw"></i> Grades</a>
                 </li>
-                <li>
-                    <a href="#"><i class="fa fa-users fa-fw"></i> Students<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li class="{{ (Route::currentRouteName() == 'students')?"active":"" }}">
-                            <a href="{{ url('/students') }}">Students List</a>
-                        </li>
-                        <li class="{{ (Route::currentRouteName() == 'attendance')?"active":"" }}">
-                            <a href="{{ url('/histories') }}">Make Attendance</a>
-                        </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
+                @endif
+                <li class="{{ (Route::currentRouteName() == 'attendances')?"active":"" }}">
+                    <a href="{{ url('/attendances') }}"><i class="fa fa-list-ul"></i> Attendances</a>
+                </li>
+                <li class="{{ (Route::currentRouteName() == 'students')?"active":"" }}">
+                    <a href="{{ url('/students') }}"><i class="fa fa-users"></i>Students List</a>
                 </li>
                 <?php
                 if (Auth::User()->role == \App\User::ROLE_ADMIN) { ?>
-                <li>
-                    <a href="#"><i class="fa fa-wrench fa-fw"></i> Manage<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li class="{{ (Route::currentRouteName() == 'histories')?"active":"" }}">
-                            <a href="{{ url('/histories') }}">Histories Login</a>
-                        </li>
-                        <li class="{{ (Route::currentRouteName() == 'users')?"active":"" }}">
-                            <a href="{{ url('/users') }}">Users</a>
-                        </li>
-                        <li class="{{ (Route::currentRouteName() == 'attendances')?"active":"" }}">
-                            <a href="{{ url('/attendances') }}">Attendances</a>
-                        </li>
-                        <li class="{{ (Route::currentRouteName() == 'grades')?"active":"" }}">
-                            <a href="{{ url('/grades') }}">Grades</a>
-                        </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                </li>
+                    <li class="{{ (Route::currentRouteName() == 'histories')?"active":"" }}">
+                        <a href="{{ url('/histories') }}"><i class="fa fa-list-ol"></i>Histories Login</a>
+                    </li>
                 <?php } ?>
             </ul>
         </div>
