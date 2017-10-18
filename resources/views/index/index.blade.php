@@ -62,7 +62,7 @@ use App\User;
                                             <i class="fa fa-tasks fa-5x"></i>
                                         </div>
                                         <div class="col-xs-9 text-right">
-                                            <div class="huge">{{ count(User::where('role', User::ROLE_USER)->get()) }}</div>
+                                            <div class="huge">{{ count(User::where('role', User::ROLE_TEACHER)->get()) }}</div>
                                             <div>Teachers</div>
                                         </div>
                                     </div>

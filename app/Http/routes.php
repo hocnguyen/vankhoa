@@ -46,15 +46,15 @@ Route::get('/attendance', ['as' => 'attendances', 'uses' => 'StudentController@g
 Route::post('/attendance/{time}', ['as' => 'attendances', 'uses' => 'AttendanceController@postAttendance']);
 Route::get('/attendances', ['as' => 'attendances', 'uses' => 'StudentController@attendances']);
 
-Route::get('grades', ['as' => 'grades', 'uses' => 'GradeController@index']);
-Route::get('/grade/view/{id}', ['as' => 'gradeview', 'uses' => 'GradeController@view']);
-Route::get('/grade/delete/{id}', ['as' => 'gradedelete', 'uses' => 'GradeController@delete']);
+Route::get('grades', ['as' => 'grades', 'uses' => 'GradeController@index'])->middleware('admin');
+Route::get('/grade/view/{id}', ['as' => 'gradeview', 'uses' => 'GradeController@view'])->middleware('admin');
+Route::get('/grade/delete/{id}', ['as' => 'gradedelete', 'uses' => 'GradeController@delete'])->middleware('admin');
 
-Route::get('/grade/create', ['as' => 'gradecreate', 'uses' => 'GradeController@getCreate']);
-Route::post('/grade/create', ['as' => 'gradecreate', 'uses' => 'GradeController@postCreate']);
+Route::get('/grade/create', ['as' => 'gradecreate', 'uses' => 'GradeController@getCreate'])->middleware('admin');
+Route::post('/grade/create', ['as' => 'gradecreate', 'uses' => 'GradeController@postCreate'])->middleware('admin');
 
-Route::get('/grade/update/{id}', ['as' => 'gradeupdate', 'uses' => 'GradeController@getUpdate']);
-Route::post('/grade/update/{id}', ['as' => 'gradeupdate', 'uses' => 'GradeController@postUpdate']);
+Route::get('/grade/update/{id}', ['as' => 'gradeupdate', 'uses' => 'GradeController@getUpdate'])->middleware('admin');
+Route::post('/grade/update/{id}', ['as' => 'gradeupdate', 'uses' => 'GradeController@postUpdate'])->middleware('admin');
 
 Route::get('/students', [ 'uses' => 'StudentController@index']);
 Route::get('/student/enrolment', [ 'uses' => 'StudentController@enrolment']);

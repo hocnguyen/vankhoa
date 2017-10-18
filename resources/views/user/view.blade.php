@@ -60,7 +60,7 @@ use App\User;
                 <div class="form-group">
                     <?php echo Form::label('role', 'Quyền hạn (Role)'); ?>
                     <?php
-                        $role = [ User::ROLE_ADMIN => 'Admin', User::ROLE_NORMAL => 'Normal'];
+                        $role = [ User::ROLE_ADMIN => 'Admin', User::ROLE_TEACHER => 'Teacher'];
                     echo Form::text('role', $role[$model->role], ['class' => 'form-control', 'readonly']); ?>
                 </div>
 
