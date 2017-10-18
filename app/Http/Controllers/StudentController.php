@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Grades;
 use App\Siblings;
-use App\Student;
 use App\Students;
 use Illuminate\Http\Request;
 
@@ -15,11 +14,11 @@ use Illuminate\Support\Facades\Auth;
 class StudentController extends Controller
 {
     public  function index(){
-        //$student = Students::where('id', '>', 0)->orderBy('id', 'DESC')->paginate(10);
         $student = DB::table('students')
             ->join('grades', 'students.grade_id', '=', 'grades.id')
             ->select('students.*', 'grades.name')
-            ->get();
+            ->where("is_deleted",0)
+            ->paginate(10);
         return view("student.index",["data"=> $student]);
     }
 
@@ -177,6 +176,14 @@ class StudentController extends Controller
             ->where('students.id',$id)
             ->get();
         return view('student.view', ['model' => $model[0],"sibling" =>$sibling]);
+    }
+
+    public function delete($id){
+        $student = Students::find($id);
+        $student->is_deleted = 1;
+        if ($student->update()) {
+            return redirect("/students");
+        }
     }
 
     public function outStanding(){

@@ -40,6 +40,11 @@ use App\Grades;
                 </div>
 
                 <div class="form-group">
+                    <?php echo Form::label('user_id', 'Giáo viên phụ trách (Teacher)'); ?>
+                    <?php echo Form::text('user_id', $model->firstname." ".$model->lastname." ( ".$model->username." ) ", ['class' => 'form-control',  'readonly']); ?>
+                </div>
+
+                <div class="form-group">
                     <?php echo Form::label('status', 'Trạng thái (Status)'); ?>
                     <?php
                     $arr = [ Grades::STATUS_INACTIVE => 'Không hoạt động', Grades::STATUS_ACTIVE => 'Hoạt động', Grades::STATUS_DELETED => 'Đã xoá'];
