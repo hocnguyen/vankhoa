@@ -40,8 +40,7 @@ class User extends Authenticatable
     const STATUS_ACTIVE = 1;
     const STATUS_INACTIVE = 2;
     const ROLE_ADMIN = 0;
-    const ROLE_USER = 1;
-    const ROLE_NORMAL = 2;
+    const ROLE_TEACHER = 1;
 
     public function his(){
         return $this->hasMany('App/HistoriesLogin','user_id');

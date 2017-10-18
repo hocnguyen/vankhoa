@@ -94,7 +94,7 @@ use App\User;
 
                     <div class="form-group">
                         <?php echo Form::label('role', 'Quyền hạn (Role)'); ?>
-                        <?php echo Form::select('role', [ User::ROLE_ADMIN => 'Admin', User::ROLE_NORMAL => 'Normal'], $model->role, ['class' => 'form-control', 'placeholder' => 'Chọn một']); ?>
+                        <?php echo Form::select('role', [ User::ROLE_ADMIN => 'Admin', User::ROLE_TEACHER => 'Teacher'], $model->role, ['class' => 'form-control', 'placeholder' => 'Chọn một']); ?>
                         @if ($errors->has('role'))
                             <div class="invalid error_msg">{{ $errors->first('role') }}</div>
                         @endif
