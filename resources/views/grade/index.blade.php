@@ -25,7 +25,8 @@ use App\Grades;
                                         <th>ID</th>
                                         <th>Tên lớp</th>
                                         <th>Năm học</th>
-                                        <th>Số lượng học sinh</th>
+                                        <th>Số lượng</th>
+                                        <th>Giáo Viên</th>
                                         <th>Chi nhánh</th>
                                         <th>Trạng thái</th>
                                         <th>Action</th>
@@ -35,10 +36,10 @@ use App\Grades;
                                     <?php foreach ($grades as $value){ ?>
                                     <tr>
                                         <td>{{ \App\Http\Controllers\GradeController::generalID($value->id) }}</td>
-                                        <td>{{ $value->id }}</td>
                                         <td>{{ $value->name }}</td>
                                         <td>{{ $value->school_year }}</td>
                                         <td>{{ $value->number_student }}</td>
+                                        <td>{{ $value->firstname." ".$value->lastname." ( ". $value->username ." ) " }}</td>
                                         <td>{{ $value->branch }}</td>
                                         <td>
                                             @if($value->status == Grades::STATUS_ACTIVE)

@@ -27,16 +27,22 @@ use App\User;
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge">
-                                            {{
-                                            count(Students::with(['grade' => function ($query) {
-                                                $query->where('school_year', \App\Http\Controllers\Controller::getYear());
-                                            }])->get()) }}
+                                            <?php
+                                            $data = DB::table('students')
+                                                    ->join('grades', function ($join) {
+                                                        $join->on('grades.id', '=', 'students.grade_id')
+                                                                ->where('grades.user_id',"=", Auth::id() )
+                                                                ->where('grades.school_year', "=", \App\Http\Controllers\Controller::getYear() );
+                                                    })
+                                                    ->get();
+                                            echo count($data);
+                                            ?>
                                         </div>
                                         <div>Students</div>
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <a href="/students">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -61,7 +67,7 @@ use App\User;
                                         </div>
                                     </div>
                                 </div>
-                                <a href="#">
+                                <a href="/users">
                                     <div class="panel-footer">
                                         <span class="pull-left">View Details</span>
                                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -81,12 +87,21 @@ use App\User;
                                         <i class="fa fa-shopping-cart fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">{{ count(Grades::where('school_year' , date('Y'))->get()) }}</div>
+                                        <div class="huge">
+                                            <?php
+                                            $data = DB::table('grades')
+                                                    ->where('grades.user_id',"=", Auth::id() )
+                                                    ->where('grades.school_year', "=", \App\Http\Controllers\Controller::getYear() )
+                                                    ->get();
+                                            echo count($data);
+                                            ?>
+
+                                        </div>
                                         <div>Grades</div>
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <a href="grades">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

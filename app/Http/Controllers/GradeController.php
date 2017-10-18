@@ -4,19 +4,37 @@ namespace App\Http\Controllers;
 
 use App\Grades;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 use App\Http\Requests;
 
 class GradeController extends Controller
 {
     public function index(){
-        $grades = Grades::where('id', '>', 0)->orderBy('id', 'DESC')->paginate(10);
+        //$grades = Grades::where('id', '>', 0)->orderBy('id', 'DESC')->paginate(10);
+
+        $grades = DB::table('grades')
+            ->join('users', 'users.id', '=', 'grades.user_id')
+            ->select('grades.*', 'users.firstname', 'users.lastname', 'users.username')
+            ->where("grades.id",">",0)
+            ->orderBy('id', 'DESC')
+            ->paginate(10);
+
         return view('grade.index', ['grades' => $grades]);
     }
 
     public function getCreate(){
         $model = new Grades();
-        return view('grade.form', ['model' => $model]);
+        $teachers = DB::table('users')
+            ->select('users.id', 'users.firstname', 'users.lastname', 'users.username')
+            ->where("is_active",1)
+            ->where("role",2)
+            ->get();
+        $teacher = [];
+        foreach ($teachers as $item) {
+            $teacher[$item->id] = $item->firstname." ".$item->lastname. " ( ".$item->username." )";
+        }
+        return view('grade.form', ['model' => $model, 'teachers' => $teacher]);
     }
 
     public function postCreate(Request $request){
@@ -37,7 +55,16 @@ class GradeController extends Controller
 
     public function getUpdate($id){
         $model = Grades::find($id);
-        return view('grade.form', ['model' => $model]);
+        $teachers = DB::table('users')
+            ->select('users.id', 'users.firstname', 'users.lastname', 'users.username')
+            ->where("is_active",1)
+            ->where("role",2)
+            ->get();
+        $teacher = [];
+        foreach ($teachers as $item) {
+            $teacher[$item->id] = $item->firstname." ".$item->lastname. " ( ".$item->username." )";
+        }
+        return view('grade.form', ['model' => $model, 'teachers' => $teacher]);
     }
 
     public function postUpdate(Request $request, $id){
@@ -56,8 +83,12 @@ class GradeController extends Controller
     }
 
     public function view($id){
-        $model = Grades::find($id);
-        return view('grade.view', ['model' => $model]);
+        $model = DB::table('grades')
+            ->join('users', 'users.id', '=', 'grades.user_id')
+            ->select('grades.*', 'users.firstname', 'users.lastname', 'users.username')
+            ->where("grades.id",$id)
+            ->get();
+        return view('grade.view', ['model' => $model[0]]);
     }
 
     public function delete($id){
