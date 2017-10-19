@@ -54,7 +54,7 @@ class UserController extends Controller
     }
 
     public function index(){
-        $users = User::where('id', '>', 0)->orderBy('id', 'DESC')->paginate(10);
+        $users = User::where('id', '>', 0)->where("role",User::ROLE_TEACHER)->orderBy('id', 'DESC')->paginate(10);
         return view('user.index', ['users' => $users]);
     }
     public function postCreate(Request $request){

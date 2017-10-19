@@ -22,6 +22,7 @@ use App\User;
                                 <table class="table ">
                                     <thead>
                                     <tr>
+                                        <th>ID</th>
                                         <th>Email</th>
                                         <th>Tên người dùng</th>
                                         <th>Tên đầy đủ </th>
@@ -33,18 +34,19 @@ use App\User;
                                     <tbody>
                                     <?php foreach ($users as $value){ ?>
                                     <tr>
+                                        <td>{{ \App\Http\Controllers\Controller::generalID($value->id) }}</td>
                                         <td>{{ $value->email }}</td>
                                         <td>{{ $value->username }}</td>
                                         <td>{{ $value->firstname . ' ' . $value->lastname }}</td>
                                         <td>{{ $value->phone }}</td>
                                         <td>{{ $value->branch }}</td>
                                         <th>
-                                            <a title="Detail" href="{{ url('/user/view/' . $value->id) }}"><i class="fa fa-eye"></i></a>
+                                            <a title="Chi Tiết" href="{{ url('/user/view/' . $value->id) }}"><i class="fa fa-eye"></i></a>
                                             <a class="action-delete" title="Delete User"href="{{ url('/user/delete/' . $value->id) }}"><i class="fa fa-trash-o"></i></a>
-                                            <a title="Update user" href="{{ url('/user/update/' . $value->id) }}"><i class="fa fa-pencil-square-o"></i></a>
-                                            <a title="Change Password" href="{{ url('/user/changepass/' . $value->id) }}"><i class="fa fa-lock"></i></a>
+                                            <a title="Cập Nhật" href="{{ url('/user/update/' . $value->id) }}"><i class="fa fa-pencil-square-o"></i></a>
+                                            <a title="Đổi Mật Khẩu" href="{{ url('/user/changepass/' . $value->id) }}"><i class="fa fa-lock"></i></a>
                                             @if(Auth::User()->role == User::ROLE_ADMIN)
-                                            <a title="Change Pass Pharse" href="{{ url('/user/changepasspharse/' . $value->id) }}"><i class="fa fa-unlock-alt "></i></a>
+                                            <a title="Đổi Pass Pharse" href="{{ url('/user/changepasspharse/' . $value->id) }}"><i class="fa fa-unlock-alt "></i></a>
                                             @endif
                                         </th>
                                     </tr>

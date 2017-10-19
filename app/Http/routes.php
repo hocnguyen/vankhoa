@@ -22,19 +22,16 @@ Route::post('profile', ['as' => 'postProfile', 'uses' => 'UserController@postPro
 Route::get('changemypassword', ['as' => 'getMyChangePassword', 'uses' => 'UserController@getMyChangePassword']);
 Route::post('changemypassword', ['as' => 'postMyChangePassword', 'uses' => 'UserController@postMyChangePassword']);
 
-Route::get('settings', ['as' => 'getSettings', 'uses' => 'UserController@getSettings']);
-Route::post('settings', ['as' => 'postSettings', 'uses' => 'UserController@postSettings']);
-
 Route::get('histories', ['as' => 'histories', 'uses' => 'HistoriesLoginController@index'])->middleware('admin');
 
 Route::get('/user/create', ['as' => 'usercreate', 'uses' => 'UserController@getCreate'])->middleware('admin');
 Route::post('/user/create', ['as' => 'usercreate', 'uses' => 'UserController@postCreate'])->middleware('admin');
 
-Route::get('/user/update/{id}', ['as' => 'userupdate', 'uses' => 'UserController@getUpdate']);
-Route::post('/user/update/{id}', ['as' => 'userupdate', 'uses' => 'UserController@postUpdate']);
+Route::get('/user/update/{id}', ['as' => 'userupdate', 'uses' => 'UserController@getUpdate'])->middleware('admin');
+Route::post('/user/update/{id}', ['as' => 'userupdate', 'uses' => 'UserController@postUpdate'])->middleware('admin');
 
 Route::get('/users', ['as' => 'userlist', 'uses' => 'UserController@index'])->middleware('admin');
-Route::get('/user/view/{id}', ['as' => 'userview', 'uses' => 'UserController@view']);
+Route::get('/user/view/{id}', ['as' => 'userview', 'uses' => 'UserController@view'])->middleware('admin');;
 
 Route::get('/user/changepass/{id}', ['as' => 'userchangepass', 'uses' => 'UserController@getChangePass']);
 Route::post('/user/changepass/{id}', ['as' => 'userchangepass', 'uses' => 'UserController@postChangePass']);

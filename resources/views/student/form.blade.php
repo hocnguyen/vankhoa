@@ -128,7 +128,7 @@
                         {
                             $grades[$item->id]  = $item->name;
                         }
-                        echo Form::select("grade_id",[$grades],$model->grade_id,['class'=> 'form-control']);
+                        echo Form::select("grade_id",$grades,$model->grade_id,['class'=> 'form-control']);
                         ?>
                         @if ($errors->has('grade_id'))
                             <div class="invalid error_msg">{{ $errors->first('grade_id') }}</div>

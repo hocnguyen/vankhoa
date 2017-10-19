@@ -42,7 +42,7 @@ class StudentController extends Controller
         $current_year = date("Y");
         $model = new Students();
         $sibling = new Siblings();
-        $grade = Grades::whereRaw('school_year = '.$current_year." and status = 1")->get();
+        $grade = DB::table('grades')->where('school_year',$current_year)->where("status",1)->get();
         return view('student.form', ['model' => $model,'grade'=>$grade,"sibling" =>$sibling]);
     }
 
