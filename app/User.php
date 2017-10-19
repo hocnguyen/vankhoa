@@ -42,6 +42,8 @@ class User extends Authenticatable
     const ROLE_ADMIN = 0;
     const ROLE_TEACHER = 1;
 
+    public static $branchs = [1 => 'St. Albans', 2 => 'South Yarra'];
+
     public function his(){
         return $this->hasMany('App/HistoriesLogin','user_id');
     }

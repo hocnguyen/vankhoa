@@ -1,5 +1,6 @@
 <?php
 use App\Grades;
+use App\User;
 ?>
 @extends('layouts.main')
 @section('title','Danh sách lớp - List Grade Page')
@@ -40,7 +41,7 @@ use App\Grades;
                                         <td>{{ $value->school_year }}</td>
                                         <td>{{ $value->number_student }}</td>
                                         <td>{{ $value->firstname." ".$value->lastname." ( ". $value->username ." ) " }}</td>
-                                        <td>{{ $value->branch }}</td>
+                                        <td>{{ User::$branchs[$value->branch] }}</td>
                                         <td>
                                             @if($value->status == Grades::STATUS_ACTIVE)
                                                 Hoạt động

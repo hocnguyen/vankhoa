@@ -19,9 +19,9 @@ class UsersTableSeeder extends Seeder
             'passwordpharse' => '12345678',
             'firstname' => 'Tom',
             'lastname' => 'Jery',
-            'phone' =>  '+8422222222',
+            'phone' =>  '+842222' . rand(100, 999),
             'branch' => 'CN1',
-            'role' => 0,
+            'role' => rand(1,2),
             'is_active' => 1,
             'remember_token' => rand(100, 1000000)
         ]);

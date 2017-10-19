@@ -13,13 +13,23 @@ use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
+    public function formList(){
+        $grades = Grades::where('user_id', Auth::User()->id)->get();
+        return view("student.form_list", ['grades' => $grades]);
+    }
     public  function index(){
-        $student = DB::table('students')
-            ->join('grades', 'students.grade_id', '=', 'grades.id')
-            ->select('students.*', 'grades.name')
-            ->where("is_deleted",0)
-            ->paginate(10);
-        return view("student.index",["data"=> $student]);
+        if(isset($_GET['grade']) && trim($_GET['grade']) != '' && isset($_GET['branch']) && trim($_GET['branch']) != '') {
+            $grade = trim($_GET['grade']);
+            $branch = trim($_GET['branch']);
+            $student = DB::table('students')
+                ->join('grades', 'students.grade_id', '=', 'grades.id')
+                ->select('students.*', 'grades.name')
+                ->where("is_deleted", 0)->where('grades.id', $grade)->where('students.branch', $branch)
+                ->paginate(10);
+            return view("student.index", ["data" => $student]);
+        }else{
+            return redirect("/error");
+        }
     }
 
     public function attendances(){

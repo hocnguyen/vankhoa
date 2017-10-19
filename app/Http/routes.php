@@ -56,7 +56,8 @@ Route::post('/grade/create', ['as' => 'gradecreate', 'uses' => 'GradeController@
 Route::get('/grade/update/{id}', ['as' => 'gradeupdate', 'uses' => 'GradeController@getUpdate'])->middleware('admin');
 Route::post('/grade/update/{id}', ['as' => 'gradeupdate', 'uses' => 'GradeController@postUpdate'])->middleware('admin');
 
-Route::get('/students', [ 'uses' => 'StudentController@index']);
+Route::get('/students', ['uses' => 'StudentController@index']);
+Route::get('/student/formList', ['as' => 'formList', 'uses' => 'StudentController@formList']);
 Route::get('/student/enrolment', [ 'uses' => 'StudentController@enrolment']);
 Route::post('/student/enrolment', [ 'uses' => 'StudentController@add']);
 

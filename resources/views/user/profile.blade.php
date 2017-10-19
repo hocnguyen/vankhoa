@@ -91,7 +91,7 @@ use App\User;
 
                 <div class="form-group">
                     <?php echo Form::label('branch', 'Chi nhánh (Branch)'); ?>
-                    <?php echo Form::select('branch',['St. Albans' => 'St. Albans', 'South Yarra' => 'South Yarra'], $model->branch, ['class' => 'form-control']); ?>
+                    <?php echo Form::select('branch', User::$branchs, $model->branch, ['class' => 'form-control']); ?>
                     @if ($errors->has('branch'))
                         <div class="invalid error_msg">{{ $errors->first('branch') }}</div>
                     @endif

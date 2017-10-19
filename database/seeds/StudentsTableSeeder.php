@@ -34,7 +34,7 @@ class StudentsTableSeeder extends Seeder
                 'is_temporary_visa' => rand(50, 100),
                 'is_vsl' => rand(50, 100),
                 'address_vsl' => rand(50, 100),
-                'branch' => str_random(10),
+                'branch' => rand(1,2),
                 'mom_name' => str_random(10),
                 'dad_name' => str_random(10),
                 'mom_phone' => str_random(10),

@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('firstname');
             $table->string('lastname');
             $table->string('phone');
-            $table->string('branch');
+            $table->integer('branch');
             $table->string('is_admin');
             $table->integer('is_active');
             $table->rememberToken();

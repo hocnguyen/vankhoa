@@ -11,9 +11,9 @@ use App\User;
             <div class="col-lg-12">
                 <label class="fix-space-lbl">Chi Nhánh Văn Khoa ( Campus )</label>
                 <label for="albans">St. Albans</label>
-                <?php echo Form::radio('branch', 1, ($model->branch == 1) ? true : "", ['class' => 'fix-space-lbl', 'readonly']); ?>
+                <?php echo Form::radio('branch', User::$branchs[1], ($model->branch == User::$branchs[1]) ? true : "", ['class' => 'fix-space-lbl', 'readonly']); ?>
                 <label for="yarra">South Yarra</label>
-                <?php echo Form::radio('branch', 2, ($model->branch == 2) ? true : "", ['class' => 'fix-space-lbl', 'readonly']); ?>
+                <?php echo Form::radio('branch', User::$branchs[2], ($model->branch == User::$branchs[2]) ? true : "", ['class' => 'fix-space-lbl', 'readonly']); ?>
 
             </div>
             <div class="col-lg-6">

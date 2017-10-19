@@ -37,7 +37,7 @@ use App\User;
                                         <td>{{ $value->username }}</td>
                                         <td>{{ $value->firstname . ' ' . $value->lastname }}</td>
                                         <td>{{ $value->phone }}</td>
-                                        <td>{{ $value->branch }}</td>
+                                        <td>{{ User::$branchs[$value->branch] }}</td>
                                         <th>
                                             <a title="Detail" href="{{ url('/user/view/' . $value->id) }}"><i class="fa fa-eye"></i></a>
                                             <a class="action-delete" title="Delete User"href="{{ url('/user/delete/' . $value->id) }}"><i class="fa fa-trash-o"></i></a>
