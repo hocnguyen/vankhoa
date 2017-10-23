@@ -17,10 +17,10 @@ class CreateGradesTable extends Migration
             $table->string('name');
             $table->string('school_year');
             $table->string('number_student');
-            $table->integer('branch');
+            $table->string('branch');
             $table->integer('user_id')->unsigned();
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

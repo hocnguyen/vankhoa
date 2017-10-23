@@ -19,7 +19,7 @@ class CreateStudentsTable extends Migration
             $table->string('middle_name');
             $table->string('name_at_school');
             $table->string('vns');
-            $table->date('birthday');
+            $table->dateTime('birthday');
             $table->integer('gender');
             $table->integer('student_type');
             $table->string('sickness');
@@ -34,9 +34,8 @@ class CreateStudentsTable extends Migration
             $table->integer('is_over_seas_student');
             $table->integer('is_temporary_visa');
             $table->integer('is_vsl');
-            $table->string('address_vsl')->nullable();
-            $table->string('languages_vsl')->nullable();
-            $table->integer('branch');
+            $table->integer('address_vsl')->nullable();
+            $table->string('branch',100);
             $table->string('mom_name',100);
             $table->string('dad_name',100);
             $table->string('mom_phone',15);
@@ -46,11 +45,11 @@ class CreateStudentsTable extends Migration
             $table->string('guardian_name');
             $table->string('relation');
             $table->string('guardian_phone');
-            $table->date('date');
+            $table->dateTime('date');
             $table->string('invoice_no');
             $table->integer('grade_id')->unsigned();
             $table->timestamps();
-            $table->foreign('grade_id')->references('id')->on('grades')->onDelete('cascade');
+            $table->foreign('grade_id')->references('id')->on('grades');
         });
     }
 

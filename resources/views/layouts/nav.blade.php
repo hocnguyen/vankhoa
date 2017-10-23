@@ -6,7 +6,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="{{ url('/') }}">Van Khoa School <?php echo \App\Http\Controllers\StudentController::getYear() ; ?></a>
+        <a class="navbar-brand" href="{{ url('/') }}">Van Khoa School <?php echo date("Y"); ?></a>
     </div>
     <!-- /.navbar-header -->
 
@@ -17,6 +17,8 @@
             </a>
             <ul class="dropdown-menu dropdown-user">
                 <li><a href="{{ url('/profile') }}"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                </li>
+                <li><a href="{{ url('/settings') }}"><i class="fa fa-gear fa-fw"></i> Settings</a>
                 </li>
                 <li class="divider"></li>
                 <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
@@ -34,26 +36,38 @@
                 <li class="&quot;active&quot;">
                     <a href="/" class="active"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                 </li>
-                @if(Auth::User()->role == \App\User::ROLE_ADMIN)
-                <li class="{{ (Route::currentRouteName() == 'users')?"active":"" }}">
-                    <a href="{{ url('/users') }}"><i class="fa fa-user-times fa-fw"></i> Teachers</a>
+                <li>
+                    <a href=""><i class="fa fa-user-times fa-fw"></i> Teachers</a>
+                    <!-- /.nav-second-level -->
                 </li>
-                <li class="{{ (Route::currentRouteName() == 'grades')?"active":"" }}">
-                    <a href="{{ url('/grades') }}"><i class="fa fa-table fa-fw"></i> Grades</a>
+                <li>
+                    <a href=""><i class="fa fa-table fa-fw"></i> Grades</a>
                 </li>
-                @endif
-                <li class="{{ (Route::currentRouteName() == 'attendances')?"active":"" }}">
-                    <a href="{{ url('/attendances') }}"><i class="fa fa-list-ul"></i> Attendances</a>
+                <li>
+                    <a href="#"><i class="fa fa-users fa-fw"></i> Students<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li class="{{ (Route::currentRouteName() == 'students')?"active":"" }}">
+                            <a href="{{ url('/histories') }}">Students List</a>
+                        </li>
+                        <li class="{{ (Route::currentRouteName() == 'attendance')?"active":"" }}">
+                            <a href="{{ url('/histories') }}">Make Attendance</a>
+                        </li>
+                    </ul>
+                    <!-- /.nav-second-level -->
                 </li>
-                <li class="{{ (Route::currentRouteName() == 'formList')?"active":"" }}">
-                    <a href="{{ url('/student/formList') }}"><i class="fa fa-users"></i>Students List</a>
+                <li>
+                    <a href="#"><i class="fa fa-wrench fa-fw"></i> Manage<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li class="{{ (Route::currentRouteName() == 'histories')?"active":"" }}">
+                            <a href="{{ url('/histories') }}">Histories Login</a>
+                        </li>
+                        <li class="{{ (Route::currentRouteName() == 'users')?"active":"" }}">
+                            <a href="{{ url('/users') }}">Users</a>
+                        </li>
+                    </ul>
+                    <!-- /.nav-second-level -->
                 </li>
-                <?php
-                if (Auth::User()->role == \App\User::ROLE_ADMIN) { ?>
-                    <li class="{{ (Route::currentRouteName() == 'histories')?"active":"" }}">
-                        <a href="{{ url('/histories') }}"><i class="fa fa-list-ol"></i>Histories Login</a>
-                    </li>
-                <?php } ?>
+
             </ul>
         </div>
         <!-- /.sidebar-collapse -->
