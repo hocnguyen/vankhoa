@@ -22,19 +22,16 @@ Route::post('profile', ['as' => 'postProfile', 'uses' => 'UserController@postPro
 Route::get('changemypassword', ['as' => 'getMyChangePassword', 'uses' => 'UserController@getMyChangePassword']);
 Route::post('changemypassword', ['as' => 'postMyChangePassword', 'uses' => 'UserController@postMyChangePassword']);
 
-Route::get('settings', ['as' => 'getSettings', 'uses' => 'UserController@getSettings']);
-Route::post('settings', ['as' => 'postSettings', 'uses' => 'UserController@postSettings']);
-
 Route::get('histories', ['as' => 'histories', 'uses' => 'HistoriesLoginController@index'])->middleware('admin');
 
 Route::get('/user/create', ['as' => 'usercreate', 'uses' => 'UserController@getCreate'])->middleware('admin');
 Route::post('/user/create', ['as' => 'usercreate', 'uses' => 'UserController@postCreate'])->middleware('admin');
 
-Route::get('/user/update/{id}', ['as' => 'userupdate', 'uses' => 'UserController@getUpdate']);
-Route::post('/user/update/{id}', ['as' => 'userupdate', 'uses' => 'UserController@postUpdate']);
+Route::get('/user/update/{id}', ['as' => 'userupdate', 'uses' => 'UserController@getUpdate'])->middleware('admin');
+Route::post('/user/update/{id}', ['as' => 'userupdate', 'uses' => 'UserController@postUpdate'])->middleware('admin');
 
 Route::get('/users', ['as' => 'userlist', 'uses' => 'UserController@index'])->middleware('admin');
-Route::get('/user/view/{id}', ['as' => 'userview', 'uses' => 'UserController@view']);
+Route::get('/user/view/{id}', ['as' => 'userview', 'uses' => 'UserController@view'])->middleware('admin');;
 
 Route::get('/user/changepass/{id}', ['as' => 'userchangepass', 'uses' => 'UserController@getChangePass']);
 Route::post('/user/changepass/{id}', ['as' => 'userchangepass', 'uses' => 'UserController@postChangePass']);
@@ -56,7 +53,8 @@ Route::post('/grade/create', ['as' => 'gradecreate', 'uses' => 'GradeController@
 Route::get('/grade/update/{id}', ['as' => 'gradeupdate', 'uses' => 'GradeController@getUpdate'])->middleware('admin');
 Route::post('/grade/update/{id}', ['as' => 'gradeupdate', 'uses' => 'GradeController@postUpdate'])->middleware('admin');
 
-Route::get('/students', [ 'uses' => 'StudentController@index']);
+Route::get('/students', ['uses' => 'StudentController@index']);
+Route::get('/student/formList', ['as' => 'formList', 'uses' => 'StudentController@formList']);
 Route::get('/student/enrolment', [ 'uses' => 'StudentController@enrolment']);
 Route::post('/student/enrolment', [ 'uses' => 'StudentController@add']);
 
@@ -65,6 +63,7 @@ Route::post('/student/update/{id}', ['as' => 'studentupdate', 'uses' => 'Student
 
 Route::get('/student/view/{id}', ['as' => 'userview', 'uses' => 'StudentController@view']);
 Route::get('/student/delete/{id}', ['as' => 'userview', 'uses' => 'StudentController@delete']);
+Route::get('/student/getClass/{id}', ['as' => 'userview', 'uses' => 'StudentController@getClassOfBranch']);
 Route::get('/student/out-standing-ledger', ['as' => 'userview', 'uses' => 'StudentController@outStanding']);
 
 Route::get('/error', ['as' => 'error', 'uses' => 'ErrorController@index']);

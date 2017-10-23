@@ -45,8 +45,8 @@
                 <li class="{{ (Route::currentRouteName() == 'attendances')?"active":"" }}">
                     <a href="{{ url('/attendances') }}"><i class="fa fa-list-ul"></i> Attendances</a>
                 </li>
-                <li class="{{ (Route::currentRouteName() == 'students')?"active":"" }}">
-                    <a href="{{ url('/students') }}"><i class="fa fa-users"></i>Students List</a>
+                <li class="{{ (Route::currentRouteName() == 'formList')?"active":"" }}">
+                    <a href="{{ url('/student/formList') }}"><i class="fa fa-users"></i>Students List</a>
                 </li>
                 <?php
                 if (Auth::User()->role == \App\User::ROLE_ADMIN) { ?>

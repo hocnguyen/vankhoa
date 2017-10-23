@@ -33,25 +33,6 @@ use App\User;
                     @endif
                 </div>
 
-
-                <div class="form-group">
-                    <?php echo Form::label('email', 'Email'); ?>
-                    <?php echo Form::text('email', $model->email, ['class' => 'form-control', 'placeholder' => 'Email']); ?>
-                    @if ($errors->has('email'))
-                        <div class="invalid error_msg">{{ $errors->first('email') }}</div>
-                    @endif
-                </div>
-
-                @if(!$model->exists)
-                    <div class="form-group">
-                        <?php echo Form::label('password', 'Mật khẩu (Password)'); ?>
-                        <?php echo Form::password('password', ['class' => 'form-control', 'placeholder' => 'Mật khẩu']); ?>
-                        @if ($errors->has('password'))
-                            <div class="invalid error_msg">{{ $errors->first('password') }}</div>
-                        @endif
-                    </div>
-                @endif
-
                 <div class="form-group">
                     <?php echo Form::label('firstname', 'Họ (First Name)'); ?>
                     <?php echo Form::text('firstname', $model->firstname, ['class' => 'form-control', 'placeholder' => 'Họ']); ?>
@@ -71,16 +52,6 @@ use App\User;
             </div>
 
             <div class="col-lg-6">
-                @if(!$model->exists)
-                    <div class="form-group">
-                        <?php echo Form::label('passwordpharse', 'Password Pharse'); ?>
-                        <?php echo Form::password('passwordpharse', ['class' => 'form-control', 'placeholder' => 'Password Pharse']); ?>
-                        @if ($errors->has('passwordpharse'))
-                            <div class="invalid error_msg">{{ $errors->first('passwordpharse') }}</div>
-                        @endif
-                    </div>
-                @endif
-
                 <div class="form-group">
                     <?php echo Form::label('phone', 'Số điện thoại (Phone)'); ?>
                     <?php echo Form::text('phone', $model->phone, ['class' => 'form-control', 'placeholder' => 'Số điện thoại']); ?>
@@ -90,8 +61,15 @@ use App\User;
                 </div>
 
                 <div class="form-group">
+                    <?php echo Form::label('email', 'Email'); ?>
+                    <?php echo Form::text('email', $model->email, ['class' => 'form-control', 'placeholder' => 'Email']); ?>
+                    @if ($errors->has('email'))
+                        <div class="invalid error_msg">{{ $errors->first('email') }}</div>
+                        @endif
+                </div>
+                <div class="form-group">
                     <?php echo Form::label('branch', 'Chi nhánh (Branch)'); ?>
-                    <?php echo Form::select('branch',['St. Albans' => 'St. Albans', 'South Yarra' => 'South Yarra'], $model->branch, ['class' => 'form-control']); ?>
+                    <?php echo Form::select('branch', User::$branchs, $model->branch, ['class' => 'form-control']); ?>
                     @if ($errors->has('branch'))
                         <div class="invalid error_msg">{{ $errors->first('branch') }}</div>
                     @endif

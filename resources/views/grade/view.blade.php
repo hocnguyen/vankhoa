@@ -1,5 +1,6 @@
 <?php
 use App\Grades;
+use App\User;
 ?>
 @extends('layouts.main')
 @section('title','View Grade')
@@ -36,7 +37,7 @@ use App\Grades;
 
                 <div class="form-group">
                     <?php echo Form::label('branch', 'Chi nhánh (Branch)'); ?>
-                    <?php echo Form::text('branch', $model->branch, ['class' => 'form-control', 'readonly']); ?>
+                    <?php echo Form::text('branch', User::$branchs[$model->branch], ['class' => 'form-control', 'readonly']); ?>
                 </div>
 
                 <div class="form-group">

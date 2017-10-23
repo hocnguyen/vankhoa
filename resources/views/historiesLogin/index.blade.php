@@ -16,7 +16,6 @@
                             <table class="table ">
                                 <thead>
                                 <tr>
-                                    <th>ID</th>
                                     <th>Tên người dùng</th>
                                     <th>Tên đầy đủ</th>
                                     <th>Thời gian</th>
@@ -25,7 +24,6 @@
                                 <tbody>
                                 <?php foreach ($histories as $value){ ?>
                                     <tr>
-                                        <td>{{ $value->id }}</td>
                                         <td>{{ $value->user->username }}</td>
                                         <td>{{ $value->user->firstname . ' ' . $value->user->lastname }}</td>
                                         <td>{{ date('H:m:s d-m-Y', strtotime($value->time_login)) }}</td>

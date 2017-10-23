@@ -36,7 +36,7 @@ class CreateStudentsTable extends Migration
             $table->integer('is_vsl');
             $table->string('address_vsl')->nullable();
             $table->string('languages_vsl')->nullable();
-            $table->string('branch',100);
+            $table->integer('branch');
             $table->string('mom_name',100);
             $table->string('dad_name',100);
             $table->string('mom_phone',15);

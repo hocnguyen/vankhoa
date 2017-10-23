@@ -1,5 +1,6 @@
 <?php
 use App\Attendances;
+use App\User;
 ?>
 @extends('layouts.main')
 @section('title','Student attendances')
@@ -52,7 +53,7 @@ use App\Attendances;
                                         <td>{{ $student->last_name }}</td>
                                         <td>{{ $student->middle_name }}</td>
                                         <td>{{ $student->phone }}</td>
-                                        <td>{{ $student->branch }}</td>
+                                        <td>{{ User::$branchs[$student->branch] }}</td>
                                         <td>
                                             <?php
                                             $arr_status = array( Attendances::STATUS_EMPTY => 'Empty', Attendances::STATUS_HAVING => 'Having', Attendances::STATUS_NO_HAVING => 'No having');

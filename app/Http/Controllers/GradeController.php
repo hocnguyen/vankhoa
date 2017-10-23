@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Grades;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -27,8 +28,8 @@ class GradeController extends Controller
         $model = new Grades();
         $teachers = DB::table('users')
             ->select('users.id', 'users.firstname', 'users.lastname', 'users.username')
-            ->where("is_active",1)
-            ->where("role",2)
+            ->where("is_active",Grades::STATUS_ACTIVE)
+            ->where("role",User::ROLE_TEACHER)
             ->get();
         $teacher = [];
         foreach ($teachers as $item) {
@@ -57,8 +58,8 @@ class GradeController extends Controller
         $model = Grades::find($id);
         $teachers = DB::table('users')
             ->select('users.id', 'users.firstname', 'users.lastname', 'users.username')
-            ->where("is_active",1)
-            ->where("role",2)
+            ->where("is_active",Grades::STATUS_ACTIVE)
+            ->where("role",User::ROLE_TEACHER)
             ->get();
         $teacher = [];
         foreach ($teachers as $item) {

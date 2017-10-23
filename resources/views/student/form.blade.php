@@ -1,4 +1,5 @@
- <?php
+<?php
+use App\User;
 ?>
 @extends('layouts.main')
 @section('title','Ghi Danh Hoc Sinh')
@@ -31,9 +32,9 @@
                 <div class="col-lg-12">
                     <label class="fix-space-lbl">Chi Nhánh Văn Khoa ( Campus )</label>
                     <label for="albans">St. Albans</label>
-                    <?php echo Form::radio('branch', 1, ($model->branch == 1) ? true : "", ['class' => 'fix-space-lbl', 'id' => 'albans']); ?>
+                    <?php echo Form::radio('branch', User::$branchs[1], ($model->branch == User::$branchs[1]) ? true : "", ['class' => 'fix-space-lbl', 'id' => 'albans']); ?>
                     <label for="yarra">South Yarra</label>
-                    <?php echo Form::radio('branch', 2, ($model->branch == 2) ? true : "", ['class' => 'fix-space-lbl', 'id' => 'yarra']); ?>
+                    <?php echo Form::radio('branch', User::$branchs[2], ($model->branch == User::$branchs[2]) ? true : "", ['class' => 'fix-space-lbl', 'id' => 'yarra']); ?>
                     @if ($errors->has('branch'))
                         <div class="invalid error_msg">{{ $errors->first('branch') }}</div>
                     @endif
@@ -128,7 +129,7 @@
                         {
                             $grades[$item->id]  = $item->name;
                         }
-                        echo Form::select("grade_id",[$grades],$model->grade_id,['class'=> 'form-control']);
+                        echo Form::select("grade_id",$grades,$model->grade_id,['class'=> 'form-control']);
                         ?>
                         @if ($errors->has('grade_id'))
                             <div class="invalid error_msg">{{ $errors->first('grade_id') }}</div>
