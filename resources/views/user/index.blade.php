@@ -28,18 +28,26 @@ use App\User;
                                         <th>Tên đầy đủ </th>
                                         <th>Số địện thoại</th>
                                         <th>Chi nhánh</th>
+                                        <th>Trạng Thái</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <?php foreach ($users as $value){ ?>
-                                    <tr>
+                                    <?php foreach ($users as $value){
+                                        $in_active = "";
+                                        if ($value->is_active == User::STATUS_INACTIVE) {
+                                            $in_active = "style=background-color:#dedede";
+                                        }
+                                    ?>
+                                    <tr {{ $in_active }} >
                                         <td>{{ \App\Http\Controllers\Controller::generalID($value->id) }}</td>
                                         <td>{{ $value->email }}</td>
                                         <td>{{ $value->username }}</td>
                                         <td>{{ $value->firstname . ' ' . $value->lastname }}</td>
                                         <td>{{ $value->phone }}</td>
-                                        <td>{{ $value->branch }}</td>
+                                        <td>{{ User::$branchs[$value->branch] }}</td>
+                                        <td><?php echo ($value->is_active == User::STATUS_ACTIVE) ? "Active" : "In Active" ?></td>
+
                                         <th>
                                             <a title="Chi Tiết" href="{{ url('/user/view/' . $value->id) }}"><i class="fa fa-eye"></i></a>
                                             <a class="action-delete" title="Delete User"href="{{ url('/user/delete/' . $value->id) }}"><i class="fa fa-trash-o"></i></a>

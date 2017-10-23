@@ -65,6 +65,29 @@ use App\User;
                     <?php echo Form::text('email', $model->email, ['class' => 'form-control', 'placeholder' => 'Email']); ?>
                     @if ($errors->has('email'))
                         <div class="invalid error_msg">{{ $errors->first('email') }}</div>
+                        @endif
+                </div>
+                <div class="form-group">
+                    <?php echo Form::label('branch', 'Chi nhánh (Branch)'); ?>
+                    <?php echo Form::select('branch', User::$branchs, $model->branch, ['class' => 'form-control']); ?>
+                    @if ($errors->has('branch'))
+                        <div class="invalid error_msg">{{ $errors->first('branch') }}</div>
+                    @endif
+                </div>
+
+                <div class="form-group">
+                    <?php echo Form::label('role', 'Quyền hạn (Role)'); ?>
+                    <?php echo Form::select('role', [ User::ROLE_ADMIN => 'Admin', User::ROLE_TEACHER => 'Teacher'], $model->role, ['class' => 'form-control', 'placeholder' => 'Chọn một']); ?>
+                    @if ($errors->has('role'))
+                        <div class="invalid error_msg">{{ $errors->first('role') }}</div>
+                    @endif
+                </div>
+
+                <div class="form-group">
+                    <?php echo Form::label('is_active', 'Trạng thái (Is Active)'); ?>
+                    <?php echo Form::select('is_active', [User::STATUS_ACTIVE => 'Active', User::STATUS_INACTIVE => 'In Active'], $model->is_active, ['class' => 'form-control', 'placeholder' => 'Chọn một']); ?>
+                    @if ($errors->has('is_active'))
+                        <div class="invalid error_msg">{{ $errors->first('is_active') }}</div>
                     @endif
                 </div>
             </div>

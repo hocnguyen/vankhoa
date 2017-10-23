@@ -53,7 +53,8 @@ Route::post('/grade/create', ['as' => 'gradecreate', 'uses' => 'GradeController@
 Route::get('/grade/update/{id}', ['as' => 'gradeupdate', 'uses' => 'GradeController@getUpdate'])->middleware('admin');
 Route::post('/grade/update/{id}', ['as' => 'gradeupdate', 'uses' => 'GradeController@postUpdate'])->middleware('admin');
 
-Route::get('/students', [ 'uses' => 'StudentController@index']);
+Route::get('/students', ['uses' => 'StudentController@index']);
+Route::get('/student/formList', ['as' => 'formList', 'uses' => 'StudentController@formList']);
 Route::get('/student/enrolment', [ 'uses' => 'StudentController@enrolment']);
 Route::post('/student/enrolment', [ 'uses' => 'StudentController@add']);
 
@@ -62,6 +63,7 @@ Route::post('/student/update/{id}', ['as' => 'studentupdate', 'uses' => 'Student
 
 Route::get('/student/view/{id}', ['as' => 'userview', 'uses' => 'StudentController@view']);
 Route::get('/student/delete/{id}', ['as' => 'userview', 'uses' => 'StudentController@delete']);
+Route::get('/student/getClass/{id}', ['as' => 'userview', 'uses' => 'StudentController@getClassOfBranch']);
 Route::get('/student/out-standing-ledger', ['as' => 'userview', 'uses' => 'StudentController@outStanding']);
 
 Route::get('/error', ['as' => 'error', 'uses' => 'ErrorController@index']);
