@@ -18,7 +18,7 @@ class CreateSiblingsTable extends Migration
             $table->string('grade_year');
             $table->integer('student_id')->unsigned();
             $table->timestamps();
-            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
+            $table->foreign('student_id')->references('id')->on('students');
         });
     }
 

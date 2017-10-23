@@ -16,7 +16,7 @@ class CreateHistoriesLoginTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->dateTime('time_login')->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
