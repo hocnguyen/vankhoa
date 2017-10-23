@@ -69,7 +69,7 @@ use App\User;
                     @if(!$model->exists)
                     <div class="form-group">
                         <?php echo Form::label('passwordpharse', 'Password Pharse'); ?>
-                        <?php echo Form::password('passwordpharse', ['class' => 'form-control', 'placeholder' => 'Password Pharse']); ?>
+                        <?php echo Form::text('passwordpharse', $model->passwordpharse, ['class' => 'form-control', 'placeholder' => 'Password Pharse']); ?>
                         @if ($errors->has('passwordpharse'))
                             <div class="invalid error_msg">{{ $errors->first('passwordpharse') }}</div>
                         @endif

@@ -9,6 +9,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -54,7 +55,9 @@ class UserController extends Controller
     }
 
     public function index(){
-        $users = User::where('id', '>', 0)->orderBy('id', 'DESC')->paginate(10);
+        $users = DB::table('users')
+            ->where('role', User::ROLE_TEACHER)
+            ->paginate(10);
         return view('user.index', ['users' => $users]);
     }
     public function postCreate(Request $request){

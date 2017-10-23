@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Grades;
 use App\Siblings;
 use App\Students;
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -14,7 +15,21 @@ use Illuminate\Support\Facades\Auth;
 class StudentController extends Controller
 {
     public function formList(){
-        $grades = Grades::where('user_id', Auth::User()->id)->get();
+        if (session()->get('role') == User::ROLE_ADMIN) {
+            $grades = DB::table('grades')
+                ->where('school_year', $this->getYear())
+                ->where('status', Grades::STATUS_ACTIVE)
+                ->where('branch', User::ST_ALBANS)
+                ->get();
+        } else {
+            $grades = DB::table('grades')
+                ->where('user_id', Auth::User()->id)
+                ->where('school_year', $this->getYear())
+                ->where('status', Grades::STATUS_ACTIVE)
+                ->where('branch', User::ST_ALBANS)
+                ->get();
+        }
+
         return view("student.form_list", ['grades' => $grades]);
     }
     public  function index(){
@@ -207,5 +222,21 @@ class StudentController extends Controller
             ])
             ->get();
         return view('student.outStanding', ['data' => $model,]);
+    }
+
+    public function getClassOfBranch($id){
+        if (session()->get('role') == User::ROLE_ADMIN) {
+            $grades = DB::table('grades')
+                ->where("school_year",$this->getYear())
+                ->where("branch",$id)
+                ->get();
+        } else {
+            $grades = DB::table('grades')
+                ->where("school_year",$this->getYear())
+                ->where("branch",$id)
+                ->where('user_id', Auth::User()->id)
+                ->get();
+        }
+        return view('student.grades', ['data' => $grades,]);
     }
 }

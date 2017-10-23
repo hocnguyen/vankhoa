@@ -10,7 +10,7 @@ use App\User;
             <div class="col-lg-12">
                 <h1 class="page-header">
                     @if($model->exists)
-                        Chỉnh sửa lớp - Update Grade #{{ $model->id }}
+                        Chỉnh sửa lớp - Update Grade
                     @else
                         Tạo mới lớp - Create Grade
                     @endif
