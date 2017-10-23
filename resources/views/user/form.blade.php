@@ -2,58 +2,65 @@
 use App\User;
 ?>
 @extends('layouts.main')
-@section('title','Create User')
+@section('title','Tạo mới người dùng - Create User')
 @section('content')
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
                     @if($model->exists)
-                        Update User #{{ $model->id }}
+                        Chỉnh sửa thông tin người dùng - Update user
                     @else
-                        Create User
+                        Tạo mới người dùng - Create user
                     @endif
                 </h1>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12">
-                @foreach($errors->all() as $error)
-                    <div class="alert alert-danger" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        {{ $error }}
-                    </div>
-                @endforeach
-            </div>
-            {{ Form::open(array('url' => ($model->exists?'/user/update/' .$model->id:'/user/create') , 'method' => 'post')) }}
+            {{ Form::open(array('url' => ($model->exists?'/user/update/' .$model->id:'/user/create') , 'method' => 'post', 'onsubmit' => 'return confirm("Bạn có chắc chắn thực hiện hành động này ?")')) }}
             {{ csrf_field() }}
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <?php echo Form::label('username', 'User Name'); ?>
-                        <?php echo Form::text('username', $model->username  , ['class' => 'form-control', 'placeholder' => 'User Name']); ?>
+                        <?php echo Form::label('username', 'Tên người dùng (User Name)'); ?>
+                        <?php echo Form::text('username', $model->username  , ['class' => 'form-control', 'placeholder' => 'Tên người dùng']); ?>
+                        @if ($errors->has('username'))
+                            <div class="invalid error_msg">{{ $errors->first('username') }}</div>
+                        @endif
                     </div>
 
 
                     <div class="form-group">
                         <?php echo Form::label('email', 'Email'); ?>
                         <?php echo Form::text('email', $model->email, ['class' => 'form-control', 'placeholder' => 'Email']); ?>
+                        @if ($errors->has('email'))
+                            <div class="invalid error_msg">{{ $errors->first('email') }}</div>
+                        @endif
                     </div>
 
                     @if(!$model->exists)
                     <div class="form-group">
-                        <?php echo Form::label('password', 'Password'); ?>
-                        <?php echo Form::password('password', ['class' => 'form-control', 'placeholder' => 'Password']); ?>
+                        <?php echo Form::label('password', 'Mật khẩu (Password)'); ?>
+                        <?php echo Form::password('password', ['class' => 'form-control', 'placeholder' => 'Mật khẩu']); ?>
+                        @if ($errors->has('password'))
+                            <div class="invalid error_msg">{{ $errors->first('password') }}</div>
+                        @endif
                     </div>
                     @endif
 
                     <div class="form-group">
-                        <?php echo Form::label('firstname', 'First Name'); ?>
-                        <?php echo Form::text('firstname', $model->firstname, ['class' => 'form-control', 'placeholder' => 'First Name']); ?>
+                        <?php echo Form::label('firstname', 'Họ (First Name)'); ?>
+                        <?php echo Form::text('firstname', $model->firstname, ['class' => 'form-control', 'placeholder' => 'Họ']); ?>
+                        @if ($errors->has('firstname'))
+                            <div class="invalid error_msg">{{ $errors->first('firstname') }}</div>
+                        @endif
                     </div>
 
                     <div class="form-group">
-                        <?php echo Form::label('lastname', 'Last Name'); ?>
-                        <?php echo Form::text('lastname', $model->lastname, ['class' => 'form-control', 'placeholder' => 'Last Name']); ?>
+                        <?php echo Form::label('lastname', 'Tên (Last Name)'); ?>
+                        <?php echo Form::text('lastname', $model->lastname, ['class' => 'form-control', 'placeholder' => 'Tên']); ?>
+                        @if ($errors->has('lastname'))
+                            <div class="invalid error_msg">{{ $errors->first('lastname') }}</div>
+                        @endif
                     </div>
 
                 </div>
@@ -62,33 +69,48 @@ use App\User;
                     @if(!$model->exists)
                     <div class="form-group">
                         <?php echo Form::label('passwordpharse', 'Password Pharse'); ?>
-                        <?php echo Form::password('passwordpharse', ['class' => 'form-control', 'placeholder' => 'Password Pharse']); ?>
+                        <?php echo Form::text('passwordpharse', $model->passwordpharse, ['class' => 'form-control', 'placeholder' => 'Password Pharse']); ?>
+                        @if ($errors->has('passwordpharse'))
+                            <div class="invalid error_msg">{{ $errors->first('passwordpharse') }}</div>
+                        @endif
                     </div>
                     @endif
 
                     <div class="form-group">
-                        <?php echo Form::label('phone', 'Phone'); ?>
-                        <?php echo Form::text('phone', $model->phone, ['class' => 'form-control', 'placeholder' => 'Phone']); ?>
+                        <?php echo Form::label('phone', 'Số điện thoại (Phone)'); ?>
+                        <?php echo Form::text('phone', $model->phone, ['class' => 'form-control', 'placeholder' => 'Số điện thoại']); ?>
+                        @if ($errors->has('phone'))
+                            <div class="invalid error_msg">{{ $errors->first('phone') }}</div>
+                        @endif
                     </div>
 
                     <div class="form-group">
-                        <?php echo Form::label('branch', 'Branch'); ?>
-                        <?php echo Form::text('branch', $model->branch, ['class' => 'form-control', 'placeholder' => 'Branch']); ?>
+                        <?php echo Form::label('branch', 'Chi nhánh (Branch)'); ?>
+                        <?php echo Form::select('branch', User::$branchs, $model->branch, ['class' => 'form-control']); ?>
+                        @if ($errors->has('branch'))
+                            <div class="invalid error_msg">{{ $errors->first('branch') }}</div>
+                        @endif
                     </div>
 
                     <div class="form-group">
-                        <?php echo Form::label('is_admin', 'Is Admin'); ?>
-                        <?php echo Form::select('is_admin', [ User::ROLE_ADMIN => 'Is Admin', User::ROLE_NORMAL => 'Normal'], $model->is_admin, ['class' => 'form-control', 'placeholder' => 'Please select one']); ?>
+                        <?php echo Form::label('role', 'Quyền hạn (Role)'); ?>
+                        <?php echo Form::select('role', [ User::ROLE_ADMIN => 'Admin', User::ROLE_TEACHER => 'Teacher'], $model->role, ['class' => 'form-control', 'placeholder' => 'Chọn một']); ?>
+                        @if ($errors->has('role'))
+                            <div class="invalid error_msg">{{ $errors->first('role') }}</div>
+                        @endif
                     </div>
 
                     <div class="form-group">
-                        <?php echo Form::label('is_active', 'Is Active'); ?>
-                        <?php echo Form::select('is_active', [User::STATUS_ACTIVE => 'Active', User::STATUS_INACTIVE => 'In Active'], $model->is_active, ['class' => 'form-control', 'placeholder' => 'Please select one']); ?>
+                        <?php echo Form::label('is_active', 'Trạng thái (Is Active)'); ?>
+                        <?php echo Form::select('is_active', [User::STATUS_ACTIVE => 'Active', User::STATUS_INACTIVE => 'In Active'], $model->is_active, ['class' => 'form-control', 'placeholder' => 'Chọn một']); ?>
+                        @if ($errors->has('is_active'))
+                            <div class="invalid error_msg">{{ $errors->first('is_active') }}</div>
+                        @endif
                     </div>
                 </div>
                 <div class="col-lg-12">
                     <div style="text-align: center">
-                        <?php echo Form::button( ($model->exists?'Update':'Create') , ['type' => 'submit', 'class' => 'btn btn-success']); ?>
+                        <?php echo Form::button( ($model->exists?'Chỉnh sửa':'Tạo mới') , ['type' => 'submit', 'class' => 'btn btn-success']); ?>
                     </div>
                 </div>
             {!! Form::close() !!}

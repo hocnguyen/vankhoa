@@ -33,17 +33,25 @@ class User extends Authenticatable
         'lastname' => 'required|min:3|max:255',
         'phone' => 'required|min:8|max:255',
         'branch' => 'required|max:255',
-        'is_admin' => 'required',
+        'role' => 'required',
         'is_active' => 'required',
     ];
 
     const STATUS_ACTIVE = 1;
     const STATUS_INACTIVE = 2;
     const ROLE_ADMIN = 0;
-    const ROLE_USER = 1;
-    const ROLE_NORMAL = 2;
+    const ROLE_TEACHER = 1;
+
+    const ST_ALBANS = 1;
+    const SOUTH_YARRA = 2;
+
+
+    public static $branchs = [User::ST_ALBANS => 'St. Albans', User::SOUTH_YARRA => 'South Yarra'];
 
     public function his(){
         return $this->hasMany('App/HistoriesLogin','user_id');
+    }
+    public function grades(){
+        return $this->hasMany('App/Grades','user_id');
     }
 }
