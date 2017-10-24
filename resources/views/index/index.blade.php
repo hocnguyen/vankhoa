@@ -31,7 +31,6 @@ use App\User;
                                             $data = DB::table('students')
                                                     ->join('grades', function ($join) {
                                                         $join->on('grades.id', '=', 'students.grade_id')
-                                                                ->where('grades.user_id',"=", Auth::id() )
                                                                 ->where('grades.school_year', "=", \App\Http\Controllers\Controller::getYear() );
                                                     })
                                                     ->get();
@@ -62,7 +61,15 @@ use App\User;
                                             <i class="fa fa-tasks fa-5x"></i>
                                         </div>
                                         <div class="col-xs-9 text-right">
-                                            <div class="huge">{{ count(User::where('role', User::ROLE_TEACHER)->get()) }}</div>
+                                            <div class="huge">
+                                                <?php
+                                                $teachers = DB::table('users')
+                                                        ->where("is_active",User::STATUS_ACTIVE)
+                                                        ->where("role",User::ROLE_TEACHER)
+                                                        ->get();
+                                                ?>
+                                                {{ count($teachers)}}
+                                            </div>
                                             <div>Teachers</div>
                                         </div>
                                     </div>
@@ -90,7 +97,6 @@ use App\User;
                                         <div class="huge">
                                             <?php
                                             $data = DB::table('grades')
-                                                    ->where('grades.user_id',"=", Auth::id() )
                                                     ->where('grades.school_year', "=", \App\Http\Controllers\Controller::getYear() )
                                                     ->get();
                                             echo count($data);

@@ -10,7 +10,17 @@
            }).done(function( html ) {
                $( ".grade_list" ).html( html );
            });
-       })
-    });
+       });
 
+        $(".select_branch").change(function () {
+            var branch_id = $(this).val();
+            $.ajax({
+                url: "/user/getTeacher/"+ branch_id,
+                cache: false
+            }).done(function( html ) {
+                $( ".teacher_list" ).html( html );
+            });
+        })
+
+    });
 </script>

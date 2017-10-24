@@ -32,9 +32,10 @@ use App\User;
                 <div class="col-lg-12">
                     <label class="fix-space-lbl">Chi Nhánh Văn Khoa ( Campus )</label>
                     <label for="albans">St. Albans</label>
-                    <?php echo Form::radio('branch', User::$branchs[1], ($model->branch == User::$branchs[1]) ? true : "", ['class' => 'fix-space-lbl', 'id' => 'albans']); ?>
+                    <?php $branchs = array_keys(User::$branchs); ?>
+                    <?php echo Form::radio('branch', $branchs[0], ($branch == $branchs[0]) ? true : "", ['class' => 'fix-space-lbl', 'id' => 'albans', "disabled"]); ?>
                     <label for="yarra">South Yarra</label>
-                    <?php echo Form::radio('branch', User::$branchs[2], ($model->branch == User::$branchs[2]) ? true : "", ['class' => 'fix-space-lbl', 'id' => 'yarra']); ?>
+                    <?php echo Form::radio('branch', $branchs[1], ($branch == $branchs[1]) ? true : "", ['class' => 'fix-space-lbl', 'id' => 'yarra' , "disabled"]); ?>
                     @if ($errors->has('branch'))
                         <div class="invalid error_msg">{{ $errors->first('branch') }}</div>
                     @endif

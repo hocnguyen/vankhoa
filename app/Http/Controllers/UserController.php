@@ -190,4 +190,13 @@ class UserController extends Controller
             return redirect()->back()->withInput()->withErrors($errors);
         }
     }
+
+    public function getTeacherOfBranch($id){
+        $teachers = DB::table('users')
+            ->where("is_active",User::STATUS_ACTIVE)
+            ->where("role",User::ROLE_TEACHER)
+            ->where("branch",$id)
+            ->get();
+        return view('user.teachers', ['data' => $teachers,]);
+    }
 }

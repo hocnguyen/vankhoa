@@ -41,14 +41,25 @@ class StudentController extends Controller
                 ->select('students.*', 'grades.name')
                 ->where("is_deleted", 0)->where('grades.id', $grade)->where('students.branch', $branch)
                 ->paginate(10);
-            return view("student.index", ["data" => $student]);
+            return view("student.index", ["data" => $student, "grade" => $grade, "branch" => $branch]);
         }else{
             return redirect("/error");
         }
     }
 
     public function attendances(){
-        $grades = Grades::where('user_id', Auth::User()->id)->get();
+        if (session()->get('role') == User::ROLE_ADMIN) {
+            $grades = DB::table('grades')
+                ->where('school_year', $this->getYear())
+                ->where('status', Grades::STATUS_ACTIVE)
+                ->get();
+        } else {
+            $grades = DB::table('grades')
+                ->where('user_id', Auth::User()->id)
+                ->where('school_year', $this->getYear())
+                ->where('status', Grades::STATUS_ACTIVE)
+                ->get();
+        }
         return view('student.attendances',['grades' => $grades]);
     }
 
@@ -63,12 +74,12 @@ class StudentController extends Controller
         }
     }
 
-    public function enrolment(){
-        $current_year = date("Y");
+    public function enrolment(Request $request){
         $model = new Students();
         $sibling = new Siblings();
-        $grade = DB::table('grades')->where('school_year',$current_year)->where("status",1)->get();
-        return view('student.form', ['model' => $model,'grade'=>$grade,"sibling" =>$sibling]);
+        $grade = DB::table('grades')->where('id',$request->get('grade'))->where("status",1)->get();
+        $branch = $request->get("branch");
+        return view('student.form', ['model' => $model,'grade'=>$grade,"sibling" =>$sibling, "branch" => $branch]);
     }
 
     public function add(Request $request){
@@ -238,5 +249,7 @@ class StudentController extends Controller
                 ->get();
         }
         return view('student.grades', ['data' => $grades,]);
-    }
+    }  
+    
+    
 }
