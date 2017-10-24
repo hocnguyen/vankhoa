@@ -47,7 +47,6 @@ class CreateStudentsTable extends Migration
             $table->string('relation');
             $table->string('guardian_phone');
             $table->date('date');
-            $table->string('invoice_no');
             $table->integer('grade_id')->unsigned();
             $table->timestamps();
             $table->foreign('grade_id')->references('id')->on('grades')->onDelete('cascade');
