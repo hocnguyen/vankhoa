@@ -90,4 +90,8 @@ class Students extends Model
     public function grade(){
         return $this->belongsTo('App\Grades', 'grade_id');
     }
+
+    public function invoices(){
+        return $this->hasMany('App\Invoices','student_id');
+    }
 }

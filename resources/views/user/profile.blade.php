@@ -67,6 +67,7 @@ use App\User;
                         <div class="invalid error_msg">{{ $errors->first('email') }}</div>
                         @endif
                 </div>
+                @if(Auth::User()->role == User::ROLE_ADMIN){
                 <div class="form-group">
                     <?php echo Form::label('branch', 'Chi nhánh (Branch)'); ?>
                     <?php echo Form::select('branch', User::$branchs, $model->branch, ['class' => 'form-control']); ?>
@@ -90,6 +91,7 @@ use App\User;
                         <div class="invalid error_msg">{{ $errors->first('is_active') }}</div>
                     @endif
                 </div>
+                @endif
             </div>
             <div class="col-lg-12">
                 <div style="text-align: center">

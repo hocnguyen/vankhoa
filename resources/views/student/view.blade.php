@@ -277,9 +277,12 @@ use App\User;
             <div class="col-lg-6">
                 <div class="form-group">
                     <label >SỐ BIÊN LAI (RECEIPT NO.) </label>
-                    <?php echo Form::label('', $model->invoice_no, ['class' => 'form-control']); ?>
+                    <?php echo Form::label('', $model->guardian_phone, ['class' => 'form-control']); ?>
                 </div>
             </div>
+            <?php
+            print_r($model->invoices); die();
+            ?>
             <div class="col-lg-12">
                 <div style="text-align: center">
                     <a href="/students" class="btn btn-success">Trở Lại Danh Sách Học Sinh</a>
