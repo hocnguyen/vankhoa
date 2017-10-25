@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Grades;
+use App\Invoices;
 use App\Siblings;
 use App\Students;
 use App\User;
@@ -79,7 +80,8 @@ class StudentController extends Controller
         $sibling = new Siblings();
         $grade = DB::table('grades')->where('id',$request->get('grade'))->where("status",1)->get();
         $branch = $request->get("branch");
-        return view('student.form', ['model' => $model,'grade'=>$grade,"sibling" =>$sibling, "branch" => $branch]);
+        $invoice = new Invoices();
+        return view('student.form', ['model' => $model,'grade'=>$grade,"sibling" =>$sibling, "branch" => $branch, 'invoice' => $invoice]);
     }
 
     public function add(Request $request){
@@ -118,7 +120,6 @@ class StudentController extends Controller
         $model->relation =  $request->relation ;
         $model->guardian_phone =  $request->guardian_phone ;
         $model->date =  $request->date ;
-        $model->invoice_no = $request->invoice_no;
         $model->grade_id =  $request->grade_id;
         if ($model->save()) {
             $id = $model->id;
@@ -134,6 +135,19 @@ class StudentController extends Controller
                 }
             }
 
+            for($i = 1; $i < 5 ; $i++) {
+                $invoice_no = "invoice_no" . $i;
+                $expired_date = "expired_date" . $i;
+                if (!empty($request->$invoice_no)) {
+                    $invoices = new Invoices();
+                    $invoices->invoice_no = $request->$invoice_no;
+                    $invoices->expired_date = $request->$expired_date;
+                    $invoices->student_id = $id;
+                    $invoices->term = $i;
+                    $invoices->save();
+                }
+            }
+
             return redirect("/students");
         }
     }
@@ -143,7 +157,8 @@ class StudentController extends Controller
         $current_year = date("Y");
         $sibling =  Siblings::whereRaw('student_id = '.$id)->get();
         $grade = Grades::whereRaw('school_year = '.$current_year." and status = 1")->get();
-        return view('student.form', ['model' => $model,'grade'=>$grade,"sibling" =>$sibling]);
+        $invoice = Invoices::whereRaw('student_id = '.$id)->get();
+        return view('student.form', ['model' => $model,'grade'=>$grade,"sibling" =>$sibling, 'invoice' => $invoice]);
     }
 
     public function postUpdate(Request $request, $id){
@@ -198,6 +213,20 @@ class StudentController extends Controller
                     $sibling->grade_year = $request->$grade;
                     $sibling->student_id = $id;
                     $sibling->save();
+                }
+            }
+
+            $invoices = Invoices::where('student_id', $id)->get(['id']);
+            Invoices::destroy($invoices->toArray());
+            for($i = 1; $i < 5 ; $i++) {
+                $invoice_no = "invoice_no" . $i;
+                $expired_date = "expired_date" . $i;
+                if (!empty($request->$invoice_no)) {
+                    $invoices = new Invoices();
+                    $invoices->invoice_no = $request->$invoice_no;
+                    $invoices->expired_date = $request->$expired_date;
+                    $invoices->student_id = $id;
+                    $invoices->save();
                 }
             }
             return redirect("/student/view/".$id);

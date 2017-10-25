@@ -32,10 +32,12 @@ use App\User;
                 <div class="col-lg-12">
                     <label class="fix-space-lbl">Chi Nhánh Văn Khoa ( Campus )</label>
                     <label for="albans">St. Albans</label>
-                    <?php $branchs = array_keys(User::$branchs); ?>
-                    <?php echo Form::radio('branch', $branchs[0], ($branch == $branchs[0]) ? true : "", ['class' => 'fix-space-lbl', 'id' => 'albans', "disabled"]); ?>
+                    <?php $branchs = array_keys(User::$branchs);
+                        $branch = (isset($branch)) ? $branch : $model->branch;
+                    ?>
+                    <?php echo Form::radio('branch', $branchs[0], ($branch == $branchs[0]) ? true : "", ['class' => 'fix-space-lbl branch_name', 'id' => 'albans', "readonly"]); ?>
                     <label for="yarra">South Yarra</label>
-                    <?php echo Form::radio('branch', $branchs[1], ($branch == $branchs[1]) ? true : "", ['class' => 'fix-space-lbl', 'id' => 'yarra' , "disabled"]); ?>
+                    <?php echo Form::radio('branch', $branchs[1], ($branch == $branchs[1]) ? true : "", ['class' => 'fix-space-lbl branch_name', 'id' => 'yarra' , "readonly"]); ?>
                     @if ($errors->has('branch'))
                         <div class="invalid error_msg">{{ $errors->first('branch') }}</div>
                     @endif
@@ -424,12 +426,54 @@ use App\User;
                         @endif
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label >SỐ BIÊN LAI (RECEIPT NO.) </label>
-                        <?php echo Form::text('invoice_no', $model->invoice_no, ['class' => 'form-control', 'placeholder' => "SỐ BIÊN LAI "]); ?>
-                    </div>
-                </div>
+                <?php if ($model->exists) {
+                    foreach ($invoice as $key=>$item) {
+                        $key++; ?>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label >SỐ BIÊN LAI <?php echo $key; ?> (RECEIPT NO.<?php echo $key; ?>) </label>
+                                <?php echo Form::text('invoice_no'.$key, $invoice->invoice_no, ['class' => 'form-control', 'placeholder' => "Số biên lai"]); ?>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label >Ngày hết hạn <?php echo $key; ?> (Expired Date.<?php echo $key; ?>)</label>
+                                <?php echo Form::text('expired_date'.$key, $invoice->expired_date, ['id' => 'expired_date'.$key, 'class' => 'form-control', 'placeholder' => "Ngày hết hạn"]); ?>
+                            </div>
+                        </div>
+                        <script type="text/javascript">
+                            $(document).ready(function () {
+                                $('#expired_date<?php echo $key; ?>').datetimepicker({
+                                    format: 'YYYY-MM-DD',
+                                    ignoreReadonly: true
+                                });
+                            })
+                        </script>
+                        <?php }
+                    }else{
+                        for ($i = 1; $i < 5; $i++){?>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label >SỐ BIÊN LAI <?php echo $i; ?> (RECEIPT NO.<?php echo $i; ?>)</label>
+                                    <?php echo Form::text('invoice_no'.$i, $invoice->invoice_no, ['class' => 'form-control', 'placeholder' => "Số biên lai"]); ?>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label >Ngày hết hạn <?php echo $i; ?> (Expired Date.<?php echo $i; ?>)</label>
+                                    <?php echo Form::text('expired_date'.$i, $invoice->expired_date, ['id' => 'expired_date'.$i, 'class' => 'form-control', 'placeholder' => "Ngày hết hạn"]); ?>
+                                </div>
+                            </div>
+                            <script type="text/javascript">
+                                $(document).ready(function () {
+                                    $('#expired_date<?php echo $i; ?>').datetimepicker({
+                                        format: 'YYYY-MM-DD',
+                                        ignoreReadonly: true
+                                    });
+                                })
+                            </script>
+                    <?php }
+                    }?>
                 <div class="col-lg-12">
                     <div style="text-align: center">
                         <?php echo Form::button( ($model->exists?'Cập Nhật':'Ghi Danh') , ['type' => 'submit', 'class' => 'btn btn-success']); ?>
@@ -450,6 +494,8 @@ use App\User;
             format: 'YYYY-MM-DD',
             ignoreReadonly: true
         });
+
+        $( ".branch_name:not(:checked)" ).attr('disabled', true);
     })
 </script>
 @endsection
