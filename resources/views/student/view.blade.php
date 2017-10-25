@@ -103,9 +103,9 @@ use App\User;
                 </div>
             </div>
             <?php
-            if (count($sibling) > 0) {
+            if (count($siblings) > 0) {
             $key = 0;
-            foreach ($sibling as $item) {
+            foreach ($siblings as $item) {
             $key++;
             ?>
             <div class="col-lg-6">
@@ -274,15 +274,24 @@ use App\User;
                     <?php echo Form::label('guardian_phone', $model->guardian_phone, ['class' => 'form-control']); ?>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <div class="form-group">
-                    <label >SỐ BIÊN LAI (RECEIPT NO.) </label>
-                    <?php echo Form::label('', $model->guardian_phone, ['class' => 'form-control']); ?>
-                </div>
-            </div>
             <?php
-            print_r($model->invoices); die();
-            ?>
+            if(0 < count($invoices)){
+                foreach ($invoices as $key=>$val){ $i = $key + 1; ?>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label >SỐ BIÊN LAI <?php echo $i; ?> (RECEIPT NO.<?php echo $i; ?>)</label>
+                            <?php echo Form::label('invoice_no', $val->invoice_no, ['class' => 'form-control']); ?>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label >Ngày hết hạn <?php echo $i; ?> (Expired Date.<?php echo $i; ?>)</label>
+                            <?php echo Form::label('expired_date', $val->expired_date, ['class' => 'form-control']); ?>
+                        </div>
+                    </div>
+                <?php
+                }
+            }?>
             <div class="col-lg-12">
                 <div style="text-align: center">
                     <a href="/students" class="btn btn-success">Trở Lại Danh Sách Học Sinh</a>

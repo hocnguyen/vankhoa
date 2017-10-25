@@ -17,7 +17,8 @@ class GradesTableSeeder extends Seeder
                 'school_year' => 2017,
                 'number_student' => rand(100, 999),
                 'branch' => rand(1, 2),
-                'user_id' => rand(1,10),
+                'user_id' => rand(2,5),
+                'status' => 1,
             ]);
         }
     }

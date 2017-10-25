@@ -30,7 +30,6 @@ class StudentController extends Controller
                 ->where('branch', User::ST_ALBANS)
                 ->get();
         }
-
         return view("student.form_list", ['grades' => $grades]);
     }
     public  function index(){
@@ -138,7 +137,7 @@ class StudentController extends Controller
             for($i = 1; $i < 5 ; $i++) {
                 $invoice_no = "invoice_no" . $i;
                 $expired_date = "expired_date" . $i;
-                if (!empty($request->$invoice_no)) {
+                if (!empty($request->$expired_date)) {
                     $invoices = new Invoices();
                     $invoices->invoice_no = $request->$invoice_no;
                     $invoices->expired_date = $request->$expired_date;
@@ -155,10 +154,12 @@ class StudentController extends Controller
     public function getUpdate($id){
         $model = Students::find($id);
         $current_year = date("Y");
-        $sibling =  Siblings::whereRaw('student_id = '.$id)->get();
+        $siblings =  Siblings::whereRaw('student_id = '.$id)->get();
+        $sibling = new Siblings();
         $grade = Grades::whereRaw('school_year = '.$current_year." and status = 1")->get();
-        $invoice = Invoices::whereRaw('student_id = '.$id)->get();
-        return view('student.form', ['model' => $model,'grade'=>$grade,"sibling" =>$sibling, 'invoice' => $invoice]);
+        $invoices = Invoices::whereRaw('student_id = '.$id)->get();
+        $invoice = new Invoices();
+        return view('student.form', ['model' => $model,'grade'=>$grade,"sibling" => $sibling, "siblings" => $siblings, 'invoices' => $invoices, 'invoice' => $invoice]);
     }
 
     public function postUpdate(Request $request, $id){
@@ -199,7 +200,6 @@ class StudentController extends Controller
         $model->relation =  $request->relation ;
         $model->guardian_phone =  $request->guardian_phone ;
         $model->date =  $request->date ;
-        $model->invoice_no = $request->invoice_no;
         $model->grade_id =  $request->grade_id;
         if ($model->update()) {
             $collection = Siblings::where('student_id', $id)->get(['id']);
@@ -221,10 +221,11 @@ class StudentController extends Controller
             for($i = 1; $i < 5 ; $i++) {
                 $invoice_no = "invoice_no" . $i;
                 $expired_date = "expired_date" . $i;
-                if (!empty($request->$invoice_no)) {
+                if (!empty($request->$expired_date)) {
                     $invoices = new Invoices();
                     $invoices->invoice_no = $request->$invoice_no;
                     $invoices->expired_date = $request->$expired_date;
+                    $invoices->term = $i;
                     $invoices->student_id = $id;
                     $invoices->save();
                 }
@@ -234,13 +235,14 @@ class StudentController extends Controller
     }
 
     public function view($id){
-        $sibling =  Siblings::whereRaw('student_id = '.$id)->get();
+        $siblings =  Siblings::whereRaw('student_id = '.$id)->get();
+        $invoices =  Invoices::whereRaw('student_id = '.$id)->get();
         $model = DB::table('students')
             ->join('grades', 'students.grade_id', '=', 'grades.id')
             ->select('students.*', 'grades.name')
             ->where('students.id',$id)
             ->get();
-        return view('student.view', ['model' => $model[0],"sibling" =>$sibling]);
+        return view('student.view', ['model' => $model[0],"siblings" =>$siblings, "invoices" => $invoices]);
     }
 
     public function delete($id){
