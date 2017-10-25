@@ -48,7 +48,7 @@ use App\User;
 
                 <div class="form-group">
                     <?php echo Form::label('branch', 'Chi nhánh (Branch)'); ?>
-                    <?php echo Form::select('branch', User::$branchs, $model->branch, ['class' => 'form-control select_branch']); ?>
+                    <?php echo Form::select('branch', User::$branchs, $model->branch, ['class' => 'form-control ']); ?>
                     @if ($errors->has('branch'))
                         <div class="invalid error_msg">{{ $errors->first('branch') }}</div>
                     @endif
@@ -56,7 +56,7 @@ use App\User;
 
                 <div class="form-group">
                     <?php echo Form::label('user_id', 'Giáo viên phụ trách (Teacher)'); ?>
-                    <?php echo Form::select('user_id', $teachers, $model->user_id, ['class' => 'form-control teacher_list', 'placeholder' => 'Chọn Giáo Viên']); ?>
+                    <?php echo Form::select('user_id', $teachers, $model->user_id, ['class' => 'form-control ', 'placeholder' => 'Chọn Giáo Viên']); ?>
                     @if ($errors->has('user_id'))
                         <div class="invalid error_msg">{{ $errors->first('user_id') }}</div>
                     @endif

@@ -56,7 +56,7 @@ use App\User;
                                         <td>{{ User::$branchs[$student->branch] }}</td>
                                         <td>
                                             <?php
-                                            $arr_status = array( Attendances::STATUS_EMPTY => 'Empty', Attendances::STATUS_HAVING => 'Having', Attendances::STATUS_NO_HAVING => 'No having');
+                                            $arr_status = array( Attendances::STATUS_EMPTY => 'Reset', Attendances::STATUS_HAVING => 'Presence ', Attendances::STATUS_NO_HAVING => 'Absent');
                                             foreach($arr_status as $key=>$value){ ?>
                                             <label style="font-weight: normal"><input name="{{ $student->id }}_attendances" {{ ($check && $check->is_present == $key)?'checked="checked"':'' }} type="radio" value="{{ $key }}" style="margin: 0px 10px 0px 10px">{{ $value }}</label>
                                             <?php } ?>

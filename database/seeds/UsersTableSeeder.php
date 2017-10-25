@@ -11,8 +11,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=0; $i < 1; $i++) {
-            App\User::create([
+        App\User::create([
             'username' => 'admin',
             'email' => rand(100, 1000000) . 'badman@gmail.com',
             'password' => bcrypt('12345678'),
@@ -21,10 +20,9 @@ class UsersTableSeeder extends Seeder
             'lastname' => 'Jery'. str_random(),
             'phone' =>  '+842222' . rand(100, 999),
             'branch' => rand(1, 2),
-            'role' => rand(1, 2),
+            'role' => 0,
             'is_active' => 1,
             'remember_token' => rand(100, 1000000)
         ]);
-        }
     }
 }

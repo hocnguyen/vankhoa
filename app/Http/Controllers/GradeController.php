@@ -30,7 +30,6 @@ class GradeController extends Controller
             ->select('users.id', 'users.firstname', 'users.lastname', 'users.username')
             ->where("is_active",Grades::STATUS_ACTIVE)
             ->where("role",User::ROLE_TEACHER)
-            ->where("branch",User::ST_ALBANS)
             ->get();
         $teacher = [];
         foreach ($teachers as $item) {
@@ -61,7 +60,6 @@ class GradeController extends Controller
             ->select('users.id', 'users.firstname', 'users.lastname', 'users.username')
             ->where("is_active",Grades::STATUS_ACTIVE)
             ->where("role",User::ROLE_TEACHER)
-            ->where("branch",User::ST_ALBANS)
             ->get();
         $teacher = [];
         foreach ($teachers as $item) {

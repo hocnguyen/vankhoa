@@ -148,7 +148,7 @@ class StudentController extends Controller
                 }
             }
 
-            return redirect("/students");
+            return redirect("/student/formList");
         }
     }
 
