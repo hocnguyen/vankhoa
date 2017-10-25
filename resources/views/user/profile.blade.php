@@ -42,13 +42,21 @@ use App\User;
                 </div>
 
                 <div class="form-group">
-                    <?php echo Form::label('lastname', 'Tên (Last Name)'); ?>
-                    <?php echo Form::text('lastname', $model->lastname, ['class' => 'form-control', 'placeholder' => 'Tên']); ?>
-                    @if ($errors->has('lastname'))
-                        <div class="invalid error_msg">{{ $errors->first('lastname') }}</div>
+                    <?php echo Form::label('email', 'Email'); ?>
+                    <?php echo Form::text('email', $model->email, ['class' => 'form-control', 'placeholder' => 'Email']); ?>
+                    @if ($errors->has('email'))
+                        <div class="invalid error_msg">{{ $errors->first('email') }}</div>
                     @endif
                 </div>
-
+                @if(Auth::User()->role == User::ROLE_ADMIN)
+                <div class="form-group">
+                    <?php echo Form::label('is_active', 'Trạng thái (Is Active)'); ?>
+                    <?php echo Form::select('is_active', [User::STATUS_ACTIVE => 'Active', User::STATUS_INACTIVE => 'In Active'], $model->is_active, ['class' => 'form-control', 'placeholder' => 'Chọn một']); ?>
+                    @if ($errors->has('is_active'))
+                        <div class="invalid error_msg">{{ $errors->first('is_active') }}</div>
+                    @endif
+                </div>
+                @endif
             </div>
 
             <div class="col-lg-6">
@@ -59,15 +67,15 @@ use App\User;
                         <div class="invalid error_msg">{{ $errors->first('phone') }}</div>
                     @endif
                 </div>
-
                 <div class="form-group">
-                    <?php echo Form::label('email', 'Email'); ?>
-                    <?php echo Form::text('email', $model->email, ['class' => 'form-control', 'placeholder' => 'Email']); ?>
-                    @if ($errors->has('email'))
-                        <div class="invalid error_msg">{{ $errors->first('email') }}</div>
-                        @endif
+                    <?php echo Form::label('lastname', 'Tên (Last Name)'); ?>
+                    <?php echo Form::text('lastname', $model->lastname, ['class' => 'form-control', 'placeholder' => 'Tên']); ?>
+                    @if ($errors->has('lastname'))
+                        <div class="invalid error_msg">{{ $errors->first('lastname') }}</div>
+                    @endif
                 </div>
-                @if(Auth::User()->role == User::ROLE_ADMIN){
+
+                @if(Auth::User()->role == User::ROLE_ADMIN)
                 <div class="form-group">
                     <?php echo Form::label('branch', 'Chi nhánh (Branch)'); ?>
                     <?php echo Form::select('branch', User::$branchs, $model->branch, ['class' => 'form-control']); ?>
@@ -84,13 +92,7 @@ use App\User;
                     @endif
                 </div>
 
-                <div class="form-group">
-                    <?php echo Form::label('is_active', 'Trạng thái (Is Active)'); ?>
-                    <?php echo Form::select('is_active', [User::STATUS_ACTIVE => 'Active', User::STATUS_INACTIVE => 'In Active'], $model->is_active, ['class' => 'form-control', 'placeholder' => 'Chọn một']); ?>
-                    @if ($errors->has('is_active'))
-                        <div class="invalid error_msg">{{ $errors->first('is_active') }}</div>
-                    @endif
-                </div>
+
                 @endif
             </div>
             <div class="col-lg-12">

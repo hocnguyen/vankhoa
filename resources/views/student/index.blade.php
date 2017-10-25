@@ -16,7 +16,7 @@ use App\Grades;
                     <div class="col-sm-12">
                         <div class="panel panel-default">
                             <div class="panel-heading text-right">
-                                <a href="{{ url('/student/enrolment') }}" class="btn btn-primary"> Thêm Mới Học Sinh</a>
+                                <a href="<?php echo  url('/student/enrolment').'?grade='.$grade.'&branch='.$branch ?>" class="btn btn-primary"> Thêm Mới Học Sinh</a>
                             </div>
                             <div class="panel-body">
                                 <table class="table ">

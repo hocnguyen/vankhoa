@@ -11,9 +11,9 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=0; $i < 100; $i++) {
+        for ($i=0; $i < 1; $i++) {
             App\User::create([
-            'username' => 'admin'. str_random(),
+            'username' => 'admin',
             'email' => rand(100, 1000000) . 'badman@gmail.com',
             'password' => bcrypt('12345678'),
             'passwordpharse' => '12345678',

@@ -16,7 +16,7 @@ class InvoicesTableCreate extends Migration
             $table->increments('id');
             $table->string('invoice_no');
             $table->date('expired_date');
-            $table->string('notice');
+            $table->integer('term');
             $table->integer('student_id')->unsigned();
             $table->timestamps();
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');

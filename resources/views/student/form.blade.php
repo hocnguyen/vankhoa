@@ -32,9 +32,12 @@ use App\User;
                 <div class="col-lg-12">
                     <label class="fix-space-lbl">Chi Nhánh Văn Khoa ( Campus )</label>
                     <label for="albans">St. Albans</label>
-                    <?php echo Form::radio('branch', User::$branchs[1], ($model->branch == User::$branchs[1]) ? true : "", ['class' => 'fix-space-lbl', 'id' => 'albans']); ?>
+                    <?php $branchs = array_keys(User::$branchs);
+                        $branch = (isset($branch)) ? $branch : $model->branch;
+                    ?>
+                    <?php echo Form::radio('branch', $branchs[0], ($branch == $branchs[0]) ? true : "", ['class' => 'fix-space-lbl branch_name', 'id' => 'albans', "readonly"]); ?>
                     <label for="yarra">South Yarra</label>
-                    <?php echo Form::radio('branch', User::$branchs[2], ($model->branch == User::$branchs[2]) ? true : "", ['class' => 'fix-space-lbl', 'id' => 'yarra']); ?>
+                    <?php echo Form::radio('branch', $branchs[1], ($branch == $branchs[1]) ? true : "", ['class' => 'fix-space-lbl branch_name', 'id' => 'yarra' , "readonly"]); ?>
                     @if ($errors->has('branch'))
                         <div class="invalid error_msg">{{ $errors->first('branch') }}</div>
                     @endif
@@ -491,6 +494,8 @@ use App\User;
             format: 'YYYY-MM-DD',
             ignoreReadonly: true
         });
+
+        $( ".branch_name:not(:checked)" ).attr('disabled', true);
     })
 </script>
 @endsection
