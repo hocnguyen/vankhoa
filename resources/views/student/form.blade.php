@@ -161,62 +161,71 @@ use App\User;
                 </div>
                 <?php
                 if ($model->exists) {
-                $key = 0;
-                    foreach ($sibling as $item) {
-                $key++;
-                ?>
+                    if(0 < count($siblings)){
+                        $key = 0;
+                        foreach ($siblings as $item) {
+                        $key++; ?>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <?php if ($key == 1 ) { echo "<label >Họ tên anh chị em (siblings’ names) </label>" ; } ?>
+                                    <?php echo Form::text('full_name'.$key, $item->full_name, ['class' => 'form-control']); ?>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <?php if ($key == 1 ) { echo " <label >Lớp (Grade) </label>" ; } ?>
+                                    <?php echo Form::text('grade_year'.$key, $item->grade_year, ['class' => 'form-control']); ?>
+                                </div>
+                            </div>
+                    <?php }
+                            for ($i= (count($siblings)+1); $i<4; $i++){ ?>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <?php if($i==1){ ?><label >Họ tên anh chị em (siblings’ names) </label> <?php } ?>
+                                    <?php echo Form::text('full_name'. $i, $sibling->full_name, ['class' => 'form-control']); ?>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <?php if($i==1){ ?><label >Lớp (Grade) </label> <?php } ?>
+                                    <?php echo Form::text('grade_year' . $i, $sibling->grade_year, ['class' => 'form-control']); ?>
+                                </div>
+                            </div>
+                            <?php
+                            }
+                        }else{
+                            for ($i=1; $i<4; $i++){ ?>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <?php if($i==1){ ?><label >Họ tên anh chị em (siblings’ names) </label> <?php } ?>
+                                        <?php echo Form::text('full_name'. $i, $sibling->full_name, ['class' => 'form-control']); ?>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <?php if($i==1){ ?><label >Lớp (Grade) </label> <?php } ?>
+                                        <?php echo Form::text('grade_year' . $i, $sibling->grade_year, ['class' => 'form-control']); ?>
+                                    </div>
+                                </div>
+                                <?php
+                            }
+                        }
+                } else {
+                    for ($i=1; $i<4; $i++){ ?>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <?php if ($key == 1 ) { echo "<label >Họ tên anh chị em (siblings’ names) </label>" ; } ?>
-                                <?php echo Form::text('full_name'.$key, $item->full_name, ['class' => 'form-control']); ?>
+                                <?php if($i==1){ ?><label >Họ tên anh chị em (siblings’ names) </label> <?php } ?>
+                                <?php echo Form::text('full_name'. $i, $sibling->full_name, ['class' => 'form-control']); ?>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <?php if ($key == 1 ) { echo " <label >Lớp (Grade) </label>" ; } ?>
-                                <?php echo Form::text('grade_year'.$key, $item->grade_year, ['class' => 'form-control']); ?>
+                                <?php if($i==1){ ?><label >Lớp (Grade) </label> <?php } ?>
+                                <?php echo Form::text('grade_year' . $i, $sibling->grade_year, ['class' => 'form-control']); ?>
                             </div>
                         </div>
-                <?php   }
-                    } else {
-                ?>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label >Họ tên anh chị em (siblings’ names) </label>
-                            <?php echo Form::text('full_name1', $sibling->full_name1, ['class' => 'form-control']); ?>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label >Lớp (Grade) </label>
-                            <?php echo Form::text('grade_year1', $sibling->grade_year1, ['class' => 'form-control']); ?>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <?php echo Form::text('full_name2', $sibling->full_name2, ['class' => 'form-control']); ?>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <?php echo Form::text('grade_year2', $sibling->grade_year2, ['class' => 'form-control']); ?>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <?php echo Form::text('full_name3', $sibling->full_name3, ['class' => 'form-control']); ?>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <?php echo Form::text('grade_year3', $sibling->grade_year3, ['class' => 'form-control']); ?>
-                        </div>
-                    </div>
-
-                <?php } ?>
+                    <?php }
+                } ?>
 
                 <div class="col-lg-12">
                     <div class="form-group">
@@ -427,29 +436,80 @@ use App\User;
                     </div>
                 </div>
                 <?php if ($model->exists) {
-                    foreach ($invoice as $key=>$item) {
-                        $key++; ?>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label >SỐ BIÊN LAI <?php echo $key; ?> (RECEIPT NO.<?php echo $key; ?>) </label>
-                                <?php echo Form::text('invoice_no'.$key, $invoice->invoice_no, ['class' => 'form-control', 'placeholder' => "Số biên lai"]); ?>
+                        if(0 < count($invoices)){
+                            foreach ($invoices as $key=>$item) {
+                            $key++; ?>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label >SỐ BIÊN LAI <?php echo $key; ?> (RECEIPT NO.<?php echo $key; ?>) </label>
+                                    <?php echo Form::text('invoice_no'.$key, $item->invoice_no, ['class' => 'form-control', 'placeholder' => "Số biên lai"]); ?>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label >Ngày hết hạn <?php echo $key; ?> (Expired Date.<?php echo $key; ?>)</label>
-                                <?php echo Form::text('expired_date'.$key, $invoice->expired_date, ['id' => 'expired_date'.$key, 'class' => 'form-control', 'placeholder' => "Ngày hết hạn"]); ?>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label >Ngày hết hạn <?php echo $key; ?> (Expired Date.<?php echo $key; ?>)</label>
+                                    <?php echo Form::text('expired_date'.$key, $item->expired_date, ['id' => 'expired_date'.$key, 'class' => 'form-control', 'placeholder' => "Ngày hết hạn"]); ?>
+                                </div>
                             </div>
-                        </div>
-                        <script type="text/javascript">
-                            $(document).ready(function () {
-                                $('#expired_date<?php echo $key; ?>').datetimepicker({
-                                    format: 'YYYY-MM-DD',
-                                    ignoreReadonly: true
-                                });
-                            })
-                        </script>
-                        <?php }
+                            <script type="text/javascript">
+                                $(document).ready(function () {
+                                    $('#expired_date<?php echo $key; ?>').datetimepicker({
+                                        format: 'YYYY-MM-DD',
+                                        ignoreReadonly: true
+                                    });
+                                })
+                            </script>
+                            <?php }
+                            if(4 > count($invoices)){
+                                for ($i = (count($invoices)+1); $i < 5; $i++){ ?>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label >SỐ BIÊN LAI <?php echo $i; ?> (RECEIPT NO.<?php echo $i; ?>)</label>
+                                            <?php echo Form::text('invoice_no'.$i, $invoice->invoice_no, ['class' => 'form-control', 'placeholder' => "Số biên lai"]); ?>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label >Ngày hết hạn <?php echo $i; ?> (Expired Date.<?php echo $i; ?>)</label>
+                                            <?php echo Form::text('expired_date'.$i, $invoice->expired_date, ['id' => 'expired_date'.$i, 'class' => 'form-control', 'placeholder' => "Ngày hết hạn"]); ?>
+                                        </div>
+                                    </div>
+                                    <script type="text/javascript">
+                                        $(document).ready(function () {
+                                            $('#expired_date<?php echo $i; ?>').datetimepicker({
+                                                format: 'YYYY-MM-DD',
+                                                ignoreReadonly: true
+                                            });
+                                        })
+                                    </script>
+                                <?php
+                                }
+                            }
+                        }else{
+                            for ($i = 1; $i < 5; $i++){?>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label >SỐ BIÊN LAI <?php echo $i; ?> (RECEIPT NO.<?php echo $i; ?>)</label>
+                                        <?php echo Form::text('invoice_no'.$i, $invoice->invoice_no, ['class' => 'form-control', 'placeholder' => "Số biên lai"]); ?>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label >Ngày hết hạn <?php echo $i; ?> (Expired Date.<?php echo $i; ?>)</label>
+                                        <?php echo Form::text('expired_date'.$i, $invoice->expired_date, ['id' => 'expired_date'.$i, 'class' => 'form-control', 'placeholder' => "Ngày hết hạn"]); ?>
+                                    </div>
+                                </div>
+                                <script type="text/javascript">
+                                    $(document).ready(function () {
+                                        $('#expired_date<?php echo $i; ?>').datetimepicker({
+                                            format: 'YYYY-MM-DD',
+                                            ignoreReadonly: true
+                                        });
+                                    })
+                                </script>
+                                <?php
+                            }
+                        }
                     }else{
                         for ($i = 1; $i < 5; $i++){?>
                             <div class="col-lg-6">

@@ -44,8 +44,7 @@ class StudentsTableSeeder extends Seeder
                 'guardian_name' => str_random(10),
                 'relation' => str_random(10),
                 'guardian_phone' => str_random(10),
-                'invoice_no' => rand(100000, 999999),
-                'grade_id' => rand(1, 9),
+                'grade_id' => rand(101, 200),
             ]);
         }
     }
