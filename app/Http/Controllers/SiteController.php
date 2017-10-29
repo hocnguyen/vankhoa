@@ -70,6 +70,7 @@ class SiteController extends Controller
                         }
                     }else{
                         $errors = new MessageBag(['errorlogin' => 'Password pharse is incorrect!']);
+                        Session::flush();
                         return redirect()->back()->withInput()->withErrors($errors);
                     }
                 } else {

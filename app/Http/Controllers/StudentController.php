@@ -270,7 +270,9 @@ class StudentController extends Controller
                     ['grades.school_year', '=', $year],
                 ])
                 ->get();
-            return view('student.outStanding', ['data' => $model,]);
+            if($model) {
+                return view('student.outStanding', ['data' => $model]);
+            }
         }
         return redirect("/student/formList");
 
