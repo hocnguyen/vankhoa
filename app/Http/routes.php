@@ -54,17 +54,23 @@ Route::post('/grade/create', ['as' => 'gradecreate', 'uses' => 'GradeController@
 Route::get('/grade/update/{id}', ['as' => 'gradeupdate', 'uses' => 'GradeController@getUpdate'])->middleware('admin');
 Route::post('/grade/update/{id}', ['as' => 'gradeupdate', 'uses' => 'GradeController@postUpdate'])->middleware('admin');
 
+Route::get('/hoc-ba-van-khoa', ['as' => 'endyear', 'uses' => 'SiteController@hocBaVanKhoa'])->middleware('admin');
+Route::post('/get_history', ['as' => 'get_history', 'uses' => 'SiteController@getHistory'])->middleware('admin');
+Route::post('/endOfYear', ['as' => 'endOfYear', 'uses' => 'SiteController@endOfYear'])->middleware('admin');
+Route::get('/confirmEndYear', ['as' => 'confirmEndYear', 'uses' => 'SiteController@confirmEndYear'])->middleware('admin');
+Route::get('/backCurrent', ['as' => 'backCurrent', 'uses' => 'SiteController@backCurrent'])->middleware('admin');
+
 Route::get('/students', ['uses' => 'StudentController@index']);
 Route::get('/student/formList', ['as' => 'formList', 'uses' => 'StudentController@formList']);
 Route::get('/student/enrolment', [ 'uses' => 'StudentController@enrolment']);
 Route::post('/student/enrolment', [ 'uses' => 'StudentController@add']);
+Route::get('/student/outStanding', [ 'uses' => 'StudentController@outStanding'])->middleware('admin');;
 
 Route::get('/student/update/{id}', ['as' => 'studentupdate', 'uses' => 'StudentController@getUpdate']);
 Route::post('/student/update/{id}', ['as' => 'studentupdate', 'uses' => 'StudentController@postUpdate']);
 
 Route::get('/student/view/{id}', ['as' => 'userview', 'uses' => 'StudentController@view']);
-Route::get('/student/delete/{id}', ['as' => 'userview', 'uses' => 'StudentController@delete']);
+Route::get('/student/delete/{id}', ['as' => 'userview', 'uses' => 'StudentController@delete'])->middleware('admin');;
 Route::get('/student/getClass/{id}', ['as' => 'userview', 'uses' => 'StudentController@getClassOfBranch']);
-Route::get('/student/out-standing-ledger', ['as' => 'userview', 'uses' => 'StudentController@outStanding']);
 
 Route::get('/error', ['as' => 'error', 'uses' => 'ErrorController@index']);

@@ -25,8 +25,7 @@ use App\User;
                                     <tr>
                                         <th>ID</th>
                                         <th>Học</th>
-                                        <th>Tên</th>
-                                        <th>Tên đệm</th>
+                                        <th>Lớp</th>
                                         <th>Số điện thoại</th>
                                         <th>Chi nhánh</th>
                                         <th>Điểm danh</th>
@@ -49,14 +48,13 @@ use App\User;
                                     ?>
                                     <tr class="student-{{ $student->id }} {{ $class }}" data-id="{{ $student->id }}">
                                         <td>{{ \App\Http\Controllers\StudentController::generalID($student->id) }}</td>
-                                        <td>{{ $student->first_name }}</td>
-                                        <td>{{ $student->last_name }}</td>
-                                        <td>{{ $student->middle_name }}</td>
+                                        <td>{{ $student->last_name." ".$student->middle_name." ".$student->first_name }}</td>
+                                        <td>{{ $student->name }}</td>
                                         <td>{{ $student->phone }}</td>
                                         <td>{{ User::$branchs[$student->branch] }}</td>
                                         <td>
                                             <?php
-                                            $arr_status = array( Attendances::STATUS_EMPTY => 'Reset', Attendances::STATUS_HAVING => 'Presence ', Attendances::STATUS_NO_HAVING => 'Absent');
+                                            $arr_status = array( Attendances::STATUS_HAVING => 'Presen ', Attendances::STATUS_NO_HAVING => 'Absent', Attendances::STATUS_EMPTY => 'Reset');
                                             foreach($arr_status as $key=>$value){ ?>
                                             <label style="font-weight: normal"><input name="{{ $student->id }}_attendances" {{ ($check && $check->is_present == $key)?'checked="checked"':'' }} type="radio" value="{{ $key }}" style="margin: 0px 10px 0px 10px">{{ $value }}</label>
                                             <?php } ?>
@@ -98,9 +96,9 @@ use App\User;
                             object.closest('tr').removeClass('having');
                             object.closest('tr').addClass('empty');
                         }
-                        alertify.success(response.message);
+                        //alertify.success(response.message);
                     }else{
-                        alertify.error(response.message);
+                        //alertify.error(response.message);
                     }
                 })
 

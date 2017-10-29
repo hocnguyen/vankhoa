@@ -11,7 +11,7 @@ class StudentsTableSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=0; $i< 100; $i++) {
+        /*for ($i=0; $i< 100; $i++) {
             DB::table('students')->insert([
                 'first_name' => str_random(10),
                 'last_name' => str_random(10),
@@ -46,6 +46,6 @@ class StudentsTableSeeder extends Seeder
                 'guardian_phone' => str_random(10),
                 'grade_id' => rand(101, 200),
             ]);
-        }
+        }*/
     }
 }

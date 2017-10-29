@@ -6,7 +6,9 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="{{ url('/') }}">Van Khoa School <?php echo \App\Http\Controllers\StudentController::getYear() ; ?></a>
+        <a class="navbar-brand" href="{{ url('/') }}">
+            Văn Khoa School <?php echo \App\Http\Controllers\StudentController::getYear() ; ?>
+        </a>
     </div>
     <!-- /.navbar-header -->
 
@@ -52,6 +54,9 @@
                 if (Auth::User()->role == \App\User::ROLE_ADMIN) { ?>
                     <li class="{{ (Route::currentRouteName() == 'histories')?"active":"" }}">
                         <a href="{{ url('/histories') }}"><i class="fa fa-list-ol"></i>Histories Login</a>
+                    </li>
+                    <li class="{{ (Route::currentRouteName() == 'endyear')?"active":"" }}">
+                        <a href="{{ url('/hoc-ba-van-khoa') }}"><i class="fa fa-history"></i>Học Bạ Văn Khoa</a>
                     </li>
                 <?php } ?>
             </ul>

@@ -11,13 +11,18 @@
             </div>
         </div>
         <div class="row">
-            {{ Form::open(array('url' => '/attendance' , 'method' => 'get'))}}
+            {{ Form::open(array('url' => '/attendance' , 'method' => 'get','id' => 'attendance'))}}
             <div class="col-sm-6 col-sm-offset-3">
                 <div class="form-group">
                     <label>Lớp - Class</label>
-                    <select name="grade" class="form-control">
+                    <select name="grade" id="grade" class="form-control">
                         <?php foreach($grades as $value){
-                           echo  '<option value="'.$value->id.'">'.$value->name.'</option>';
+                            if ($value->branch == \App\User::ST_ALBANS) {
+                                $branch = \App\User::$branchs[1];
+                            } else {
+                                $branch = \App\User::$branchs[2];
+                            }
+                           echo  '<option value="'.$value->id.'">'.$value->name.' - ('.$branch.') </option>';
                         } ?>
                     </select>
                 </div>
@@ -28,7 +33,8 @@
             </div>
             <div class="col-lg-12">
                 <div style="text-align: center">
-                    <button type="submit" class="btn btn-success"> Điểm danh</button>
+                    <label class="error_msg"></label> <br/>
+                    <button type="button" class="btn btn-success attendant"> Điểm danh</button>
                 </div>
             </div>
             {!! Form::close() !!}
@@ -39,6 +45,15 @@
             $('#time').datetimepicker({
                 format: 'YYYY-MM-DD',
                 ignoreReadonly: true
+            });
+            $(".attendant").click(function () {
+                var time = $("#time").val();
+                var grade = $("#grade").find(":selected").text();
+                if (grade == "" || typeof grade == undefined || time == "" || typeof time == undefined) {
+                    $(".error_msg").html("Vui lòng điền đầy đủ thông tin");
+                } else {
+                    $("#attendance").submit();
+                }
             });
         })
     </script>

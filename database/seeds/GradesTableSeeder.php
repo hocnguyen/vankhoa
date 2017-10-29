@@ -11,7 +11,7 @@ class GradesTableSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=0; $i < 100; $i++) {
+        /*for ($i=0; $i < 100; $i++) {
             App\Grades::create([
                 'name' => str_random(),
                 'school_year' => 2017,
@@ -20,6 +20,6 @@ class GradesTableSeeder extends Seeder
                 'user_id' => rand(2,5),
                 'status' => 1,
             ]);
-        }
+        }*/
     }
 }

@@ -7,6 +7,9 @@ use App\User;
 @section('title','Trang chủ')
 @section('content')
     <div id="page-wrapper" style="min-height: 346px;">
+        <?php
+        if (Auth::User()->role == \App\User::ROLE_ADMIN) {
+        ?>
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">Dashboard</h1>
@@ -50,42 +53,36 @@ use App\User;
                             </a>
                         </div>
                     </div>
-                    <?php
-                    if (Auth::User()->role == \App\User::ROLE_ADMIN) {
-                     ?>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="panel panel-green">
-                                <div class="panel-heading">
-                                    <div class="row">
-                                        <div class="col-xs-3">
-                                            <i class="fa fa-tasks fa-5x"></i>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-tasks fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">
+                                            <?php
+                                            $teachers = DB::table('users')
+                                                    ->where("is_active",User::STATUS_ACTIVE)
+                                                    ->where("role",User::ROLE_TEACHER)
+                                                    ->get();
+                                            ?>
+                                            {{ count($teachers)}}
                                         </div>
-                                        <div class="col-xs-9 text-right">
-                                            <div class="huge">
-                                                <?php
-                                                $teachers = DB::table('users')
-                                                        ->where("is_active",User::STATUS_ACTIVE)
-                                                        ->where("role",User::ROLE_TEACHER)
-                                                        ->get();
-                                                ?>
-                                                {{ count($teachers)}}
-                                            </div>
-                                            <div>Teachers</div>
-                                        </div>
+                                        <div>Teachers</div>
                                     </div>
                                 </div>
-                                <a href="/users">
-                                    <div class="panel-footer">
-                                        <span class="pull-left">View Details</span>
-                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </a>
                             </div>
+                            <a href="/users">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
                         </div>
-                    <?php
-                        }
-                    ?>
+                    </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="panel panel-yellow">
                             <div class="panel-heading">
@@ -118,6 +115,7 @@ use App\User;
                     </div>
 
                 </div>
+                
                 <!-- /.row -->
 
             </div>
@@ -126,6 +124,11 @@ use App\User;
 
 
         </div>
+        <?php } else { ?>
+            <div class="col-lg-12" style="text-align: center">
+                <img  src="{{ asset(config('app.themes').'/image/vk.jpg') }}">
+            </div>
+        <?php } ?>
         <!-- /#page-wrapper -->
     </div>
 @endsection

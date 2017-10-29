@@ -15,11 +15,20 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;
 
+    public $studentTable;
     public function __construct(Route $route) {
         $action =  $route->getUri();
         $skipArr = ['login','error','logout'];
         if (!in_array($action,$skipArr)) {
             $this->middleware('auth');
+        }
+
+        //get data student
+        $year = Session::get("year");
+        if (empty($year)) {
+            $this->studentTable = "students";
+        } else {
+            $this->studentTable = "students_".$year;
         }
     }
 
@@ -34,7 +43,7 @@ class Controller extends BaseController
     public static function getYear(){
         $year = Session::get("year");
         if (empty($year)) {
-            return "2017";
+            return date('Y');
         }
             return $year;
     }
