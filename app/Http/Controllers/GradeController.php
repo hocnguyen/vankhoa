@@ -18,6 +18,7 @@ class GradeController extends Controller
             ->join('users', 'users.id', '=', 'grades.user_id')
             ->select('grades.*', 'users.firstname', 'users.lastname', 'users.username')
             ->where("grades.id",">",0)
+            ->where("grades.school_year","=",$this->getYear())
             ->orderBy('id', 'DESC')
             ->paginate(10);
 

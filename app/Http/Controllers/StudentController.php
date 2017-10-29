@@ -36,10 +36,10 @@ class StudentController extends Controller
         if(isset($_GET['grade']) && trim($_GET['grade']) != '' && isset($_GET['branch']) && trim($_GET['branch']) != '') {
             $grade = trim($_GET['grade']);
             $branch = trim($_GET['branch']);
-            $student = DB::table('students')
-                ->join('grades', 'students.grade_id', '=', 'grades.id')
-                ->select('students.*', 'grades.name')
-                ->where("is_deleted", 0)->where('grades.id', $grade)->where('students.branch', $branch)
+            $student = DB::table($this->studentTable)
+                ->join('grades', $this->studentTable.'.grade_id', '=', 'grades.id')
+                ->select($this->studentTable.'.*', 'grades.name')
+                ->where("is_deleted", 0)->where('grades.id', $grade)->where($this->studentTable.'.branch', $branch)
                 ->paginate(10);
             return view("student.index", ["data" => $student, "grade" => $grade, "branch" => $branch]);
         }else{
@@ -67,7 +67,11 @@ class StudentController extends Controller
         if(isset($_GET['grade']) && trim($_GET['grade']) != '' && isset($_GET['time']) && trim($_GET['time']) != '') {
             $grade = trim($_GET['grade']);
             $time = trim($_GET['time']);
-            $students = Students::with('grade')->where('grade_id', $grade)->orderBy('id', 'DESC')->paginate(10);
+            $students = DB::table($this->studentTable)
+                ->join('grades', $this->studentTable.'.grade_id', '=', 'grades.id')
+                ->select($this->studentTable.'.*', 'grades.name')
+                ->where("is_deleted", 0)->where('grades.id', $grade)
+                ->get();
             return view('student.attendance', ['students' => $students, 'grade' => $grade, 'time' => $time]);
         }else{
             return redirect("/error");
@@ -137,7 +141,7 @@ class StudentController extends Controller
             for($i = 1; $i < 5 ; $i++) {
                 $invoice_no = "invoice_no" . $i;
                 $expired_date = "expired_date" . $i;
-                if (!empty($request->$expired_date)) {
+                if (!empty($request->$expired_date) || !empty($request->$invoice_no) ) {
                     $invoices = new Invoices();
                     $invoices->invoice_no = $request->$invoice_no;
                     $invoices->expired_date = $request->$expired_date;
@@ -147,7 +151,7 @@ class StudentController extends Controller
                 }
             }
 
-            return redirect("/student/formList");
+            return redirect("/student/view/".$model->id);
         }
     }
 
@@ -221,7 +225,7 @@ class StudentController extends Controller
             for($i = 1; $i < 5 ; $i++) {
                 $invoice_no = "invoice_no" . $i;
                 $expired_date = "expired_date" . $i;
-                if (!empty($request->$expired_date)) {
+                if (!empty($request->$expired_date) || !empty($request->$invoice_no) ) {
                     $invoices = new Invoices();
                     $invoices->invoice_no = $request->$invoice_no;
                     $invoices->expired_date = $request->$expired_date;
@@ -237,10 +241,10 @@ class StudentController extends Controller
     public function view($id){
         $siblings =  Siblings::whereRaw('student_id = '.$id)->get();
         $invoices =  Invoices::whereRaw('student_id = '.$id)->get();
-        $model = DB::table('students')
-            ->join('grades', 'students.grade_id', '=', 'grades.id')
-            ->select('students.*', 'grades.name')
-            ->where('students.id',$id)
+        $model = DB::table($this->studentTable)
+            ->join('grades', $this->studentTable.'.grade_id', '=', 'grades.id')
+            ->select($this->studentTable.'.*', 'grades.name')
+            ->where($this->studentTable.'.id',$id)
             ->get();
         return view('student.view', ['model' => $model[0],"siblings" =>$siblings, "invoices" => $invoices]);
     }
@@ -249,21 +253,27 @@ class StudentController extends Controller
         $student = Students::find($id);
         $student->is_deleted = 1;
         if ($student->update()) {
-            return redirect("/students");
+            return redirect("/student/formList");
         }
     }
 
     public function outStanding(){
         $year =  $this->getYear();
-        $model = DB::table('students')
-            ->join('grades', 'students.grade_id', '=', 'grades.id')
-            ->select('students.*', 'grades.name')
-            ->where([
-                ['students.invoice_no', '=', ""],
-                ['grades.school_year', '=', $year],
-            ])
-            ->get();
-        return view('student.outStanding', ['data' => $model,]);
+        $grade = $_GET['grade'];
+        if (!empty($grade)) {
+            $model = DB::table($this->studentTable)
+                ->select($this->studentTable.".*","grades.name","grades.branch","grades.id as grade_id")
+                ->join('grades', $this->studentTable.'.grade_id', '=', 'grades.id',"left")
+                ->where([
+                    [$this->studentTable.'.grade_id', '=', $grade],
+                    [$this->studentTable.'.is_deleted', '=', 0],
+                    ['grades.school_year', '=', $year],
+                ])
+                ->get();
+            return view('student.outStanding', ['data' => $model,]);
+        }
+        return redirect("/student/formList");
+
     }
 
     public function getClassOfBranch($id){

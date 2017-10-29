@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Years;
+use Session;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -81,4 +83,43 @@ class SiteController extends Controller
         }
 
     }
+    
+    public function hocBaVanKhoa(){
+        $years = DB::table('years')->get();
+        return view('site.endyear',['years' => $years]);
+    }
+    
+    public function getHistory( Request $request){
+        $cur_year = $this->getYear();
+        if ($cur_year == $request->year) {
+            $request->session()->flash('msg', 'Bạn đang xem học bạ niên khoá '.$cur_year.'. Vui lòng chọn niên khoá khác. ');
+          return redirect("/hoc-ba-van-khoa");
+        }
+        Session::set("year",$request->year);
+        return redirect('/');
+    } 
+    public function confirmEndYear(){
+        return view('site.confirm');
+    }
+
+    public function endOfYear(Request $request){
+        if( Auth::attempt(['password' => $request->password])) {
+            $sql = "CREATE TABLE students_".$this->getYear()." LIKE students";
+            DB::statement($sql);
+            $year  = new Years();
+            $year->year = $this->getYear();
+            $year->save();
+            $request->session()->flash('msg', 'End Of Year Success! ');
+            return redirect("/hoc-ba-van-khoa");
+        } else {
+            $request->session()->flash('msg', 'Mật khẩu xác nhận End Of Year Không đúng. Vui lòng kiểm tra lại!');
+            return redirect("/hoc-ba-van-khoa");
+        }
+    }
+    
+    public function backCurrent(){
+        Session::forget('year');
+        return redirect('/');
+    }
+    
 }

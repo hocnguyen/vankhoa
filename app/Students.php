@@ -82,7 +82,7 @@ class Students extends Model
         "created_at",
         "updated_at"
     ];
-
+    
     public function att(){
         return $this->hasMany('App\Attendances','student_id');
     }

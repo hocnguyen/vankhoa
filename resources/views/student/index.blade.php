@@ -17,6 +17,9 @@ use App\Grades;
                         <div class="panel panel-default">
                             <div class="panel-heading text-right">
                                 <a href="<?php echo  url('/student/enrolment').'?grade='.$grade.'&branch='.$branch ?>" class="btn btn-primary"> Thêm Mới Học Sinh</a>
+                                <?php if (Auth::User()->role == \App\User::ROLE_ADMIN) { ?>
+                                <a href="<?php echo  url('/student/outStanding').'?grade='.$grade ?>" class="btn btn-primary"> Oustanding Ledger</a>
+                                <?php } ?>
                             </div>
                             <div class="panel-body">
                                 <table class="table ">
@@ -42,7 +45,9 @@ use App\Grades;
                                         <td>{{ $value->phone }}</td>
                                         <th>
                                             <a href="{{ url('/student/view/' . $value->id) }}"><i class="fa fa-eye"></i></a>
+                                            <?php if (Auth::User()->role == \App\User::ROLE_ADMIN) { ?>
                                             <a class="action-delete" href="{{ url('/student/delete/' . $value->id) }}"><i class="fa fa-trash-o"></i></a>
+                                            <?php } ?>
                                             <a href="{{ url('/student/update/' . $value->id) }}"><i class="fa fa-pencil-square-o"></i></a>
                                         </th>
                                     </tr>

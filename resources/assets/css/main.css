@@ -31,3 +31,9 @@ table tr.no-having td{
     background-color: rgba(128, 128, 128, 0.23);
     color: blue;
 }
+.term_form {
+    border: 1px solid rgba(128, 128, 128, 0.56);
+    padding: 25px 50px;
+    width: 100%;
+    margin-bottom: 20px;
+}

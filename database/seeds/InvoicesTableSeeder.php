@@ -11,12 +11,12 @@ class InvoicesTableSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=0; $i < 100; $i++) {
+        /*for ($i=0; $i < 100; $i++) {
             App\Invoices::create([
                 'invoice_no' => str_random(),
                 'expired_date' => date('Y-m-d'),
                 'student_id' => rand(5, 100)
             ]);
-        }
+        }*/
     }
 }

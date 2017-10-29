@@ -11,9 +11,9 @@ use App\User;
             <div class="col-lg-12">
                 <label class="fix-space-lbl">Chi Nhánh Văn Khoa ( Campus )</label>
                 <label for="albans">St. Albans</label>
-                <?php echo Form::radio('branch', User::$branchs[1], ($model->branch == User::$branchs[1]) ? true : "", ['class' => 'fix-space-lbl', 'readonly']); ?>
+                <?php echo Form::radio('branch', User::$branchs[1], ($model->branch == User::ST_ALBANS) ? true : "", ['class' => 'fix-space-lbl', 'readonly']); ?>
                 <label for="yarra">South Yarra</label>
-                <?php echo Form::radio('branch', User::$branchs[2], ($model->branch == User::$branchs[2]) ? true : "", ['class' => 'fix-space-lbl', 'readonly']); ?>
+                <?php echo Form::radio('branch', User::$branchs[2], ($model->branch == User::SOUTH_YARRA) ? true : "", ['class' => 'fix-space-lbl', 'readonly']); ?>
 
             </div>
             <div class="col-lg-6">
@@ -64,6 +64,7 @@ use App\User;
                             echo ' <label for="nu">Nữ</label>';
                         }
                     ?>
+
                 </div>
             </div>
 
@@ -280,13 +281,13 @@ use App\User;
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label >SỐ BIÊN LAI <?php echo $i; ?> (RECEIPT NO.<?php echo $i; ?>)</label>
-                            <?php echo Form::label('invoice_no', $val->invoice_no, ['class' => 'form-control']); ?>
+                            <?php echo Form::label('', $val->invoice_no, ['class' => 'form-control']); ?>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label >Ngày hết hạn <?php echo $i; ?> (Expired Date.<?php echo $i; ?>)</label>
-                            <?php echo Form::label('expired_date', $val->expired_date, ['class' => 'form-control']); ?>
+                            <?php echo Form::label('', $val->expired_date, ['class' => 'form-control']); ?>
                         </div>
                     </div>
                 <?php
@@ -294,7 +295,7 @@ use App\User;
             }?>
             <div class="col-lg-12">
                 <div style="text-align: center">
-                    <a href="/students" class="btn btn-success">Trở Lại Danh Sách Học Sinh</a>
+                    <a href="/students?branch=<?php echo $model->branch ?>&grade=<?php echo $model->grade_id ?>" class="btn btn-success">Trở Lại Danh Sách Học Sinh</a>
                 </div>
             </div>
         </div>
