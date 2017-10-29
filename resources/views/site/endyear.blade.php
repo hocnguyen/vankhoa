@@ -16,9 +16,13 @@ use App\Grades;
                     <div class="col-sm-12">
                         <div class="panel panel-default">
                             <div class="panel-heading text-right">
-                                <?php if (\App\Http\Controllers\Controller::getYear() == date('Y')) { ?>
-                                <a href="<?php echo  url('/confirmEndYear') ?>" class="btn btn-primary"> End Of Year <?php echo \App\Http\Controllers\Controller::getYear() ?></a>
-                                <?php } else {?>
+                                <?php if (\App\Http\Controllers\Controller::getYear() == date('Y')) {
+                                    if (count($invoice) > 0) { ?>
+                                <label style="color: #843534">Không thể end of year vì chưa thu học phí đầy đủ.</label>
+                                        <a href="#"  class="disabled btn btn-primary "> End Of Year <?php echo \App\Http\Controllers\Controller::getYear() ?></a>
+                                <?php     } else { ?>
+                                        <a href="<?php echo  url('/confirmEndYear') ?>" class="btn btn-primary"> End Of Year <?php echo \App\Http\Controllers\Controller::getYear() ?></a>
+                                <?php } } else { ?>
                                     <a href="<?php echo  url('/backCurrent') ?>" class="btn btn-primary"> Về lại niên khoá <?php echo date('Y') ?></a>
                                 <?php  } ?>
                             </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Invoices;
 use App\User;
 use App\Years;
 use Session;
@@ -87,7 +88,8 @@ class SiteController extends Controller
     
     public function hocBaVanKhoa(){
         $years = DB::table('years')->get();
-        return view('site.endyear',['years' => $years]);
+        $invoices = Invoices::where(DB::raw("(DATE_FORMAT(expired_date,'%Y'))"),$this->getYear())->where("invoice_no","=","")->get();
+        return view('site.endyear',['years' => $years, "invoice" => $invoices]);
     }
     
     public function getHistory( Request $request){
