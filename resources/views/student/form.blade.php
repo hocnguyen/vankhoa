@@ -537,6 +537,7 @@ use App\User;
                 <div class="col-lg-12">
                     <div style="text-align: center">
                         <?php echo Form::button( ($model->exists?'Cập Nhật':'Ghi Danh') , ['type' => 'submit', 'class' => 'btn btn-success']); ?>
+                            <a href="/students?branch=<?php echo $branch ?>&grade=<?php echo $grade[0]->id ?>" class="btn btn-success">Trở Lại Danh Sách Học Sinh</a>
                     </div>
                 </div>
             {!! Form::close() !!}

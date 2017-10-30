@@ -31,11 +31,9 @@ use App\User;
                                     <div class="col-xs-9 text-right">
                                         <div class="huge">
                                             <?php
-                                            $data = DB::table('students')
-                                                    ->join('grades', function ($join) {
-                                                        $join->on('grades.id', '=', 'students.grade_id')
-                                                                ->where('grades.school_year', "=", \App\Http\Controllers\Controller::getYear() );
-                                                    })
+                                            $data = DB::table($student)
+                                                    ->join('grades','grades.id', '=', $student.'.grade_id')
+                                                    ->where('grades.school_year', "=", \App\Http\Controllers\Controller::getYear() )
                                                     ->get();
                                             echo count($data);
                                             ?>

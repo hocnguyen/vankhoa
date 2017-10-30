@@ -21,7 +21,6 @@ class GradeController extends Controller
             ->where("grades.school_year","=",$this->getYear())
             ->orderBy('id', 'DESC')
             ->paginate(10);
-
         return view('grade.index', ['grades' => $grades]);
     }
 
@@ -36,14 +35,18 @@ class GradeController extends Controller
         foreach ($teachers as $item) {
             $teacher[$item->id] = $item->firstname." ".$item->lastname. " ( ".$item->username." )";
         }
-        return view('grade.form', ['model' => $model, 'teachers' => $teacher]);
+        $years = DB::table('years')->orderBy("id", "DESC")->get();
+        $old_grade = "";
+        if (count($years) > 0 && ($this->getYear()> $years[0]->year)) {
+            $old_grade = DB::table('grades')
+                ->where("grades.school_year","=",$years[0]->year)
+                ->get();
+        }
+        return view('grade.form', ['model' => $model, 'teachers' => $teacher, "old_grade" => $old_grade]);
     }
 
     public function postCreate(Request $request){
         $model = new Grades();
-
-        $this->validate($request, $model->rules);
-
         $model->name = $request->name;
         $model->school_year = $request->school_year;
         $model->number_student = $request->number_student;
@@ -51,6 +54,10 @@ class GradeController extends Controller
         $model->status = $request->status;
         $model->user_id = $request->user_id;
         if ($model->save()) {
+            if (isset($request->old_grade)) {
+                $sql = "UPDATE `students` SET `grade_id`='".$model->id."' WHERE `grade_id`='".$request->old_grade."'";
+                DB::statement($sql);
+            }
             return redirect("/grades");
         }
     }
@@ -66,7 +73,12 @@ class GradeController extends Controller
         foreach ($teachers as $item) {
             $teacher[$item->id] = $item->firstname." ".$item->lastname. " ( ".$item->username." )";
         }
-        return view('grade.form', ['model' => $model, 'teachers' => $teacher]);
+        $years = DB::table('years')->orderBy("id", "DESC")->get();
+        $old_grade = "";
+        if (count($years) > 0 && ($this->getYear()> $years[0]->year)) {
+            $old_grade = DB::table('grades')->where("grades.school_year","=",$years[0]->year)->get();
+        }
+        return view('grade.form', ['model' => $model, 'teachers' => $teacher, "old_grade" => $old_grade]);
     }
 
     public function postUpdate(Request $request, $id){
@@ -80,6 +92,10 @@ class GradeController extends Controller
         $model->status = $request->status;
         $model->user_id = $request->user_id;
         if ($model->update()) {
+            if (isset($request->old_grade)) {
+                $sql = "UPDATE `students` SET `grade_id`='".$id."' WHERE `grade_id`='".$request->old_grade."'";
+                DB::statement($sql);
+            }
             return redirect("/grades");
         }
     }

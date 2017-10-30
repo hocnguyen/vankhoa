@@ -161,7 +161,7 @@ class StudentController extends Controller
         $siblings =  Siblings::whereRaw('student_id = '.$id)->get();
         $sibling = new Siblings();
         $grade = Grades::whereRaw('school_year = '.$current_year." and status = 1")->get();
-        $invoices = Invoices::whereRaw('student_id = '.$id)->get();
+        $invoices = Invoices::whereRaw('student_id = '.$id)->where(DB::raw("(DATE_FORMAT(expired_date,'%Y'))"),$this->getYear())->get();
         $invoice = new Invoices();
         return view('student.form', ['model' => $model,'grade'=>$grade,"sibling" => $sibling, "siblings" => $siblings, 'invoices' => $invoices, 'invoice' => $invoice]);
     }
@@ -206,7 +206,7 @@ class StudentController extends Controller
         $model->date =  $request->date ;
         $model->grade_id =  $request->grade_id;
         if ($model->update()) {
-            $collection = Siblings::where('student_id', $id)->get(['id']);
+            $collection = Siblings::where('student_id', $id)->where(DB::raw("(DATE_FORMAT(created_at,'%Y'))"),$this->getYear())->get(['id']);
             Siblings::destroy($collection->toArray());
             for($i = 1; $i <4 ; $i++) {
                 $name = "full_name".$i;
@@ -220,7 +220,7 @@ class StudentController extends Controller
                 }
             }
 
-            $invoices = Invoices::where('student_id', $id)->get(['id']);
+            $invoices = Invoices::where('student_id', $id)->where(DB::raw("(DATE_FORMAT(expired_date,'%Y'))"),$this->getYear())->get(['id']);
             Invoices::destroy($invoices->toArray());
             for($i = 1; $i < 5 ; $i++) {
                 $invoice_no = "invoice_no" . $i;
@@ -240,7 +240,7 @@ class StudentController extends Controller
 
     public function view($id){
         $siblings =  Siblings::whereRaw('student_id = '.$id)->get();
-        $invoices =  Invoices::whereRaw('student_id = '.$id)->get();
+        $invoices =  Invoices::whereRaw('student_id = '.$id)->where(DB::raw("(DATE_FORMAT(expired_date,'%Y'))"),$this->getYear())->get();
         $model = DB::table($this->studentTable)
             ->join('grades', $this->studentTable.'.grade_id', '=', 'grades.id')
             ->select($this->studentTable.'.*', 'grades.name')

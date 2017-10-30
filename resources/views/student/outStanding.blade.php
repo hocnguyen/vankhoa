@@ -47,6 +47,7 @@ use App\Grades;
                                         $invoices = DB::table('invoices')
                                         ->select('term', 'invoice_no','expired_date')
                                         ->where("student_id", $value->id)
+                                        ->where(DB::raw("(DATE_FORMAT(expired_date,'%Y'))"),\App\Http\Controllers\Controller::getYear())
                                         ->orderBy('term')
                                         ->get();
                                         if (!empty($invoices)) {

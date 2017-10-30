@@ -107,7 +107,7 @@ class SiteController extends Controller
 
     public function endOfYear(Request $request){
         if( Auth::attempt(['password' => $request->password])) {
-            $sql = "CREATE TABLE students_".$this->getYear()." LIKE students";
+            $sql = "CREATE TABLE students_".$this->getYear()." AS SELECT * FROM students";
             DB::statement($sql);
             $year  = new Years();
             $year->year = $this->getYear();

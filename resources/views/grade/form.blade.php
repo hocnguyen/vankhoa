@@ -69,7 +69,27 @@ use App\User;
                         <div class="invalid error_msg">{{ $errors->first('status') }}</div>
                     @endif
                 </div>
-
+                @if ($old_grade)
+                <?php
+                $grades = [];
+                foreach ($old_grade as $item)
+                {
+                    if($item->branch == User::ST_ALBANS){
+                        $branch = User::$branchs[User::ST_ALBANS];
+                    } else {
+                        $branch = User::$branchs[User::SOUTH_YARRA];
+                    }
+                    $grades[$item->id]  = $item->name." - ".$branch;
+                }
+                ?>
+                <div class="form-group">
+                    <label>Lớp học năm trước </label>
+                    <?php echo Form::select('old_grade', $grades,"", ['class' => 'form-control', 'placeholder' => 'Chọn một']); ?>
+                    @if ($errors->has('old_grade'))
+                        <div class="invalid error_msg">{{ $errors->first('status') }}</div>
+                    @endif
+                </div>
+                @endif
             </div>
             <div class="col-lg-12">
                 <div style="text-align: center">
