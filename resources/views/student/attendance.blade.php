@@ -24,7 +24,7 @@ use App\User;
                                     <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Học</th>
+                                        <th>Học Sinh</th>
                                         <th>Lớp</th>
                                         <th>Số điện thoại</th>
                                         <th>Chi nhánh</th>
