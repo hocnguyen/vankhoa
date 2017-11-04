@@ -91,7 +91,9 @@ use App\User;
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label >Ngày tháng năm sinh ( Date of birth )</label>
-                        <?php echo Form::text('birthday', $model->birthday, ['class' => 'form-control', 'placeholder' => 'Ngày tháng năm sinh ', 'id' => 'birthday']); ?>
+                        <?php
+                            $birthday = ($model->birthday) ? date("d-m-Y", strtotime($model->birthday)) : $model->birthday;
+                        echo Form::text('birthday', $birthday, ['class' => 'form-control', 'placeholder' => 'Ngày tháng năm sinh ', 'id' => 'birthday']); ?>
                         @if ($errors->has('birthday'))
                             <div class="invalid error_msg">{{ $errors->first('birthday') }}</div>
                         @endif
@@ -411,7 +413,7 @@ use App\User;
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label >Date Of Enrollment</label>
-                        <?php echo Form::text('date', $model->date, ['class' => 'form-control', 'placeholder' => "Date", 'id' => 'date_sign']); ?>
+                        <?php echo Form::text('date', ($model->date) ? date("d-m-Y", strtotime($model->date)) : $model->date, ['class' => 'form-control', 'placeholder' => "Date", 'id' => 'date_sign']); ?>
                         @if ($errors->has('date'))
                             <div class="invalid error_msg">{{ $errors->first('date') }}</div>
                         @endif
@@ -448,7 +450,7 @@ use App\User;
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label >Ngày hết hạn <?php echo $key; ?> (Expired Date.<?php echo $key; ?>)</label>
-                                    <?php echo Form::text('expired_date'.$key, $item->expired_date, ['id' => 'expired_date'.$key, 'class' => 'form-control', 'placeholder' => "Ngày hết hạn"]); ?>
+                                    <?php echo Form::text('expired_date'.$key,  date("d-m-Y", strtotime($item->expired_date)), ['id' => 'expired_date'.$key, 'class' => 'form-control', 'placeholder' => "Ngày hết hạn"]); ?>
                                 </div>
                             </div>
                             <script type="text/javascript">

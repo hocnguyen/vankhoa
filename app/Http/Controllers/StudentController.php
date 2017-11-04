@@ -95,7 +95,8 @@ class StudentController extends Controller
         $model->middle_name = $request->middle_name ;
         $model->name_at_school = $request->name_at_school ;
         $model->vns =  $request->vns ;
-        $model->birthday =  $request->birthday;
+        $birthday = str_replace('/', '-', $request->birthday);
+        $model->birthday =  date("Y-m-d", strtotime($birthday));
         $model->gender =  $request->gender ;
         $model->student_type =  $request->student_type ;
         $model->sickness =  $request->sickness ;
@@ -122,7 +123,8 @@ class StudentController extends Controller
         $model->guardian_name =  $request->guardian_name;
         $model->relation =  $request->relation ;
         $model->guardian_phone =  $request->guardian_phone ;
-        $model->date =  $request->date ;
+        $date = str_replace('/', '-', $request->date);
+        $model->date =  date("Y-m-d", strtotime($date));
         $model->grade_id =  $request->grade_id;
         if ($model->save()) {
             $id = $model->id;
@@ -144,7 +146,8 @@ class StudentController extends Controller
                 if (!empty($request->$expired_date) || !empty($request->$invoice_no) ) {
                     $invoices = new Invoices();
                     $invoices->invoice_no = $request->$invoice_no;
-                    $invoices->expired_date = $request->$expired_date;
+                    $ex_date = str_replace('/', '-', $request->$expired_date);
+                    $invoices->expired_date = date("Y-m-d", strtotime($ex_date));
                     $invoices->student_id = $id;
                     $invoices->term = $i;
                     $invoices->save();
@@ -176,7 +179,8 @@ class StudentController extends Controller
         $model->middle_name = $request->middle_name ;
         $model->name_at_school = $request->name_at_school ;
         $model->vns =  $request->vns ;
-        $model->birthday =  $request->birthday;
+        $birthday = str_replace('/', '-', $request->birthday);
+        $model->birthday =  date("Y-m-d", strtotime($birthday));
         $model->gender =  $request->gender ;
         $model->student_type =  $request->student_type ;
         $model->sickness =  $request->sickness ;
@@ -203,7 +207,8 @@ class StudentController extends Controller
         $model->guardian_name =  $request->guardian_name;
         $model->relation =  $request->relation ;
         $model->guardian_phone =  $request->guardian_phone ;
-        $model->date =  $request->date ;
+        $date = str_replace('/', '-', $request->date);
+        $model->date =  date("Y-m-d", strtotime($date));
         $model->grade_id =  $request->grade_id;
         if ($model->update()) {
             $collection = Siblings::where('student_id', $id)->where(DB::raw("(DATE_FORMAT(created_at,'%Y'))"),$this->getYear())->get(['id']);
@@ -228,7 +233,8 @@ class StudentController extends Controller
                 if (!empty($request->$expired_date) || !empty($request->$invoice_no) ) {
                     $invoices = new Invoices();
                     $invoices->invoice_no = $request->$invoice_no;
-                    $invoices->expired_date = $request->$expired_date;
+                    $ex_date = str_replace('/', '-', $request->$expired_date);
+                    $invoices->expired_date = date("Y-m-d", strtotime($ex_date));
                     $invoices->term = $i;
                     $invoices->student_id = $id;
                     $invoices->save();
