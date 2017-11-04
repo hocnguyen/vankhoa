@@ -28,10 +28,19 @@ use App\User;
                                     <div class="col-xs-9 text-right">
                                         <div class="huge">
                                             <?php
-                                            $data = DB::table($student)
-                                                    ->join('grades','grades.id', '=', $student.'.grade_id')
-                                                    ->where('grades.school_year', "=", \App\Http\Controllers\Controller::getYear() )
-                                                    ->get();
+                                                if (Auth::User()->role == \App\User::ROLE_ADMIN){
+                                                    $data = DB::table($student)
+                                                            ->join('grades','grades.id', '=', $student.'.grade_id')
+                                                            ->where('grades.school_year', "=", \App\Http\Controllers\Controller::getYear() )
+                                                            ->get();
+                                                } else {
+                                                    $data = DB::table($student)
+                                                            ->join('grades','grades.id', '=', $student.'.grade_id')
+                                                            ->where('grades.user_id', "=", Auth::User()->id)
+                                                            ->where('grades.school_year', "=", \App\Http\Controllers\Controller::getYear() )
+                                                            ->get();
+                                                }
+
                                             echo count($data);
                                             ?>
                                         </div>
