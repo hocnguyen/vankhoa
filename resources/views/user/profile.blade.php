@@ -34,7 +34,7 @@ use App\User;
                 </div>
 
                 <div class="form-group">
-                    <?php echo Form::label('firstname', 'Họ (First Name)'); ?>
+                    <?php echo Form::label('firstname', 'Tên (First Name)'); ?>
                     <?php echo Form::text('firstname', $model->firstname, ['class' => 'form-control', 'placeholder' => 'Họ']); ?>
                     @if ($errors->has('firstname'))
                         <div class="invalid error_msg">{{ $errors->first('firstname') }}</div>
@@ -68,7 +68,7 @@ use App\User;
                     @endif
                 </div>
                 <div class="form-group">
-                    <?php echo Form::label('lastname', 'Tên (Last Name)'); ?>
+                    <?php echo Form::label('lastname', 'Họ (Last Name)'); ?>
                     <?php echo Form::text('lastname', $model->lastname, ['class' => 'form-control', 'placeholder' => 'Tên']); ?>
                     @if ($errors->has('lastname'))
                         <div class="invalid error_msg">{{ $errors->first('lastname') }}</div>

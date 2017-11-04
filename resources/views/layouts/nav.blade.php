@@ -32,6 +32,7 @@
 
     <div class="navbar-default sidebar" role="navigation">
         <div class="sidebar-nav navbar-collapse">
+
             <ul class="nav in" id="side-menu">
                 <li class="&quot;active&quot;">
                     <a href="/" class="active"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
@@ -43,22 +44,19 @@
                 <li class="{{ (Route::currentRouteName() == 'grades')?"active":"" }}">
                     <a href="{{ url('/grades') }}"><i class="fa fa-table fa-fw"></i> Grades</a>
                 </li>
-                @endif
                 <li class="{{ (Route::currentRouteName() == 'attendances')?"active":"" }}">
                     <a href="{{ url('/attendances') }}"><i class="fa fa-list-ul"></i> Attendances</a>
                 </li>
                 <li class="{{ (Route::currentRouteName() == 'formList')?"active":"" }}">
                     <a href="{{ url('/student/formList') }}"><i class="fa fa-users"></i>Students List</a>
                 </li>
-                <?php
-                if (Auth::User()->role == \App\User::ROLE_ADMIN) { ?>
-                    <li class="{{ (Route::currentRouteName() == 'histories')?"active":"" }}">
-                        <a href="{{ url('/histories') }}"><i class="fa fa-list-ol"></i>Histories Login</a>
-                    </li>
-                    <li class="{{ (Route::currentRouteName() == 'endyear')?"active":"" }}">
-                        <a href="{{ url('/hoc-ba-van-khoa') }}"><i class="fa fa-history"></i>Học Bạ Văn Khoa</a>
-                    </li>
-                <?php } ?>
+                <li class="{{ (Route::currentRouteName() == 'histories')?"active":"" }}">
+                    <a href="{{ url('/histories') }}"><i class="fa fa-list-ol"></i>Histories Login</a>
+                </li>
+                <li class="{{ (Route::currentRouteName() == 'endyear')?"active":"" }}">
+                    <a href="{{ url('/hoc-ba-van-khoa') }}"><i class="fa fa-history"></i>Học Bạ Văn Khoa</a>
+                </li>
+                @endif
             </ul>
         </div>
         <!-- /.sidebar-collapse -->

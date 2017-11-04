@@ -64,7 +64,7 @@ use App\User;
 
                 <div class="form-group">
                     <?php echo Form::label('status', 'Trạng thái (Status)'); ?>
-                    <?php echo Form::select('status', [ Grades::STATUS_INACTIVE => 'Không hoạt động', Grades::STATUS_ACTIVE => 'Hoạt động', Grades::STATUS_DELETED => 'Đã xoá'], $model->status, ['class' => 'form-control', 'placeholder' => 'Chọn một']); ?>
+                    <?php echo Form::select('status', [ Grades::STATUS_INACTIVE => 'InActive', Grades::STATUS_ACTIVE => 'Active', Grades::STATUS_DELETED => 'Deleted'], $model->status, ['class' => 'form-control', 'placeholder' => 'Chọn một']); ?>
                     @if ($errors->has('status'))
                         <div class="invalid error_msg">{{ $errors->first('status') }}</div>
                     @endif

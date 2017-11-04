@@ -9,7 +9,7 @@ use App\User;
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    Chi tiết lớp - View Grade #{{ \App\Http\Controllers\GradeController::generalID($model->id) }}
+                    Chi tiết lớp - Detail Grade {{ $model->name }}
                 </h1>
             </div>
         </div>
@@ -48,7 +48,7 @@ use App\User;
                 <div class="form-group">
                     <?php echo Form::label('status', 'Trạng thái (Status)'); ?>
                     <?php
-                    $arr = [ Grades::STATUS_INACTIVE => 'Không hoạt động', Grades::STATUS_ACTIVE => 'Hoạt động', Grades::STATUS_DELETED => 'Đã xoá'];
+                    $arr = [ Grades::STATUS_INACTIVE => 'InActive', Grades::STATUS_ACTIVE => 'Active', Grades::STATUS_DELETED => 'Deleted'];
                     echo Form::text('status', $arr[$model->status], ['class' => 'form-control', 'readonly']); ?>
                 </div>
             </div>

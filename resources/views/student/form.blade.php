@@ -401,7 +401,7 @@ use App\User;
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label >Tên phụ huynh / người giám hộ (Name of Parent/Guardian)</label>
+                        <label >Tên người giám hộ (Name of Legal Guardian)</label>
                         <?php echo Form::text('guardian_name', $model->guardian_name, ['class' => 'form-control', 'placeholder' => "Tên phụ huynh / người giám hộ "]); ?>
                         @if ($errors->has('guardian_name'))
                             <div class="invalid error_msg">{{ $errors->first('guardian_name') }}</div>
@@ -410,7 +410,7 @@ use App\User;
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label >Date</label>
+                        <label >Date Of Enrollment</label>
                         <?php echo Form::text('date', $model->date, ['class' => 'form-control', 'placeholder' => "Date", 'id' => 'date_sign']); ?>
                         @if ($errors->has('date'))
                             <div class="invalid error_msg">{{ $errors->first('date') }}</div>
@@ -454,7 +454,7 @@ use App\User;
                             <script type="text/javascript">
                                 $(document).ready(function () {
                                     $('#expired_date<?php echo $key; ?>').datetimepicker({
-                                        format: 'YYYY-MM-DD',
+                                        format: 'DD/MM/YYYY',
                                         ignoreReadonly: true
                                     });
                                 })
@@ -477,7 +477,7 @@ use App\User;
                                     <script type="text/javascript">
                                         $(document).ready(function () {
                                             $('#expired_date<?php echo $i; ?>').datetimepicker({
-                                                format: 'YYYY-MM-DD',
+                                                format: 'DD/MM/YYYY',
                                                 ignoreReadonly: true
                                             });
                                         })
@@ -502,7 +502,7 @@ use App\User;
                                 <script type="text/javascript">
                                     $(document).ready(function () {
                                         $('#expired_date<?php echo $i; ?>').datetimepicker({
-                                            format: 'YYYY-MM-DD',
+                                            format: 'DD/MM/YYYY',
                                             ignoreReadonly: true
                                         });
                                     })
@@ -527,7 +527,7 @@ use App\User;
                             <script type="text/javascript">
                                 $(document).ready(function () {
                                     $('#expired_date<?php echo $i; ?>').datetimepicker({
-                                        format: 'YYYY-MM-DD',
+                                        format: 'DD/MM/YYYY',
                                         ignoreReadonly: true
                                     });
                                 })
@@ -547,12 +547,12 @@ use App\User;
 <script type="text/javascript">
     $(document).ready(function () {
         $('#birthday').datetimepicker({
-            format: 'YYYY-MM-DD',
+            format: 'DD/MM/YYYY',
             ignoreReadonly: true
         });
 
         $('#date_sign').datetimepicker({
-            format: 'YYYY-MM-DD',
+            format: 'DD/MM/YYYY',
             ignoreReadonly: true
         });
 

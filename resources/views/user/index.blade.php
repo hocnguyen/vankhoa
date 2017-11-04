@@ -16,6 +16,13 @@ use App\User;
                     <div class="col-sm-12">
                         <div class="panel panel-default">
                             <div class="panel-heading text-right">
+                                <label style="margin-top: 8px" class="col-md-2">Tìm kiếm branch</label>
+                                <div class="col-md-4">
+                                    <select class="form-control user_branchs">
+                                        <option value="1"> St. Albans </option>
+                                        <option value="2"> South Yarra </option>
+                                    </select>
+                                </div>
                                 <a href="{{ url('/user/create') }}" class="btn btn-primary"> Thêm Mới Người Dùng</a>
                             </div>
                             <div class="panel-body">
@@ -32,7 +39,7 @@ use App\User;
                                         <th>Action</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="content">
                                     <?php foreach ($users as $value){
                                         $in_active = "";
                                         if ($value->is_active == User::STATUS_INACTIVE) {
@@ -49,12 +56,12 @@ use App\User;
                                         <td><?php echo ($value->is_active == User::STATUS_ACTIVE) ? "Active" : "In Active" ?></td>
 
                                         <th>
-                                            <a title="Chi Tiết" href="{{ url('/user/view/' . $value->id) }}"><i class="fa fa-eye"></i></a>
-                                            <a class="action-delete" title="Delete User"href="{{ url('/user/delete/' . $value->id) }}"><i class="fa fa-trash-o"></i></a>
-                                            <a title="Cập Nhật" href="{{ url('/user/update/' . $value->id) }}"><i class="fa fa-pencil-square-o"></i></a>
-                                            <a title="Đổi Mật Khẩu" href="{{ url('/user/changepass/' . $value->id) }}"><i class="fa fa-lock"></i></a>
+                                            <a title="View" href="{{ url('/user/view/' . $value->id) }}"><i class="fa fa-eye"></i></a>
+                                            <a class="action-delete" title="Delete"href="{{ url('/user/delete/' . $value->id) }}"><i class="fa fa-trash-o"></i></a>
+                                            <a title="Update" href="{{ url('/user/update/' . $value->id) }}"><i class="fa fa-pencil-square-o"></i></a>
+                                            <a title="Password" href="{{ url('/user/changepass/' . $value->id) }}"><i class="fa fa-lock"></i></a>
                                             @if(Auth::User()->role == User::ROLE_ADMIN)
-                                            <a title="Đổi Pass Pharse" href="{{ url('/user/changepasspharse/' . $value->id) }}"><i class="fa fa-unlock-alt "></i></a>
+                                            <a title="Passpharse" href="{{ url('/user/changepasspharse/' . $value->id) }}"><i class="fa fa-unlock-alt "></i></a>
                                             @endif
                                         </th>
                                     </tr>

@@ -40,15 +40,15 @@ use App\Grades;
                                         <td>{{ \App\Http\Controllers\StudentController::generalID($value->id) }}</td>
                                         <td>{{ $value->last_name." ".$value->middle_name." ".$value->first_name }}</td>
                                         <td>{{ $value->name }}</td>
-                                        <td>{{ $value->birthday }}</td>
+                                        <td>{{ date("d-m-Y", strtotime($value->birthday ))}}</td>
                                         <td>{{ $value->home_phone }}</td>
                                         <td>{{ $value->phone }}</td>
                                         <th>
-                                            <a href="{{ url('/student/view/' . $value->id) }}"><i class="fa fa-eye"></i></a>
+                                            <a title="View" href="{{ url('/student/view/' . $value->id) }}"><i class="fa fa-eye"></i></a>
                                             <?php if (Auth::User()->role == \App\User::ROLE_ADMIN) { ?>
-                                            <a class="action-delete" href="{{ url('/student/delete/' . $value->id) }}"><i class="fa fa-trash-o"></i></a>
+                                            <a title="Delete" class="action-delete" href="{{ url('/student/delete/' . $value->id) }}"><i class="fa fa-trash-o"></i></a>
                                             <?php } ?>
-                                            <a href="{{ url('/student/update/' . $value->id) }}"><i class="fa fa-pencil-square-o"></i></a>
+                                            <a title="Update" href="{{ url('/student/update/' . $value->id) }}"><i class="fa fa-pencil-square-o"></i></a>
                                         </th>
                                     </tr>
                                     <?php } ?>

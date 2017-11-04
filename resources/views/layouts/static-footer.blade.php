@@ -22,5 +22,27 @@
             });
         })
 
+        $(".branchs").change(function () {
+            var branch_id = $(this).val();
+            $.ajax({
+                url: "/grade/ajaxIndex/"+ branch_id,
+                cache: false
+            }).done(function( html ) {
+                if(html != null || html != "")
+                $( ".content" ).html( html );
+            });
+        })
+
+        $(".user_branchs").change(function () {
+            var branch_id = $(this).val();
+            $.ajax({
+                url: "/user/indexAjax/"+ branch_id,
+                cache: false
+            }).done(function( html ) {
+                if(html != null || html != "")
+                $( ".content" ).html( html );
+            });
+        })
+
     });
 </script>

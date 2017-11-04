@@ -17,6 +17,13 @@ use App\User;
                     <div class="col-sm-12">
                         <div class="panel panel-default">
                             <div class="panel-heading text-right">
+                                <label style="margin-top: 8px" class="col-md-2">Tìm kiếm branch</label>
+                                <div class="col-md-4">
+                                    <select class="form-control branchs">
+                                        <option value="1"> St. Albans </option>
+                                        <option value="2"> South Yarra </option>
+                                    </select>
+                                </div>
                                 <a href="{{ url('/grade/create') }}" class="btn btn-primary"> Thêm Mới Lớp</a>
                             </div>
                             <div class="panel-body">
@@ -33,7 +40,7 @@ use App\User;
                                         <th>Action</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="content">
                                     <?php foreach ($grades as $value){ ?>
                                     <tr>
                                         <td>{{ \App\Http\Controllers\GradeController::generalID($value->id) }}</td>
@@ -44,17 +51,17 @@ use App\User;
                                         <td>{{ User::$branchs[$value->branch] }}</td>
                                         <td>
                                             @if($value->status == Grades::STATUS_ACTIVE)
-                                                Hoạt động
+                                                Active
                                             @elseif($value->status == Grades::STATUS_INACTIVE)
-                                                Không hoạt động
+                                                InActive
                                             @else
-                                                Đã xoá
+                                                Deleted
                                             @endif
                                         </td>
                                         <th>
-                                            <a href="{{ url('/grade/view/' . $value->id) }}"><i class="fa fa-eye"></i></a>
-                                            <a class="action-delete" href="{{ url('/grade/delete/' . $value->id) }}"><i class="fa fa-trash-o"></i></a>
-                                            <a href="{{ url('/grade/update/' . $value->id) }}"><i class="fa fa-pencil-square-o"></i></a>
+                                            <a title="View" href="{{ url('/grade/view/' . $value->id) }}"><i class="fa fa-eye"></i></a>
+                                            <a title="Delete" class="action-delete" href="{{ url('/grade/delete/' . $value->id) }}"><i class="fa fa-trash-o"></i></a>
+                                            <a title="Update" href="{{ url('/grade/update/' . $value->id) }}"><i class="fa fa-pencil-square-o"></i></a>
                                         </th>
                                     </tr>
                                     <?php } ?>

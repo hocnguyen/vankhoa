@@ -41,7 +41,7 @@ use App\Grades;
                                         <td>{{ \App\Http\Controllers\StudentController::generalID($value->id) }}</td>
                                         <td>{{ $value->last_name." ".$value->middle_name." ".$value->first_name }}</td>
                                         <td>{{ $value->name }}</td>
-                                        <td>{{ $value->birthday }}</td>
+                                        <td>{{ date("d-m-Y", strtotime($value->birthday ))}}</td>
                                         <td>{{ $value->phone }}</td>
                                         <?php
                                         $invoices = DB::table('invoices')

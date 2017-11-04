@@ -12,16 +12,27 @@ use App\Http\Requests;
 class GradeController extends Controller
 {
     public function index(){
-        //$grades = Grades::where('id', '>', 0)->orderBy('id', 'DESC')->paginate(10);
-
         $grades = DB::table('grades')
             ->join('users', 'users.id', '=', 'grades.user_id')
             ->select('grades.*', 'users.firstname', 'users.lastname', 'users.username')
             ->where("grades.id",">",0)
+            ->where("grades.branch","=",1)
             ->where("grades.school_year","=",$this->getYear())
             ->orderBy('id', 'DESC')
             ->paginate(10);
         return view('grade.index', ['grades' => $grades]);
+    }
+
+    public function ajaxIndex($branch){
+        $grades = DB::table('grades')
+            ->join('users', 'users.id', '=', 'grades.user_id')
+            ->select('grades.*', 'users.firstname', 'users.lastname', 'users.username')
+            ->where("grades.id",">",0)
+            ->where("grades.branch","=",$branch)
+            ->where("grades.school_year","=",$this->getYear())
+            ->orderBy('id', 'DESC')
+            ->paginate(10);
+        return view('grade.indexAjax', ['grades' => $grades]);
     }
 
     public function getCreate(){

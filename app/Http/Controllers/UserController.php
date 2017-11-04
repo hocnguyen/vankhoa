@@ -56,10 +56,18 @@ class UserController extends Controller
 
     public function index(){
         $users = DB::table('users')
-            ->where('role', User::ROLE_TEACHER)
+            ->where('branch', User::ST_ALBANS)
             ->paginate(10);
         return view('user.index', ['users' => $users]);
     }
+
+    public function indexAjax($branch){
+        $users = DB::table('users')
+            ->where('branch', $branch)
+            ->paginate(10);
+        return view('user.indexAjax', ['users' => $users]);
+    }
+
     public function postCreate(Request $request){
         $model = new User();
 

@@ -31,7 +31,8 @@ Route::get('/user/update/{id}', ['as' => 'userupdate', 'uses' => 'UserController
 Route::post('/user/update/{id}', ['as' => 'userupdate', 'uses' => 'UserController@postUpdate'])->middleware('admin');
 
 Route::get('/users', ['as' => 'userlist', 'uses' => 'UserController@index'])->middleware('admin');
-Route::get('/user/view/{id}', ['as' => 'userview', 'uses' => 'UserController@view'])->middleware('admin');;
+Route::get('/user/view/{id}', ['as' => 'userview', 'uses' => 'UserController@view'])->middleware('admin');
+Route::get('/user/indexAjax/{id}', ['as' => 'userview', 'uses' => 'UserController@indexAjax'])->middleware('admin');
 
 Route::get('/user/changepass/{id}', ['as' => 'userchangepass', 'uses' => 'UserController@getChangePass']);
 Route::post('/user/changepass/{id}', ['as' => 'userchangepass', 'uses' => 'UserController@postChangePass']);
@@ -48,6 +49,7 @@ Route::get('grades', ['as' => 'grades', 'uses' => 'GradeController@index'])->mid
 Route::get('/grade/view/{id}', ['as' => 'gradeview', 'uses' => 'GradeController@view'])->middleware('admin');
 Route::get('/grade/delete/{id}', ['as' => 'gradedelete', 'uses' => 'GradeController@delete'])->middleware('admin');
 
+Route::get('/grade/ajaxIndex/{branch}', ['as' => 'gradecreate', 'uses' => 'GradeController@ajaxIndex'])->middleware('admin');
 Route::get('/grade/create', ['as' => 'gradecreate', 'uses' => 'GradeController@getCreate'])->middleware('admin');
 Route::post('/grade/create', ['as' => 'gradecreate', 'uses' => 'GradeController@postCreate'])->middleware('admin');
 

@@ -43,7 +43,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#time').datetimepicker({
-                format: 'YYYY-MM-DD',
+                format: 'DD/MM/YYYY',
                 ignoreReadonly: true
             });
             $(".attendant").click(function () {

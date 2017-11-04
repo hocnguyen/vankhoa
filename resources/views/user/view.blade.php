@@ -31,12 +31,12 @@ use App\User;
                 </div>
 
                 <div class="form-group">
-                    <?php echo Form::label('firstname', 'Họ (First Name)'); ?>
+                    <?php echo Form::label('firstname', 'Tên (First Name)'); ?>
                     <?php echo Form::text('firstname', $model->firstname, ['class' => 'form-control', 'readonly']); ?>
                 </div>
 
                 <div class="form-group">
-                    <?php echo Form::label('lastname', 'Tên (Last Name)'); ?>
+                    <?php echo Form::label('lastname', 'Họ (Last Name)'); ?>
                     <?php echo Form::text('lastname', $model->lastname, ['class' => 'form-control', 'readonly']); ?>
                 </div>
 

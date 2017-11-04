@@ -7,9 +7,6 @@ use App\User;
 @section('title','Trang chủ')
 @section('content')
     <div id="page-wrapper" style="min-height: 346px;">
-        <?php
-        if (Auth::User()->role == \App\User::ROLE_ADMIN) {
-        ?>
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">Dashboard</h1>
@@ -26,7 +23,7 @@ use App\User;
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-3">
-                                        <i class="fa fa-comments fa-5x"></i>
+                                        <i class="fa fa-users fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge">
@@ -44,19 +41,20 @@ use App\User;
                             </div>
                             <a href="/student/formList">
                                 <div class="panel-footer">
-                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-left">Danh Sách Học Sinh</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                     <div class="clearfix"></div>
                                 </div>
                             </a>
                         </div>
                     </div>
+                    @if(Auth::User()->role == \App\User::ROLE_ADMIN)
                     <div class="col-lg-4 col-md-6">
                         <div class="panel panel-green">
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-3">
-                                        <i class="fa fa-tasks fa-5x"></i>
+                                        <i class="fa fa-street-view fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge">
@@ -74,19 +72,20 @@ use App\User;
                             </div>
                             <a href="/users">
                                 <div class="panel-footer">
-                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-left">Danh Sách Giáo Viên</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                     <div class="clearfix"></div>
                                 </div>
                             </a>
                         </div>
                     </div>
+
                     <div class="col-lg-4 col-md-6">
-                        <div class="panel panel-yellow">
+                        <div class="panel panel-red">
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-3">
-                                        <i class="fa fa-shopping-cart fa-5x"></i>
+                                        <i class="fa fa-list fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge">
@@ -102,15 +101,47 @@ use App\User;
                                     </div>
                                 </div>
                             </div>
-                            <a href="grades">
+                            <a href="/grades">
                                 <div class="panel-footer">
-                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-left">Danh Sách Lớp Học</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                     <div class="clearfix"></div>
                                 </div>
                             </a>
                         </div>
                     </div>
+                    @else
+                    <div class="col-lg-4 col-md-6" style="text-align: center; margin-top: -20px">
+                        <img  src="{{ asset(config('app.themes').'/image/vk.jpg') }}">
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-clock-o fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">
+
+                                        </div>
+                                        <div></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="/attendances">
+                                <div class="panel-footer">
+                                    <span class="pull-left">Điểm Danh</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    @endif
+
+
 
                 </div>
                 
@@ -122,11 +153,6 @@ use App\User;
 
 
         </div>
-        <?php } else { ?>
-            <div class="col-lg-12" style="text-align: center">
-                <img  src="{{ asset(config('app.themes').'/image/vk.jpg') }}">
-            </div>
-        <?php } ?>
         <!-- /#page-wrapper -->
     </div>
 @endsection

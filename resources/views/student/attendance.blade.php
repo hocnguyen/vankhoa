@@ -19,7 +19,7 @@ use App\User;
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <input type="hidden" value="{{ $grade }}" id="grade_id">
-                                <input type="hidden" value="{{ date('Y-m-d', strtotime($time)) }}" id="time">
+                                <input type="hidden" value="{{ $time}}" id="time">
                                 <table class="table ">
                                     <thead>
                                     <tr>
@@ -34,7 +34,7 @@ use App\User;
                                     <tbody>
                                     <?php
                                     foreach ($students as $student){
-                                    $check = Attendances::where('grade_id', $grade)->where('student_id', $student->id)->where('time', $time)->first();
+                                    $check = Attendances::where('grade_id', $grade)->where('student_id', $student->id)->where('time', date("Y-m-d",strtotime($time)))->first();
                                     $class = '';
                                     if($check){
                                         if($check->is_present == Attendances::STATUS_NO_HAVING){
@@ -54,7 +54,7 @@ use App\User;
                                         <td>{{ User::$branchs[$student->branch] }}</td>
                                         <td>
                                             <?php
-                                            $arr_status = array( Attendances::STATUS_HAVING => 'Presen ', Attendances::STATUS_NO_HAVING => 'Absent', Attendances::STATUS_EMPTY => 'Reset');
+                                            $arr_status = array( Attendances::STATUS_HAVING => 'Present', Attendances::STATUS_NO_HAVING => 'Absent', Attendances::STATUS_EMPTY => 'Reset');
                                             foreach($arr_status as $key=>$value){ ?>
                                             <label style="font-weight: normal"><input name="{{ $student->id }}_attendances" {{ ($check && $check->is_present == $key)?'checked="checked"':'' }} type="radio" value="{{ $key }}" style="margin: 0px 10px 0px 10px">{{ $value }}</label>
                                             <?php } ?>
@@ -79,8 +79,7 @@ use App\User;
                 var grade_id = $('#grade_id').val();
                 var CSRF_TOKEN = $('input[name=_token]').val();
                 var object = $(this);
-
-                $.post('{{ url('/attendance/' . date('Y-m-d', strtotime($time)))  }}', {is_present: is_present, student_id: student_id, grade_id: grade_id, time: time, _token: CSRF_TOKEN}, function (response) {
+                $.post('<?php echo url('/attendance/' .date("Y-m-d",strtotime($time))) ?>', {is_present: is_present, student_id: student_id, grade_id: grade_id, time: time, _token: CSRF_TOKEN}, function (response) {
                     var response = JSON.parse(response);
                     if(response.success == 1){
                         if(object.val() == '<?php echo Attendances::STATUS_NO_HAVING ?>'){

@@ -50,7 +50,7 @@ use App\User;
             <div class="col-lg-6">
                 <div class="form-group">
                     <label >Ngày tháng năm sinh ( Date of birth )</label>
-                    <?php echo Form::label('', $model->birthday, ['class' => 'form-control']); ?>
+                    <?php echo Form::label('', date("d-m-Y",strtotime($model->birthday)), ['class' => 'form-control']); ?>
                 </div>
             </div>
 
@@ -253,14 +253,14 @@ use App\User;
             </div>
             <div class="col-lg-6">
                 <div class="form-group">
-                    <label >Tên phụ huynh / người giám hộ (Name of Parent/Guardian)</label>
+                    <label >Tên người giám hộ (Name of Legal Guardian)</label>
                     <?php echo Form::label('guardian_name', $model->guardian_name, ['class' => 'form-control']); ?>
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="form-group">
-                    <label >Date</label>
-                    <?php echo Form::label('date', $model->date, ['class' => 'form-control']); ?>
+                    <label >Date Of Enrollment</label>
+                    <?php echo Form::label('date', date("d-m-Y",strtotime($model->date)), ['class' => 'form-control']); ?>
                 </div>
             </div>
             <div class="col-lg-6">
@@ -287,7 +287,7 @@ use App\User;
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label >Ngày hết hạn <?php echo $i; ?> (Expired Date.<?php echo $i; ?>)</label>
-                            <?php echo Form::label('', $val->expired_date, ['class' => 'form-control']); ?>
+                            <?php echo Form::label('', date("d-m-Y", strtotime($val->expired_date)), ['class' => 'form-control']); ?>
                         </div>
                     </div>
                 <?php

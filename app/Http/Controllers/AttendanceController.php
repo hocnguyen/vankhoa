@@ -24,7 +24,7 @@ class AttendanceController extends Controller
                 $model->grade_id = $grade_id;
                 $model->student_id = $student_id;
                 $model->is_present = $is_present;
-                $model->time = $time;
+                $model->time = date("Y-m-d",strtotime($time));
                 if ($model->save()) {
                     return json_encode(array('success' => 1, 'message' => 'Điểm danh thành công!'));
                 } else {
